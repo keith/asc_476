@@ -11,6 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140106182213) do
+
+  create_table "applicants", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "wuid"
+    t.string   "phone_number"
+    t.string   "class_standing"
+    t.float    "gpa"
+    t.datetime "gpa_timestamp"
+    t.text     "comment"
+    t.string   "major"
+    t.string   "minor"
+    t.boolean  "work_study"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", force: true do |t|
+    t.string   "designator"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "professors", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "password_confirmation"
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
