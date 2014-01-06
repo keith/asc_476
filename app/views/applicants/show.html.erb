@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @applicant.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @applicant.email %>
+</p>
+
+<p>
+  <strong>Wuid:</strong>
+  <%= @applicant.wuid %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @applicant.phone_number %>
+</p>
+
+<p>
+  <strong>Class standing:</strong>
+  <%= @applicant.class_standing %>
+</p>
+
+<p>
+  <strong>Gpa:</strong>
+  <%= @applicant.gpa %>
+</p>
+
+<p>
+  <strong>Gpa timestamp:</strong>
+  <%= @applicant.gpa_timestamp %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @applicant.comment %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @applicant.major %>
+</p>
+
+<p>
+  <strong>Minor:</strong>
+  <%= @applicant.minor %>
+</p>
+
+<p>
+  <strong>Work study:</strong>
+  <%= @applicant.work_study %>
+</p>
+
+<%= link_to 'Edit', edit_applicant_path(@applicant) %> |
+<%= link_to 'Back', applicants_path %>

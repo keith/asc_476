@@ -1,4 +1,6 @@
 Asc476::Application.routes.draw do
+  resources :applicants
+
   resources :users
 
   resources :courses

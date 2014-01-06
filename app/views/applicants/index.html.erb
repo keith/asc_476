@@ -1,0 +1,47 @@
+<h1>Listing applicants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Wuid</th>
+      <th>Phone number</th>
+      <th>Class standing</th>
+      <th>Gpa</th>
+      <th>Gpa timestamp</th>
+      <th>Comment</th>
+      <th>Major</th>
+      <th>Minor</th>
+      <th>Work study</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @applicants.each do |applicant| %>
+      <tr>
+        <td><%= applicant.name %></td>
+        <td><%= applicant.email %></td>
+        <td><%= applicant.wuid %></td>
+        <td><%= applicant.phone_number %></td>
+        <td><%= applicant.class_standing %></td>
+        <td><%= applicant.gpa %></td>
+        <td><%= applicant.gpa_timestamp %></td>
+        <td><%= applicant.comment %></td>
+        <td><%= applicant.major %></td>
+        <td><%= applicant.minor %></td>
+        <td><%= applicant.work_study %></td>
+        <td><%= link_to 'Show', applicant %></td>
+        <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
+        <td><%= link_to 'Destroy', applicant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Applicant', new_applicant_path %>
