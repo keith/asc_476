@@ -1,5 +1,7 @@
 class ApplicantsController < ApplicationController
-  before_action :set_applicant, only: [:show, :edit, :update, :destroy]
+  before_action :set_applicant, :signed_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index]
+
 
   # GET /applicants
   def index
@@ -55,4 +57,5 @@ class ApplicantsController < ApplicationController
     def applicant_params
       params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :gpa_timestamp, :comment, :major, :minor, :work_study)
     end
+
 end
