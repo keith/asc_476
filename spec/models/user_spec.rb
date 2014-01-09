@@ -19,4 +19,22 @@ describe User do
     before { @invalid = User.new }
     specify { @invalid.should_not be_valid }
   end
+
+  describe "user permissions" do
+    describe "an admin" do
+      it "should be an admin" do
+        @admin.admin?.should be_true
+      end
+
+      it "should be a moderator" do
+        @admin.moderator?.should be_true
+      end
+    end
+
+    describe "a moderator" do
+      before { @mod = FactoryGirl.create(:moderator) }
+      specify { @mod.admin?.should be_false }
+      specify { @mod.moderator?.should be_true }
+    end
+  end
 end
