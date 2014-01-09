@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
+  def self.encrypt(blob)
+    Digest::SHA1.hexdigest(blob.to_s)
+  end
+
   def delete_remember_token
     self.update_attribute(:remember_token, nil)
   end

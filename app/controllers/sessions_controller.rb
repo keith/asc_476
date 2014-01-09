@@ -1,21 +1,19 @@
 class SessionsController < ApplicationController
-  # Send to sign in page
   def new
   end
 
-  # Generate token, set it on the user, set the cookie
   def create
     user = User.find_by_email(email: params[:email].downcase)
     if user && user.authenticate(params[:password])
       sign_in user
-      # TODO: redirect somewhere
+      redirect_to applicants_path
     else
       flash.now[:error] = 'Invalid email/password'
-      render 'new'
+      render :new
     end
   end
 
   def destroy
-
+    current_user.delete_remember_token
   end
 end
