@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Professor comments:</strong>
+  <%= @position.professor_comments %>
+</p>
+
+<p>
+  <strong>Professor verdict:</strong>
+  <%= @position.professor_verdict %>
+</p>
+
+<p>
+  <strong>Professor taught:</strong>
+  <%= @position.professor_taught %>
+</p>
+
+<p>
+  <strong>Application status:</strong>
+  <%= @position.application_status %>
+</p>
+
+<p>
+  <strong>Asc comments:</strong>
+  <%= @position.asc_comments %>
+</p>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

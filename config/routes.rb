@@ -1,4 +1,6 @@
 Asc476::Application.routes.draw do
+  resources :positions
+
   resources :available_times
 
   resources :professors

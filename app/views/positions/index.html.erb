@@ -1,0 +1,35 @@
+<h1>Listing positions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Professor comments</th>
+      <th>Professor verdict</th>
+      <th>Professor taught</th>
+      <th>Application status</th>
+      <th>Asc comments</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @positions.each do |position| %>
+      <tr>
+        <td><%= position.professor_comments %></td>
+        <td><%= position.professor_verdict %></td>
+        <td><%= position.professor_taught %></td>
+        <td><%= position.application_status %></td>
+        <td><%= position.asc_comments %></td>
+        <td><%= link_to 'Show', position %></td>
+        <td><%= link_to 'Edit', edit_position_path(position) %></td>
+        <td><%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Position', new_position_path %>
