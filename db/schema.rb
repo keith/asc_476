@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140109151652) do
     t.boolean  "work_study"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "hash"
+    t.string   "identifier"
   end
 
   create_table "available_times", force: true do |t|
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140109151652) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "hash"
+    t.string   "identifier"
   end
 
   create_table "users", force: true do |t|
