@@ -6,9 +6,6 @@ namespace :db do
 end
 
 def make_users
-  User.create!(email: "test@example.com",
-                password: "abcdef",
-                password_confirmation: "abcdef",
-                level: 0)
+  FactoryGirl.create(:admin)
 end
 
