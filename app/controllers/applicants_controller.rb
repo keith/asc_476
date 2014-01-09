@@ -41,12 +41,6 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  # DELETE /applicants/1
-  def destroy
-    @applicant.destroy
-    redirect_to applicants_url, notice: 'Applicant was successfully destroyed.'
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant
@@ -55,7 +49,6 @@ class ApplicantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def applicant_params
-      params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :gpa_timestamp, :comment, :major, :minor, :work_study)
+      params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study)
     end
-
 end
