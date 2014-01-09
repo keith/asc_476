@@ -23,4 +23,27 @@ describe Course do
       specify { expect(@course.disabled?).to be_true }
     end
   end
+
+  describe "uniqueness" do
+    describe "two courses with different numbers" do
+      before do
+        @course1 = Course.create!(designator: "CSCI", number: 123)
+        @course2 = Course.create!(designator: "CSCI", number: 456)
+      end
+
+      specify { @course1.should be_valid }
+      specify { @course2.should be_valid }
+    end
+
+    describe "two courses with the same numbers" do
+      before do
+        @course1 = Course.create!(designator: "CSCI", number: 123)
+        @course2 = Course.new(designator: "CSCI", number: 123)
+      end
+
+      specify { @course1.should be_valid }
+      specify { @course2.should_not be_valid }
+      specify { expect{ @course2.save! }.to raise_exception(/Designator has already been taken/) }
+    end
+  end
 end
