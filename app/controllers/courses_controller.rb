@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update]
   before_action :signed_in_user
 
   # GET /courses
@@ -38,12 +38,6 @@ class CoursesController < ApplicationController
     else
       render action: 'edit'
     end
-  end
-
-  # DELETE /courses/1
-  def destroy
-    @course.destroy
-    redirect_to courses_url, notice: 'Course was successfully destroyed.'
   end
 
   private
