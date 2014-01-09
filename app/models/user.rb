@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
 
+  has_secure_password
+  
   def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
