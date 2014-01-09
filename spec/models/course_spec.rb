@@ -44,11 +44,14 @@ describe Course do
       before do
         @course1 = Course.create!(designator: "CSCI", number: 123)
         @course2 = Course.new(designator: "CSCI", number: 123)
+        @course3 = Course.new(designator: "csci", number: 123)
       end
 
       specify { @course1.should be_valid }
       specify { @course2.should_not be_valid }
       specify { expect{ @course2.save! }.to raise_exception(/Designator has already been taken/) }
+      specify { @course3.should_not be_valid }
+      specify { expect{ @course3.save! }.to raise_exception(/Designator has already been taken/) }
     end
   end
 end
