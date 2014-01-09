@@ -11,8 +11,20 @@ describe Course do
   it { should be_valid }
 
   describe "invalid fields" do
-    before { @invalid = Course.new }
-    specify { @invalid.should_not be_valid }
+    describe "empty course object" do
+      before { @invalid = Course.new }
+      specify { @invalid.should_not be_valid }
+    end
+
+    describe "non-alphabetic course designator" do
+      before { @invalid = Course.new(designator: "1234", number: 123) }
+      specify { @invalid.should_not be_valid }
+    end
+
+    describe "bad course designator length" do
+      before { @invalid = Course.new(designator: "WAYTOOLONG", number: 123) }
+      specify { @invalid.should_not be_valid }
+    end
   end
 
   describe "helper methods" do
