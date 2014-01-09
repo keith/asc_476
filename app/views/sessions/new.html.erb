@@ -1,0 +1,21 @@
+<% provide(:title, "Login") %>
+<h1>Login</h1>
+
+<% if flash[:error] %>
+  <div class="alert">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <%= f.submit "Sign in" %>
+    <% end %>
+  </div>
+</div>
+<%= debug(params) =%>
