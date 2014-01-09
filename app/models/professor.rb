@@ -4,9 +4,9 @@ class Professor < ActiveRecord::Base
   before_create { self.identifier = new_professor_identifier }
   before_save { email.downcase! }
 
+  validate :static_identifier, on: :update
   validates_presence_of :name
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validate :static_identifier, on: :update
 
   private
 
