@@ -3,8 +3,8 @@ class Course < ActiveRecord::Base
 
   validates_presence_of :designator
   validates_presence_of :number
-  validates_uniqueness_of :designator, case_sensitive: false, scope: :number
   validates_format_of :designator, with: /\A([a-zA-Z]){4}\z/
+  validates_uniqueness_of :number, { scope: :designator, message: "Course has already been added" }
 
   def hidden?
     self.hidden || self.disabled
