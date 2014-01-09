@@ -27,4 +27,9 @@ describe Professor do
 
     specify { expect(@prof.email == "abc@def.com").to be_true }
   end
+
+  describe "changing identifiers" do
+    before { @prof.identifier = "abc" }
+    it { should_not be_valid }
+  end
 end
