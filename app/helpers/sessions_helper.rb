@@ -14,4 +14,9 @@ module SessionsHelper
     token = User.encrypt(cookies[:remember_token])
     @current_user ||= User.find_by_remember_token(token)
   end
+
+  def signed_in?
+    !current_user.nil?
+  end
+
 end
