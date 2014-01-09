@@ -3,7 +3,7 @@ module SessionsHelper
     token = User.new_remember_token
     cookies.permanent[:remember_token] = token
     user.update_attribute(:remember_token, User.encrypt(token))
-    @current_user = user
+    self.current_user = user
   end
 
   def current_user=(user)
