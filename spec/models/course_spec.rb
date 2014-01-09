@@ -61,9 +61,9 @@ describe Course do
 
       specify { @course1.should be_valid }
       specify { @course2.should_not be_valid }
-      specify { expect{ @course2.save! }.to raise_exception(/Designator has already been taken/) }
+      specify { expect{ @course2.save! }.to raise_exception(/Course has already been added/) }
       specify { @course3.should_not be_valid }
-      specify { expect{ @course3.save! }.to raise_exception(/Designator has already been taken/) }
+      specify { expect{ @course3.save! }.to raise_exception(/Course has already been added/) }
     end
   end
 end
