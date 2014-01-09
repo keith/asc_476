@@ -2,7 +2,9 @@
 
 FactoryGirl.define do
   factory :course do
-    designator "MyString"
-    number 1
+    designator { ["CSCI", "MATH", "ENGL", "PHYS"].sample }
+    number { (100..600).to_a.sample }
+    hidden false
+    disabled false
   end
 end
