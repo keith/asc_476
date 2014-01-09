@@ -10,5 +10,15 @@
   <%= @course.number %>
 </p>
 
+<p>
+  <strong>Hidden:</strong>
+  <%= @course.hidden %>
+</p>
+
+<p>
+  <strong>Disabled:</strong>
+  <%= @course.disabled %>
+</p>
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
