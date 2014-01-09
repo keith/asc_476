@@ -1,9 +1,12 @@
 class User < ActiveRecord::Base
+  has_secure_password
+
+  before_save { email.downcase! }
+
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+  validates :level, presence: true, inclusion: { in: 0..3 }
 
-  has_secure_password
-  
   def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
