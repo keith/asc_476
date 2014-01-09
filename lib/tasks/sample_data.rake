@@ -7,5 +7,6 @@ end
 
 def make_users
   FactoryGirl.create(:admin)
+  FactoryGirl.create(:moderator)
 end
 
