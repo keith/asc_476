@@ -10,6 +10,11 @@ describe Course do
   it { should respond_to(:disabled) }
   it { should be_valid }
 
+  describe "invalid fields" do
+    before { @invalid = Course.new }
+    specify { @invalid.should_not be_valid }
+  end
+
   describe "helper methods" do
     describe "hidden?" do
       before { @course.hidden = true }
