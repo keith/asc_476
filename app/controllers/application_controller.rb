@@ -18,14 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in_user
-    redirect_to new_sessions_path unless logged_in?
+    redirect_to signin_path unless logged_in?
   end
 
   def signed_in_moderator
-    redirect_to new_sessions_path unless logged_in_moderator?
+    redirect_to signin_path unless logged_in_moderator?
   end
 
   def signed_in_admin
-    redirect_to new_sessions_path unless logged_in_admin?
+    redirect_to signin_path unless logged_in_admin?
   end
 end

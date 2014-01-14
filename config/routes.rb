@@ -10,6 +10,7 @@ Asc476::Application.routes.draw do
   end
 
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin',  to: 'sessions#new', via: :get
   resource :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
