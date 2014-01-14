@@ -19,5 +19,5 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to signin_path
   end
-
 end
+
