@@ -3,9 +3,11 @@
 <%= form_for(@course) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, 'error') %> stopped this course from being saved:</h2>
+
       <ul>
-        <% @course.errors.each do |key, value| %>
-          <li><%= value %></li>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
@@ -17,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :number %><br>
-    <%= f.number_field :number %>
+    <%= f.text_field :number %>
   </div>
   <div class="field">
     <%= f.label :hidden %><br>
@@ -33,3 +35,4 @@
 <% end %>
 
 <%= link_to 'Back', courses_path %>
+

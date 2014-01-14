@@ -1,10 +1,9 @@
 class Course < ActiveRecord::Base
   before_save { designator.upcase! }
 
-  COURSE_REGEX = /\A([a-z]){4}\z/i
-  validates :designator, presence: true, format: { with: COURSE_REGEX }
-  validates_presence_of :number
-  validates_uniqueness_of :number, { scope: :designator, message: "Course has already been added" }
+  COURSE_REGEX = /\A([a-z])*\z/i
+  validates :designator, presence: true, format: { with: COURSE_REGEX }, length: { is: 4 }
+  validates :number, presence: true, uniqueness: { scope: :designator }
 
   def hidden?
     self.hidden || self.disabled
@@ -14,3 +13,4 @@ class Course < ActiveRecord::Base
     self.disabled
   end
 end
+
