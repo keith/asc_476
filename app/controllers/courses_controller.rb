@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :signed_in_admin
-  before_action :set_course, only: [:show, :edit, :update]
+  before_action :set_course, only: [:edit, :update]
 
   # GET /courses
   def index
@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1
   def show
+    redirect_to courses_path
   end
 
   # GET /courses/new
@@ -25,7 +26,7 @@ class CoursesController < ApplicationController
     @course = Course.new(create_params)
 
     if @course.save
-      redirect_to @course, notice: 'Course was successfully created.'
+      redirect_to courses_path, notice: 'Course was successfully created.'
     else
       render action: 'new'
     end
@@ -34,7 +35,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   def update
     if @course.update(update_params)
-      redirect_to @course, notice: 'Course was successfully updated.'
+      redirect_to courses_path, notice: 'Course was successfully updated.'
     else
       render action: 'edit'
     end
