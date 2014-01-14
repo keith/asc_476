@@ -16,9 +16,7 @@ class Applicant < ActiveRecord::Base
   private
 
     def gpa_update
-      if self.gpa_changed?
-        self.gpa_timestamp = Time.now
-      end
+      self.gpa_timestamp = Time.now if self.gpa_changed?
     end
 
     def static_identifier
