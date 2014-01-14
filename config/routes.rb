@@ -2,8 +2,9 @@ Asc476::Application.routes.draw do
   resources :positions
   resources :available_times
   resources :professors
-  resources :applicants
   resources :users
+
+  resources :applicants, except: [:destroy]
 
   resources :courses, only: [:create, :index, :new] do
     put 'update_multiple', on: :collection
