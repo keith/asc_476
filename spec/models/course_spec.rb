@@ -27,20 +27,6 @@ describe Course do
     end
   end
 
-  describe "helper methods" do
-    describe "hidden?" do
-      before { @course.hidden = true }
-      specify { expect(@course.hidden?).to be_true }
-      specify { expect(@course.disabled?).to be_false }
-    end
-
-    describe "disabled?" do
-      before { @course.disabled = true }
-      specify { expect(@course.hidden?).to be_true }
-      specify { expect(@course.disabled?).to be_true }
-    end
-  end
-
   describe "uniqueness" do
     describe "two courses with different numbers" do
       before do
