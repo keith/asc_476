@@ -2,6 +2,8 @@ class Applicant < ActiveRecord::Base
   include ApplicantsHelper
 
   has_many :available_times
+  has_many :positions
+  accepts_nested_attributes_for :positions, :available_times
 
   before_create { self.identifier = new_applicant_identifier }
   before_save { email.downcase! }
