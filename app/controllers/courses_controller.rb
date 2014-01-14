@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :signed_in_admin
   before_action :set_course, only: [:show, :edit, :update]
-  before_action :signed_in_user
 
   # GET /courses
   def index
@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
 
   # POST /courses
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(create_params)
 
     if @course.save
       redirect_to @course, notice: 'Course was successfully created.'
@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
 
   # PATCH/PUT /courses/1
   def update
-    if @course.update(course_params)
+    if @course.update(update_params)
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render action: 'edit'
@@ -41,13 +41,16 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def course_params
+    def create_params
       params.require(:course).permit(:designator, :number, :hidden, :disabled)
+    end
+
+    def update_params
+      params.require(:course).permit(:hidden, :disabled)
     end
 end
