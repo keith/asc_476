@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  before_save { designator.upcase! }
+  before_save :save_action
 
   COURSE_REGEX = /\A([a-z])*\z/i
   validates :designator, presence: true, format: { with: COURSE_REGEX }, length: { is: 4 }
@@ -12,5 +12,11 @@ class Course < ActiveRecord::Base
   def disabled?
     self.disabled
   end
+
+  private
+    def save_action
+      designator.upcase!
+      self.hidden = true if self.disabled
+    end
 end
 
