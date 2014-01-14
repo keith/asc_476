@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :course do
     designator { ["CSCI", "MATH", "ENGL", "PHYS"].sample }
     number { (100..600).to_a.sample }
-    hidden false
-    disabled false
+    hidden { [true, false].sample }
+    disabled { [true, false].sample }
   end
 end
