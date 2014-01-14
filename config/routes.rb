@@ -1,20 +1,16 @@
 Asc476::Application.routes.draw do
   resources :positions
-
   resources :available_times
-
   resources :professors
-
   resources :applicants
-
   resources :users
 
-  resources :courses
+  resources :courses, only: [:create, :index, :new] do
+    put 'update_multiple', on: :collection
+  end
 
+  match '/signout', to: 'sessions#destroy', via: :delete
   resource :sessions
-
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
