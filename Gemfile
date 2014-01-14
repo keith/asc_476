@@ -35,5 +35,6 @@ group :development do
   gem 'faker', '~> 1.2.0'
   gem 'rspec-rails', '~> 2.14.0'
   gem 'guard-rspec', '~> 4.0.1'
+  gem 'capybara', '~> 2.2.1'
 end
 
