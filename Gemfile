@@ -30,11 +30,13 @@ group :development do
   gem 'binding_of_caller', '~> 0.7.2'
 
   gem 'sdoc', '~> 0.3.20'
+  gem 'guard-rspec', '~> 4.0.1'
+end
 
+group :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'faker', '~> 1.2.0'
   gem 'rspec-rails', '~> 2.14.0'
-  gem 'guard-rspec', '~> 4.0.1'
   gem 'capybara', '~> 2.2.1'
   gem 'coveralls', require: false
 end
