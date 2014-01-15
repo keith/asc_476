@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   before_save { designator.upcase! }
+  has_many :positions
 
   COURSE_REGEX = /\A([a-z]){4}\z/i
   validates :designator, presence: true, format: { with: COURSE_REGEX }
@@ -13,4 +14,9 @@ class Course < ActiveRecord::Base
   def disabled?
     self.disabled
   end
+
+  def full_name
+    "#{designator} #{number}"
+  end
+
 end
