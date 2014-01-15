@@ -1,15 +1,14 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ProfessorsHelper. For example:
-#
-# describe ProfessorsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe ProfessorsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'new_professor_identifier' do
+    it 'should return long identifier' do
+      expect(helper.new_professor_identifier.length >= 32).to be_true
+    end
+
+    it 'should not return the same thing twice (probably)' do
+      expect(helper.new_professor_identifier).not_to eq(helper.new_professor_identifier)
+    end
+  end
 end
+

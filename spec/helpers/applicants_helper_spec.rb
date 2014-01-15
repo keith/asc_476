@@ -1,15 +1,14 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ApplicantsHelper. For example:
-#
-# describe ApplicantsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe ApplicantsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'new_applicant_identifier' do
+    it 'should return a long identifier' do
+      expect(helper.new_applicant_identifier.length >= 36).to be_true
+    end
+
+    it 'should not return the same identifier twice (probably)' do
+      expect(helper.new_applicant_identifier).not_to eq(helper.new_applicant_identifier)
+    end
+  end
 end
+

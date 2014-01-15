@@ -10,14 +10,13 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_to applicants_path
     else
-      flash.now[:error] = 'Invalid email/password'
-      render :new
+      redirect_to signin_path, flash: { alert: 'Invalid email/password' }
     end
   end
 
   def destroy
     sign_out
-    redirect_to new_sessions_path
+    redirect_to signin_path
   end
-
 end
+

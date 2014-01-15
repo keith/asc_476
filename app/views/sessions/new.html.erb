@@ -1,11 +1,9 @@
-<% provide(:title, "Login") %>
+<% provide(:title, 'Login') %>
 <h1>Login</h1>
 
-<% if flash[:error] %>
-  <div class="alert">
-    <%= flash[:error] %>
-  </div>
-<% end %>
+<div class="alert">
+  <%= alert %>
+</div>
 
 <div class="row">
   <div class="span6 offset3">
@@ -18,4 +16,4 @@
     <% end %>
   </div>
 </div>
-<%= debug(params) =%>
+
