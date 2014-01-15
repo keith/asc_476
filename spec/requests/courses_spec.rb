@@ -58,7 +58,9 @@ describe 'Courses' do
     it 'should create a new course' do
       fill_in 'Designator', with: @course.designator
       fill_in 'Number', with: @course.number
-      click_button 'Create Course'
+      expect {
+        click_button 'Create Course'
+      }.to change(Course, :count).by(1)
       current_path.should == courses_path
       expect(page).to have_content(@course.designator)
       expect(page).to have_content(@course.number)
