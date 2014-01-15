@@ -26,6 +26,7 @@ describe Applicant do
 
     describe "non-unique email" do
       before do
+        Applicant.delete_all
         @good = Applicant.create!(name: "Joe", email: "smithj1@winthrop.edu")
         @bad = Applicant.new(name: "Jane", email: "smithj1@winthrop.edu")
       end
@@ -36,7 +37,7 @@ describe Applicant do
   end
 
   describe "gpa timestamp changed on update" do
-    before do 
+    before do
       @old_timestamp = @applicant.gpa_timestamp
       @applicant.update_attributes(gpa: 3.7)
       @new_timestamp = @applicant.gpa_timestamp
