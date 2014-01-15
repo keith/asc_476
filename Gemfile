@@ -36,5 +36,6 @@ group :development do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'guard-rspec', '~> 4.0.1'
   gem 'capybara', '~> 2.2.1'
+  gem 'coveralls', require: false
 end
 
