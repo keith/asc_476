@@ -1,11 +1,68 @@
 require 'spec_helper'
 
-describe "Courses" do
-  describe "GET /courses" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get courses_path
-      response.status.should be(200)
+describe 'Courses' do
+  before do
+    @admin = FactoryGirl.create(:admin)
+    visit signin_path
+    fill_in 'Email', with: @admin.email
+    fill_in 'Password', with: 'abcdef'
+    click_button 'Sign in'
+  end
+
+  describe 'GET /courses' do
+    before do
+      @course = FactoryGirl.create(:course)
+      @course.disabled = false
+      @course.save
+      visit courses_path
+    end
+
+    it 'should be on the correct page' do
+      current_path.should == courses_path
+    end
+
+    it 'should have the correct HTML' do
+      expect(page).to have_content('Listing courses')
+      expect(page).to have_button('Update Courses')
+      expect(page).to have_link('New Course', href: new_course_path)
+      expect(page).to have_content(@course.designator)
+      expect(page).to have_content(@course.number)
+    end
+
+    it 'should save and update' do
+      check_id = "courses_#{ @course.id }_disabled"
+      expect(page).to have_unchecked_field(check_id)
+      page.check(check_id)
+      click_button 'Update Courses'
+      current_path.should == courses_path
+      expect(page).to have_checked_field(check_id)
+    end
+  end
+
+  describe 'GET /courses/new' do
+    before do
+      @course = FactoryGirl.build(:course)
+      visit new_course_path
+    end
+
+    it 'should be on the correct page' do
+      current_path.should == new_course_path
+    end
+
+    it 'should have the correct HTML' do
+      expect(page).to have_content('New course')
+      expect(page).to have_field('Designator', type: 'text')
+      expect(page).to have_button('Create Course')
+    end
+
+    it 'should create a new course' do
+      fill_in 'Designator', with: @course.designator
+      fill_in 'Number', with: @course.number
+      click_button 'Create Course'
+      current_path.should == courses_path
+      expect(page).to have_content(@course.designator)
+      expect(page).to have_content(@course.number)
     end
   end
 end
+
