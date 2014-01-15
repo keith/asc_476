@@ -49,9 +49,20 @@
     <%= f.label :work_study %><br>
     <%= f.check_box :work_study %>
   </div>
+
+  <%= f.fields_for :positions do |position_fields| %>
+    <%# if position_fields.object.active? %>
+      <%= render "position_fields", :f => position_fields %>
+    <%# end %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Position", f, :positions %></p>
+
   <div class="actions">
     <%= f.submit "Submit Application" %>
   </div>
+
+<%= debug(params) =%>
+
 <% end %>
 
 <%= link_to 'Back', applicants_path %>

@@ -2,7 +2,6 @@ class ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index]
 
-
   # GET /applicants
   def index
     @applicants = Applicant.all
@@ -15,6 +14,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @applicant = Applicant.new
+    position = @applicant.positions.build
   end
 
   # GET /applicants/1/edit
@@ -47,8 +47,13 @@ class ApplicantsController < ApplicationController
       @applicant = Applicant.find(params[:id])
     end
 
+    def create_or_find_professor(email)
+      @professor = Professor.find_or_create_by_email(params[:professor_email])
+    end
+
+    
     # Only allow a trusted parameter "white list" through.
     def applicant_params
-      params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study)
+      params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study, positions_attributes: [:course_id])
     end
 end
