@@ -1,6 +1,6 @@
 language: ruby
-rvm:
-  - 2.0.0-p247
+rvm: 2.0.0-p247
 install: bundle install
-script: bundle exec rake spec
+script: bundle exec rspec spec
+secure: "MFs59A6NhOymJD0eL+cAjiJDoTpeqZxR3fGcU35yxekw5KP/Z//qIKAZGK4itUyzHDo2JsfT1Ku4j/cNLyNpKAQdxhAs9JSQzyjczkqWBEC2vLMKey2PbA+Kr20ExrpE7hMgx9HyInwuOub3cBbw9N1BN0HwDl9Vr4b838Vzpxk="
 
