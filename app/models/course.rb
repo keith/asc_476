@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   before_save { designator.upcase! }
+  before_create :default_values
   has_many :positions
   before_save :save_action
 
@@ -24,5 +25,11 @@ class Course < ActiveRecord::Base
       designator.upcase!
       self.hidden = true if self.disabled
     end
+
+    def default_values
+      self.hidden = 0
+      self.disabled = 0
+    end
+
 end
 
