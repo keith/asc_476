@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       # TODO: Send email to @user with password reset link
+      # TODO: Redirect to another path if the user isn't an admin
       redirect_to users_path, notice: 'User was successfully updated.'
     else
       render action: 'edit'
@@ -54,10 +55,10 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      if @current_user.admin?
-        params.require(:user).permit(:name, :email, :level)
-      elsif @current_user == @user
+      if @current_user == @user
         params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      elsif @current_user.admin?
+        params.require(:user).permit(:name, :email, :level)
       else
         raise ArgumentError
       end
@@ -69,6 +70,7 @@ class UsersController < ApplicationController
     end
 
     def admin_or_current
+      logged_in_user
       @current_user.admin? || @current_user == @user
     end
 end
