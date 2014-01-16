@@ -1,3 +1,6 @@
+require 'factory_girl_rails'
+require 'faker'
+
 namespace :db do
   desc 'Generate some sample data'
   task populate: :environment do
