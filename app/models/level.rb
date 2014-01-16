@@ -6,6 +6,14 @@ Level = Struct.new(:name, :desc, :num) do
     ]
   end
 
+  def self.names
+    self.levels.map { |x| x.name }
+  end
+
+  def self.for_number(n)
+    (Level.levels.select { |x| x.num == n }).first
+  end
+
   def description
     "#{ name } - #{ desc }"
   end
