@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:destroy]
   before_action :signed_in_admin, only: [:create, :destroy, :index, :new]
+  before_action :set_user_admin_or_current, only: [:edit, :update]
 
   # GET /users
   def index
-    @users = User.find_all_except(@current_user)
+    @users = User.all
   end
 
   # GET /users/new
@@ -19,8 +20,10 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.set_temporary_password
 
     if @user.save
+      # TODO: Send email to @user with link to set their password and/or with the temporary password created above
       redirect_to users_path, notice: 'User was successfully created.'
     else
       render action: 'new'
@@ -30,7 +33,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      # TODO: Send email to @user with password reset link
+      redirect_to users_path, notice: 'User was successfully updated.'
     else
       render action: 'edit'
     end
@@ -39,7 +43,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    redirect_to users_url, notice: 'User was deleted successfully.'
   end
 
   private
@@ -50,7 +54,22 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :level)
+      if @current_user.admin?
+        params.require(:user).permit(:name, :email, :level)
+      elsif @current_user == @user
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      else
+        raise ArgumentError
+      end
+    end
+
+    def set_user_admin_or_current
+      set_user
+      redirect_to signin_path unless admin_or_current
+    end
+
+    def admin_or_current
+      @current_user.admin? || @current_user == @user
     end
 end
 
