@@ -22,8 +22,8 @@ class Course < ActiveRecord::Base
 
   private
     def default_values
-      self.hidden = false
-      self.disabled = false
+      self.hidden ||= false
+      self.disabled ||= false
       nil
     end
 
