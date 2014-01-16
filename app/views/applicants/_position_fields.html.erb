@@ -1,3 +1,4 @@
 <p>
-  <%= f.collection_select  :course_id, Course.all, :id, :full_name, prompt: true %>
+  <%= f.collection_select  :course_id, 
+    Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name, prompt: true %>
 </p>

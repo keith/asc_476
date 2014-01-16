@@ -50,7 +50,6 @@ class ApplicantsController < ApplicationController
     def create_or_find_professor(email)
       @professor = Professor.find_or_create_by_email(params[:professor_email])
     end
-
     
     # Only allow a trusted parameter "white list" through.
     def applicant_params
