@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
   validates :level, presence: true, inclusion: { in: 0..3 }
 
-  def self.new_remember_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
 
   def moderator?
     self.level <= 2
+  end
+
+  def set_temporary_password
+    token = User.new_token
+    self.password = token
+    self.password_confirmation = token
   end
 end
 
