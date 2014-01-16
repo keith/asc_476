@@ -43,8 +43,13 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was deleted successfully.'
+    notice = 'User was deleted successfully.'
+    if last_admin?(@user)
+      notice = 'Cannot delete the last administrator'
+    else
+      @user.destroy
+    end
+    redirect_to users_url, notice: notice
   end
 
   private
@@ -62,6 +67,10 @@ class UsersController < ApplicationController
       else
         raise ArgumentError
       end
+    end
+
+    def last_admin?(user)
+      user.admin? && User.where(level: 0).count <= 1
     end
 
     def set_user_admin_or_current

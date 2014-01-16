@@ -4,6 +4,35 @@ require 'spec_helper'
 describe 'Users' do
   let(:bobemail) { 'bob@example.com' }
 
+  describe 'deleting last administrator' do
+    before do
+      @admin = FactoryGirl.create(:admin)
+      @admin2 = FactoryGirl.create(:admin)
+      visit signin_path
+      fill_in 'Email', with: @admin.email
+      fill_in 'Password', with: 'abcdef'
+      click_button 'Sign in'
+    end
+
+    it 'should allow the deletion of one of the admins' do
+      visit users_path
+      current_path.should == users_path
+      expect(page).to have_content(@admin2.email)
+      expect {
+        find(:xpath, "//a[@href='/users/#{ @admin2.id }']").click
+      }.to change(User, :count).by(-1)
+      current_path.should == users_path
+      expect(page).not_to have_content(@admin2.email)
+      expect(page).to have_content('User was deleted')
+      expect {
+        find(:xpath, "//a[@href='/users/#{ @admin.id }']").click
+      }.to change(User, :count).by(0)
+      current_path.should == users_path
+      expect(page).to have_content(@admin.email)
+      expect(page).to have_content('Cannot delete')
+    end
+  end
+
   describe 'admins' do
     before do
       @admin = FactoryGirl.create(:admin)
