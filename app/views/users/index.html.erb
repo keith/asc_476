@@ -1,12 +1,25 @@
 <h1>Listing users</h1>
+<p id="notice">
+  <%= notice %>
+</p>
+
+<% @users.each do |user| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% user.errors.each do |key, value| %>
+          <li><%= value %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Password</th>
-      <th>Password confirmation</th>
       <th>Level</th>
       <th></th>
       <th></th>
@@ -19,11 +32,8 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.password %></td>
-        <td><%= user.password_confirmation %></td>
         <td><%= user.level %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <%# <td><%= link_to 'Edit', edit_user_path(user) %1></td> %>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -33,3 +43,4 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+

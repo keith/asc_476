@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :signed_in_admin, only: [:create, :destroy, :index, :new]
 
   # GET /users
   def index
-    @users = User.all
-  end
-
-  # GET /users/1
-  def show
+    @users = User.find_all_except(@current_user)
   end
 
   # GET /users/new
@@ -24,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to users_path, notice: 'User was successfully created.'
     else
       render action: 'new'
     end
@@ -56,3 +53,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :level)
     end
 end
+
