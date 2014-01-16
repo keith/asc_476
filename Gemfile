@@ -30,7 +30,8 @@ group :development do
   gem 'binding_of_caller', '~> 0.7.2'
 
   gem 'sdoc', '~> 0.3.20'
-  gem 'guard-rspec', '~> 4.0.1'
+  gem 'guard-rspec', '~> 4.0.1', require: false
+  gem 'guard-livereload', require: false
 end
 
 group :test do
