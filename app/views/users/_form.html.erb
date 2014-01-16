@@ -28,8 +28,7 @@
     <%= f.text_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label :level %><br>
-    <%= f.number_field :level %>
+    <%= f.collection_select(:level, Level.levels, :num, :description) %>
   </div>
   <div class="actions">
     <%= f.submit %>
