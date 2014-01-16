@@ -19,7 +19,7 @@ describe 'users/edit' do
       assert_select 'input#user_email[name=?]', 'user[email]'
       assert_select 'input#user_password[name=?]', 'user[password]'
       assert_select 'input#user_password_confirmation[name=?]', 'user[password_confirmation]'
-      assert_select 'input#user_level[name=?]', 'user[level]'
+      assert_select 'select#user_level'
     end
   end
 end
