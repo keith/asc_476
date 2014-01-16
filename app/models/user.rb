@@ -15,10 +15,6 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(blob.to_s)
   end
 
-  def self.find_all_except(user)
-    User.find(:all, conditions: ['id != ?', user.id])
-  end
-
   def delete_remember_token
     self.update_attribute(:remember_token, nil)
   end
