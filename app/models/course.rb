@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
-  before_save { designator.upcase! }
-  before_create :default_values
   has_many :positions
+
+  before_create :default_values
   before_save :save_action
 
   COURSE_REGEX = /\A([a-z])*\z/i
@@ -9,27 +9,27 @@ class Course < ActiveRecord::Base
   validates :number, presence: true, uniqueness: { scope: :designator }
 
   def hidden?
-    self.hidden || self.disabled
+    !!self.hidden || disabled?
   end
 
   def disabled?
-    self.disabled
+    !!self.disabled
   end
 
   def full_name
-    "#{designator} #{number}"
+    "#{ designator } #{ number }"
   end
 
   private
+    def default_values
+      self.hidden = false
+      self.disabled = false
+      nil
+    end
+
     def save_action
       designator.upcase!
-      self.hidden = true if self.disabled
+      self.hidden = true if disabled?
     end
-
-    def default_values
-      self.hidden = 0
-      self.disabled = 0
-    end
-
 end
 
