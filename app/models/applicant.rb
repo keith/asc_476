@@ -13,6 +13,10 @@ class Applicant < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates_presence_of :name
 
+  def to_param
+    identifier.to_s
+  end
+
   private
 
     def gpa_update
@@ -22,4 +26,5 @@ class Applicant < ActiveRecord::Base
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
     end
+
 end

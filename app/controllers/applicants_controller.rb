@@ -44,7 +44,7 @@ class ApplicantsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant
-      @applicant = Applicant.find(params[:id])
+      @applicant = Applicant.find_by_identifier(params[:id])
     end
 
     def create_or_find_professor(email)
