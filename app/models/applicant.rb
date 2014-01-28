@@ -14,7 +14,7 @@ class Applicant < ActiveRecord::Base
   validates_presence_of :name
 
   def to_param
-    identifier.to_s
+    identifier
   end
 
   private
