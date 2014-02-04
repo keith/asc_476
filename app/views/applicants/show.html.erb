@@ -25,12 +25,17 @@
   <%= @applicant.class_standing %>
 </p>
 
-<%# TODO: Can only view if is admin or moderator? %>
-<% if @applicant.gpa %>
-  <p>
-    <strong>Gpa (last updated <%= @applicant.gpa_timestamp %>):</strong>
-    <%= @applicant.gpa %>
-  </p>
+<% if logged_in_admin? %>
+  <% if @applicant.gpa %>
+    <p>
+      <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT) %>):</strong>
+      <%= @applicant.gpa %>
+    </p>
+  <% else %>
+    <p>
+      <strong>GPA:</strong> hasn't been entered
+    </p>
+  <% end %>
 <% end %>
 
 <p>

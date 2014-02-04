@@ -22,15 +22,16 @@
     <%= f.text_field :class_standing %>
   </div>
 
-  <%# TODO: Only if admin/moderator? is logged in %>
-  <div class="field">
-    <% if @applicant.gpa_timestamp %>
-      <%= f.label :gpa, "GPA (Last updated #{ @applicant.gpa_timestamp }" %><br>
-    <% else %>
-      <%= f.label :gpa, 'GPA' %><br>
-    <% end %>
-    <%= f.text_field :gpa %>
-  </div>
+  <% if logged_in_admin? %>
+    <div class="field">
+      <% if @applicant.gpa_timestamp %>
+        <%= f.label :gpa, "GPA (#{ @applicant.gpa_timestamp.strftime(DATE_FORMAT) })" %><br>
+      <% else %>
+        <%= f.label :gpa, 'GPA' %><br>
+      <% end %>
+      <%= f.text_field :gpa %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :comment %><br>

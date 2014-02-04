@@ -11,14 +11,17 @@ class ApplicationController < ActionController::Base
   def logged_in?
     logged_in_user.present?
   end
+  helper_method :logged_in?
 
   def logged_in_moderator?
     logged_in? && @current_user.moderator?
   end
+  helper_method :logged_in_moderator?
 
   def logged_in_admin?
     logged_in? && @current_user.admin?
   end
+  helper_method :logged_in_admin?
 
   def signed_in_user
     redirect_to signin_path unless logged_in?
