@@ -3,16 +3,17 @@ require 'spec_helper'
 describe "applicants/show" do
   before(:each) do
     @applicant = assign(:applicant, stub_model(Applicant,
-      :name => "Name",
-      :email => "Email",
-      :wuid => "Wuid",
-      :phone_number => "Phone Number",
-      :class_standing => "Class Standing",
-      :gpa => 1.5,
-      :comment => "MyText",
-      :major => "Major",
-      :minor => "Minor",
-      :work_study => false
+      name: "Name",
+      email: "Email",
+      wuid: "Wuid",
+      phone_number: "Phone Number",
+      class_standing: "Class Standing",
+      gpa: 1.5,
+      comment: "MyText",
+      major: "Major",
+      minor: "Minor",
+      work_study: false,
+      identifier: "abc"
     ))
   end
 
