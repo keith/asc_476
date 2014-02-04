@@ -1,6 +1,6 @@
 <h1>New applicant</h1>
 
-<%= form_for(@applicant, method: "create") do |f| %>
+<%= form_for(@applicant, method: 'create') do |f| %>
   <% if @applicant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@applicant.errors.count, "error") %> prohibited this applicant from being saved:</h2>
@@ -19,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %> @winthrop.edu
+    <%= f.text_field :email %> <%= EMAIL_SUFFIX %>
   </div>
   <div class="field">
     <%= f.label :wuid %><br>
@@ -56,7 +56,7 @@
   <p><%= link_to_add_fields "Add Position", f, :positions %></p>
 
   <div class="actions">
-    <%= f.submit "Submit Application" %>
+    <%= f.submit 'Submit Application' %>
   </div>
 <% end %>
 

@@ -51,7 +51,7 @@ describe Applicant do
 
   describe "email cannot have suffix" do
     before do
-      @applicant.email = "foo@winthrop.edu"
+      @applicant.email = "foo#{ EMAIL_SUFFIX }"
     end
 
     it { should_not be_valid }
