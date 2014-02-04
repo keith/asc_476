@@ -1,12 +1,23 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# describe "Applicants" do
-#   describe "GET /applicants" do
-#     it "works! (now write some real specs)" do
-#       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-#       get applicants_path
-#       response.status.should be(200)
-#     end
-#   end
-# end
+describe "Applicants" do
+  before do
+    @admin = FactoryGirl.create(:admin)
+    visit signin_path
+    fill_in 'Email', with: @admin.email
+    fill_in 'Password', with: 'abcdef'
+    click_button 'Sign in'
+  end
+
+  describe "GET /applicant/:id" do
+    before do
+      @applicant = FactoryGirl.create(:applicant)
+      visit applicant_path(@applicant)
+    end
+
+    it "should have the url /applicant/:hash" do
+      current_path.should == "#{applicants_path}/#{@applicant.identifier}"
+    end
+  end
+end
 
