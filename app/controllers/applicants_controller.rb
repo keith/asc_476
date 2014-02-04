@@ -14,7 +14,6 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @applicant = Applicant.new
-    position = @applicant.positions.build
   end
 
   # GET /applicants/1/edit
