@@ -1,6 +1,8 @@
 class Applicant < ActiveRecord::Base
   include ApplicantsHelper
 
+  EMAIL_REGEX = /\A\w+\z/i
+
   has_many :available_times
   has_many :positions
   accepts_nested_attributes_for :positions
@@ -10,7 +12,7 @@ class Applicant < ActiveRecord::Base
 
   validate :gpa_update, on: :update
   validate :static_identifier, on: :update
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
   validates_presence_of :name
 
   def to_param
@@ -26,5 +28,4 @@ class Applicant < ActiveRecord::Base
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
     end
-
 end

@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :applicant, class: Applicant do
     name { Faker::Name.name }
-    email { Faker::Name.first_name + ('a'..'z').to_a[rand(26)] + (rand(9)+1).to_s + "@winthrop.edu" }
+    email { Faker::Name.last_name + ('a'..'z').to_a.sample + (rand(9)+1).to_s }
     wuid { Faker::Number.number(8) }
     phone_number { Faker::PhoneNumber.phone_number }
     class_standing { ["Freshman", "Sophomore", "Junior", "Senior"].sample }

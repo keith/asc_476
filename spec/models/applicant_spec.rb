@@ -27,8 +27,8 @@ describe Applicant do
     describe "non-unique email" do
       before do
         Applicant.delete_all
-        @good = Applicant.create!(name: "Joe", email: "smithj1@winthrop.edu")
-        @bad = Applicant.new(name: "Jane", email: "smithj1@winthrop.edu")
+        @good = Applicant.create!(name: "Joe", email: "smithj1")
+        @bad = Applicant.new(name: "Jane", email: "smithj1")
       end
 
       specify { @bad.should_not be_valid }
@@ -47,5 +47,13 @@ describe Applicant do
 
   describe "identifier is immutable" do
       specify { expect{ @applicant.update_attributes!(identifier: 123) }.to raise_exception(/can't be changed/) }
+  end
+
+  describe "email cannot have suffix" do
+    before do
+      @applicant.email = "foo@winthrop.edu"
+    end
+
+    it { should_not be_valid }
   end
 end

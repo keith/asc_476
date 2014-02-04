@@ -11,38 +11,47 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= f.label :phone_number %><br>
     <%= f.text_field :phone_number %>
   </div>
+
   <div class="field">
     <%= f.label :class_standing %><br>
     <%= f.text_field :class_standing %>
   </div>
+
+  <%# TODO: Only if admin/moderator? is logged in %>
   <div class="field">
-    <%= f.label :gpa %><br>
+    <% if @applicant.gpa_timestamp %>
+      <%= f.label :gpa, "GPA (Last updated #{ @applicant.gpa_timestamp }" %><br>
+    <% else %>
+      <%= f.label :gpa, 'GPA' %><br>
+    <% end %>
     <%= f.text_field :gpa %>
   </div>
-  <div class="field">
-    <%= f.label :gpa_timestamp %><br>
-    <%= f.datetime_select :gpa_timestamp %>
-  </div>
+
   <div class="field">
     <%= f.label :comment %><br>
     <%= f.text_area :comment %>
   </div>
+
   <div class="field">
     <%= f.label :major %><br>
     <%= f.text_field :major %>
   </div>
+
   <div class="field">
     <%= f.label :minor %><br>
     <%= f.text_field :minor %>
   </div>
+
   <div class="field">
     <%= f.label :work_study %><br>
     <%= f.check_box :work_study %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
