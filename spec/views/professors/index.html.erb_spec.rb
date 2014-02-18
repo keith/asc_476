@@ -2,14 +2,17 @@ require 'spec_helper'
 
 describe "professors/index" do
   before(:each) do
+    view.stub(:logged_in_admin?).and_return(true)
     assign(:professors, [
       stub_model(Professor,
         :name => "Name",
-        :email => "Email"
+        :email => "Email",
+        :identifier => "abc"
       ),
       stub_model(Professor,
         :name => "Name",
-        :email => "Email"
+        :email => "Email",
+        :identifier => "abc"
       )
     ])
   end
