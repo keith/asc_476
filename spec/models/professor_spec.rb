@@ -15,7 +15,6 @@ describe Professor do
   end
 
   describe 'a professor should generate a token' do
-    before { @prof.valid? }
     specify { expect(@prof.identifier.present?).to be_true }
   end
 

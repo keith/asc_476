@@ -8,6 +8,10 @@ class Professor < ActiveRecord::Base
   validates_presence_of :name
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+  def to_param
+    identifier
+  end
+
   private
 
     def static_identifier

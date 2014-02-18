@@ -1,4 +1,5 @@
 class ProfessorsController < ApplicationController
+  before_action :signed_in_admin, only: [:index, :destroy]
   before_action :set_professor, only: [:show, :edit, :update, :destroy]
 
   # GET /professors
@@ -47,12 +48,17 @@ class ProfessorsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    # TODO: Return 404 for nil prof?
     def set_professor
-      @professor = Professor.find(params[:id])
+      @professor = Professor.find_by_identifier(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def professor_params
-      params.require(:professor).permit(:name, :email)
+      if logged_in_admin?
+        params.require(:professor).permit(:name, :email)
+      else
+        params.require(:professor).permit(:name)
+      end
     end
 end
