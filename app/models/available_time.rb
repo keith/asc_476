@@ -3,5 +3,5 @@ class AvailableTime < ActiveRecord::Base
 
   def day_name
     Date::DAYNAMES[day]
-end
+  end
 end
