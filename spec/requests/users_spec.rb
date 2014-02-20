@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe 'Users' do
   let(:bobemail) { 'bob@example.com' }
 
@@ -199,4 +198,3 @@ describe 'Users' do
     end
   end
 end
-

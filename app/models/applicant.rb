@@ -1,7 +1,7 @@
 class Applicant < ActiveRecord::Base
   include ApplicantsHelper
 
-  EMAIL_REGEX = /\A\w+\z/i
+  EMAIL_REGEX = /\A\w+\z/
 
   has_many :available_times
   has_many :positions

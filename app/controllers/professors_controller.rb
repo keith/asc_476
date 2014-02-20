@@ -1,4 +1,5 @@
 class ProfessorsController < ApplicationController
+  before_action :signed_in_admin, only: [:index, :destroy]
   before_action :set_professor, only: [:show, :edit, :update, :destroy]
 
   # GET /professors
@@ -7,27 +8,12 @@ class ProfessorsController < ApplicationController
   end
 
   # GET /professors/1
+  # TODO: Use this action to show all applications waiting their recommendation
   def show
-  end
-
-  # GET /professors/new
-  def new
-    @professor = Professor.new
   end
 
   # GET /professors/1/edit
   def edit
-  end
-
-  # POST /professors
-  def create
-    @professor = Professor.new(professor_params)
-
-    if @professor.save
-      redirect_to @professor, notice: 'Professor was successfully created.'
-    else
-      render action: 'new'
-    end
   end
 
   # PATCH/PUT /professors/1
@@ -48,11 +34,16 @@ class ProfessorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_professor
-      @professor = Professor.find(params[:id])
+      @professor = Professor.find_by_identifier(params[:id])
+      raise ActiveRecord::RecordNotFound.new('Professor not found') if @professor.nil?
     end
 
     # Only allow a trusted parameter "white list" through.
     def professor_params
-      params.require(:professor).permit(:name, :email)
+      if logged_in_admin?
+        params.require(:professor).permit(:name, :email)
+      else
+        params.require(:professor).permit(:name)
+      end
     end
 end

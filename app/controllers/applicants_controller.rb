@@ -42,9 +42,9 @@ class ApplicantsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    # TODO: If applicant doesn't exist this we need to 404?
     def set_applicant
       @applicant = Applicant.find_by_identifier(params[:id])
+      raise ActiveRecord::RecordNotFound.new('Application not found') if @applicant.nil?
     end
 
     def create_or_find_professor(email)

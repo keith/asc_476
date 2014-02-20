@@ -63,6 +63,10 @@ Asc476::Application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # TODO: Configure mailer options
+  # config.action_mailer.default_url_options = {
+  #   host: 'our deployment url'
+  # }
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

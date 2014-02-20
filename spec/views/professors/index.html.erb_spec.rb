@@ -5,11 +5,13 @@ describe "professors/index" do
     assign(:professors, [
       stub_model(Professor,
         :name => "Name",
-        :email => "Email"
+        :email => "Email",
+        :identifier => "abc"
       ),
       stub_model(Professor,
         :name => "Name",
-        :email => "Email"
+        :email => "Email",
+        :identifier => "abc"
       )
     ])
   end
