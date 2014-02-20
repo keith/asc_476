@@ -11,11 +11,6 @@ class ProfessorsController < ApplicationController
   def show
   end
 
-  # GET /professors/new
-  def new
-    @professor = Professor.new
-  end
-
   # GET /professors/1/edit
   def edit
   end
