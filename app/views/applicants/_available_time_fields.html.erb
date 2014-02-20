@@ -1,0 +1,7 @@
+<p>
+  <div class="field">
+    <%= f.select :day, get_days.each_with_index.map {|name, index| [name,index]}, {:prompt => "--Select Day--"} %>
+    <%= f.datetime_select(:start, {prompt: {hour: "Select Start Time"}, discard_year: true, discard_month: true, ampm: true, minute_step: 15} ) %> - 
+    <%= f.datetime_select(:finish, {prompt: {hour: "Select End Time"}, discard_year: true, discard_month: true, ampm: true, minute_step: 15} ) %>
+   </div>
+</p>

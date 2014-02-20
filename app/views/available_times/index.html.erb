@@ -15,9 +15,9 @@
   <tbody>
     <% @available_times.each do |available_time| %>
       <tr>
-        <td><%= available_time.day %></td>
-        <td><%= available_time.start %></td>
-        <td><%= available_time.finish %></td>
+        <td><%= available_time.day_name %></td>
+        <td><%= available_time.start.strftime(AVAILABLE_TIME_FORMAT) %></td>
+        <td><%= available_time.finish.strftime(AVAILABLE_TIME_FORMAT) %></td>
         <td><%= link_to 'Show', available_time %></td>
         <td><%= link_to 'Edit', edit_available_time_path(available_time) %></td>
         <td><%= link_to 'Destroy', available_time, method: :delete, data: { confirm: 'Are you sure?' } %></td>

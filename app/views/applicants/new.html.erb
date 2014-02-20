@@ -50,6 +50,11 @@
     <%= f.check_box :work_study %>
   </div>
 
+  <%= f.fields_for :available_times do |available_time_fields| %>
+      <%= render "available_time_fields", :f => available_time_fields %>
+    <% end %>
+    <p><%= link_to_add_fields "Add Available Time", f, :available_times %></p>
+
   <%= f.fields_for :positions do |position_fields| %>
     <%= render "position_fields", :f => position_fields %>
   <% end %>

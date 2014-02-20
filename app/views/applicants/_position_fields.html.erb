@@ -1,4 +1,11 @@
 <p>
+  <div class="field">
   <%= f.collection_select  :course_id, 
-    Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name, prompt: true %>
+      Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name, prompt: true %>
+  
+  <%= f.fields_for :professor do |professor_fields| %>
+    <%= professor_fields.text_field :name, :placeholder => "Enter Professor Name" %>
+    <%= professor_fields.text_field :email, :placeholder => "Enter Professor Email" %>
+  <% end %>
+   </div>
 </p>

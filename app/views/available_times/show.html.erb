@@ -7,12 +7,12 @@
 
 <p>
   <strong>Start:</strong>
-  <%= @available_time.start %>
+  <%= @available_time.start.strftime(AVAILABLE_TIME_FORMAT) %>
 </p>
 
 <p>
   <strong>Finish:</strong>
-  <%= @available_time.finish %>
+  <%= @available_time.finish.strftime(AVAILABLE_TIME_FORMAT) %>
 </p>
 
 <%= link_to 'Edit', edit_available_time_path(@available_time) %> |
