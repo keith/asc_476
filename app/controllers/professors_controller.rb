@@ -48,9 +48,9 @@ class ProfessorsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    # TODO: Return 404 for nil prof?
     def set_professor
       @professor = Professor.find_by_identifier(params[:id])
+      raise ActiveRecord::RecordNotFound.new('Professor not found') if @professor.nil?
     end
 
     # Only allow a trusted parameter "white list" through.

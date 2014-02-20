@@ -12,6 +12,14 @@ describe 'Professors' do
     end
   end
 
+  describe 'viewing an invalid path' do
+    it 'should raise an error' do
+      expect {
+        visit professor_path('abc')
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
   describe 'changing a professor email' do
     describe 'not logged in' do
       before { visit edit_professor_path(@prof) }

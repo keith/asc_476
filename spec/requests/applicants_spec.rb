@@ -19,6 +19,13 @@ describe "Applicants" do
       current_path.should == "#{applicants_path}/#{@applicant.identifier}"
     end
 
+    describe 'viewing an invalid path' do
+      it 'should raise an error' do
+        expect {
+          visit applicant_path('abc')
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 
   describe "GET applicant_path(@applicant)" do
@@ -37,4 +44,3 @@ describe "Applicants" do
     end
   end
 end
-
