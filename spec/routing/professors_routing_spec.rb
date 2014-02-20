@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe ProfessorsController do
   describe 'routing' do
-
     it 'routes to #index' do
       get('/professors').should route_to('professors#index')
     end
@@ -13,10 +12,6 @@ describe ProfessorsController do
 
     it 'routes to #edit' do
       get('/professors/1/edit').should route_to('professors#edit', :id => '1')
-    end
-
-    it 'routes to #create' do
-      post('/professors').should route_to('professors#create')
     end
 
     it 'routes to #update' do

@@ -8,22 +8,12 @@ class ProfessorsController < ApplicationController
   end
 
   # GET /professors/1
+  # TODO: Use this action to show all applications waiting their recommendation
   def show
   end
 
   # GET /professors/1/edit
   def edit
-  end
-
-  # POST /professors
-  def create
-    @professor = Professor.new(professor_params)
-
-    if @professor.save
-      redirect_to @professor, notice: 'Professor was successfully created.'
-    else
-      render action: 'new'
-    end
   end
 
   # PATCH/PUT /professors/1
