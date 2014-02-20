@@ -1,4 +1,4 @@
-<h1>Listing professors</h1>
+<h1>All professors</h1>
 
 <table>
   <thead>
@@ -18,15 +18,8 @@
         <td><%= professor.email %></td>
         <td><%= link_to 'Show', professor %></td>
         <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
-
-      <% if logged_in_admin? %>
         <td><%= link_to 'Destroy', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Professor', new_professor_path %>
