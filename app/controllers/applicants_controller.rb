@@ -52,10 +52,6 @@ class ApplicantsController < ApplicationController
       raise ActiveRecord::RecordNotFound.new('Application not found') if @applicant.nil?
     end
 
-    def create_or_find_professor(email)
-      @professor = Professor.find_or_create_by_email(params[:professor_email])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def applicant_params
       params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study, positions_attributes: [:course_id, professor_attributes: [:name, :email]], available_times_attributes: [:day, :start, :finish])
