@@ -25,8 +25,8 @@ class ApplicantsController < ApplicationController
     @applicant = Applicant.new(applicant_params)
 
     @applicant.positions.each do |position|
-      p = Professor.find_by_email(position.professor.email)
-      position.professor = p if p
+      professor = Professor.find_by_email(position.professor.email)
+      position.professor = professor if professor
     end
     
     if @applicant.save
