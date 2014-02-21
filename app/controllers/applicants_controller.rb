@@ -24,6 +24,11 @@ class ApplicantsController < ApplicationController
   def create
     @applicant = Applicant.new(applicant_params)
 
+    @applicant.positions.each do |position|
+      p = Professor.find_by_email(position.professor.email)
+      position.professor = p if p
+    end
+    
     if @applicant.save
       redirect_to @applicant, notice: 'Applicant was successfully created.'
     else
