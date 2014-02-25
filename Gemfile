@@ -34,7 +34,7 @@ group :development do
   gem 'guard-livereload', require: false
 end
 
-group :test do
+group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'faker', '~> 1.2.0'
   gem 'rspec-rails', '~> 2.14.0'
