@@ -1,0 +1,5 @@
+{
+  "app/controllers/*_controller.rb": {"alternate": "spec/requests/%s_spec.rb"},
+  "spec/requests/*_spec.rb": {"alternate": "app/controllers/%s_controller.rb"},
+  "config/routes.rb": {"command": "routes"}
+}
