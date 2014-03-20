@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%# TODO: Add more info about the student and course for this position %>
 <p>
   <strong>Professor comments:</strong>
   <%= @position.professor_comments %>
@@ -7,23 +8,25 @@
 
 <p>
   <strong>Professor verdict:</strong>
-  <%= @position.professor_verdict %>
+  <%= @position.professor_verdict ? 'Yes' : 'No' %>
 </p>
 
 <p>
   <strong>Professor taught:</strong>
-  <%= @position.professor_taught %>
+  <%= @position.professor_taught ? 'Yes' : 'No' %>
 </p>
 
-<p>
-  <strong>Application status:</strong>
-  <%= @position.application_status %>
-</p>
+<% if logged_in_admin? %>
+  <p>
+    <strong>Application status:</strong>
+    <%= Status.for_number(@position.application_status) %>
+  </p>
 
-<p>
-  <strong>Asc comments:</strong>
-  <%= @position.asc_comments %>
-</p>
+  <p>
+    <strong>Asc comments:</strong>
+    <%= @position.asc_comments %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_position_path(@position) %> |
 <%= link_to 'Back', positions_path %>

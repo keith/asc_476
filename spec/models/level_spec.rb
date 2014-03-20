@@ -20,4 +20,3 @@ describe Level do
     end
   end
 end
-

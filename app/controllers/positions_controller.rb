@@ -1,4 +1,5 @@
 class PositionsController < ApplicationController
+  # TODO: Possibly create a unique ID for positions for editing
   before_action :set_position, only: [:show, :edit, :update, :destroy]
 
   # GET /positions
@@ -32,7 +33,14 @@ class PositionsController < ApplicationController
 
   # PATCH/PUT /positions/1
   def update
-    if @position.update(position_params)
+    args = params
+    if logged_in_admin?
+      args = asc_position_params
+    else
+      args = professor_position_params
+    end
+
+    if @position.update(args)
       redirect_to @position, notice: 'Position was successfully updated.'
     else
       render action: 'edit'
@@ -51,8 +59,11 @@ class PositionsController < ApplicationController
       @position = Position.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def position_params
-      params.require(:position).permit(:professor_comments, :professor_verdict, :professor_taught, :application_status, :asc_comments)
+    def professor_position_params
+      params.require(:position).permit(:professor_comments, :professor_verdict, :professor_taught)
+    end
+
+    def asc_position_params
+      params.require(:position).permit(:application_status, :asc_comments)
     end
 end

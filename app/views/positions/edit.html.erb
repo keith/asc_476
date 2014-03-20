@@ -1,6 +1,63 @@
 <h1>Editing position</h1>
 
-<%= render 'form' %>
+<%= form_for(@position) do |f| %>
+  <% if @position.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@position.errors.count, "error") %> prohibited this position from being saved:</h2>
 
-<%= link_to 'Show', @position %> |
-<%= link_to 'Back', positions_path %>
+      <ul>
+      <% @position.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if logged_in_admin? %>
+    <p>
+      <strong>Professor comments:</strong>
+      <%= @position.professor_comments %>
+    </p>
+
+    <p>
+      <strong>Professor verdict:</strong>
+      <%= @position.professor_verdict ? 'Yes' : 'No' %>
+    </p>
+
+    <p>
+      <strong>Professor taught:</strong>
+      <%= @position.professor_taught ? 'Yes' : 'No' %>
+    </p>
+    <div class="field">
+      <%= f.label :application_status %>:
+      <%= f.collection_select(:application_status, Status.statuses, :num, :to_s) %>
+    </div>
+    <div class="field">
+      <%= f.label :asc_comments %><br>
+      <%= f.text_area :asc_comments %>
+    </div>
+
+  <% else %>
+    <div class="field">
+      <%= f.label :professor_comments %><br>
+      <%= f.text_area :professor_comments %>
+    </div>
+    <div class="field">
+      <%# TODO: Switch to use radio buttons for these %>
+      <%= f.label :professor_verdict %>:
+      <%= f.check_box :professor_verdict %>
+    </div>
+    <div class="field">
+      <%# TODO: Switch to use radio buttons for these %>
+      <%= f.label :professor_taught %>:
+      <%= f.check_box :professor_taught %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% if logged_in_admin? %>
+  <%= link_to 'Back', positions_path %>
+<% end %>

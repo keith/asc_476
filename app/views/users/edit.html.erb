@@ -34,6 +34,7 @@
     </div>
   <% else %>
     <div class="field">
+      <%= f.label :level, 'User permissions:' %>
       <%= f.collection_select(:level, Level.levels, :num, :description) %>
     </div>
   <% end %>
@@ -44,4 +45,3 @@
 <% end %>
 
 <%= link_to 'Back', users_path %>
-

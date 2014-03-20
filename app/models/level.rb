@@ -18,4 +18,3 @@ Level = Struct.new(:name, :desc, :num) do
     "#{ name } - #{ desc }"
   end
 end
-
