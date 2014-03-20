@@ -18,17 +18,20 @@ describe Applicant do
   it { should respond_to(:identifier) }
   it { should be_valid }
 
-  describe "invalid states" do
-    describe "empty applicant object" do
+  describe 'invalid states' do
+    describe 'empty applicant object' do
       before { @invalid = Applicant.new }
       specify { @invalid.should_not be_valid }
     end
 
-    describe "non-unique email" do
+    describe 'non-unique email' do
       before do
         Applicant.delete_all
-        @good = Applicant.create!(name: "Joe", email: "smithj1")
-        @bad = Applicant.new(name: "Jane", email: "smithj1")
+        @good = FactoryGirl.build(:applicant)
+        @good.email = 'smithj1'
+        @good.save!
+        @bad = FactoryGirl.build(:applicant)
+        @bad.email = @good.email
       end
 
       specify { @bad.should_not be_valid }
@@ -36,7 +39,7 @@ describe Applicant do
     end
   end
 
-  describe "gpa timestamp changed on update" do
+  describe 'gpa timestamp changed on update' do
     before do
       @old_timestamp = @applicant.gpa_timestamp
       @applicant.update_attributes(gpa: 3.7)
@@ -45,15 +48,33 @@ describe Applicant do
     specify { @new_timestamp.should_not eq(@old_timestamp) }
   end
 
-  describe "identifier is immutable" do
+  describe 'identifier is immutable' do
       specify { expect{ @applicant.update_attributes!(identifier: 123) }.to raise_exception(/can't be changed/) }
   end
 
-  describe "email cannot have suffix" do
+  describe 'email cannot have suffix' do
     before do
       @applicant.email = "foo#{ EMAIL_SUFFIX }"
     end
 
     it { should_not be_valid }
+  end
+
+  describe 'phone number length' do
+    context 'too short' do
+      before do
+        @applicant.phone_number = 123
+      end
+
+      it { should_not be_valid }
+    end
+
+    context 'long enough' do
+      before do
+        @applicant.phone_number = 1234567890
+      end
+
+      it { should be_valid }
+    end
   end
 end

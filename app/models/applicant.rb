@@ -12,6 +12,7 @@ class Applicant < ActiveRecord::Base
 
   validate :gpa_update, on: :update
   validate :static_identifier, on: :update
+  validates :phone_number, length: { minimum: 10 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
     format: { with: EMAIL_REGEX }
   validates_presence_of :name
