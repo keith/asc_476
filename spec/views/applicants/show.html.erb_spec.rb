@@ -1,25 +1,25 @@
 require 'spec_helper'
 
-describe "applicants/show" do
+describe 'applicants/show' do
   before(:each) do
     view.stub(:logged_in_admin?).and_return(true)
     @applicant = assign(:applicant, stub_model(Applicant,
-      name: "Name",
-      email: "Email",
-      wuid: "Wuid",
-      phone_number: "Phone Number",
-      class_standing: "Class Standing",
+      name: 'Name',
+      email: 'Email',
+      wuid: 'Wuid',
+      phone_number: 'Phone Number',
+      class_standing: 'Class Standing',
       gpa: 1.5,
       gpa_timestamp: Date.today,
-      comment: "MyText",
-      major: "Major",
-      minor: "Minor",
+      comment: 'MyText',
+      major: 'Major',
+      minor: 'Minor',
       work_study: false,
-      identifier: "abc"
+      identifier: 'abc'
     ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
@@ -31,6 +31,6 @@ describe "applicants/show" do
     rendered.should match(/MyText/)
     rendered.should match(/Major/)
     rendered.should match(/Minor/)
-    rendered.should match(/false/)
+    rendered.should match(/No/)
   end
 end
