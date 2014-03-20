@@ -1,4 +1,5 @@
 Asc476::Application.routes.draw do
+  root 'applicants#new'
   resources :positions
   resources :professors, except: [:create, :new]
 
