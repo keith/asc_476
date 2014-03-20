@@ -1,8 +1,8 @@
 <h1>Editing applicant</h1>
-<%= form_for(@applicant, method: "edit") do |f| %>
+<%= form_for(@applicant) do |f| %>
   <% if @applicant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@applicant.errors.count, "error") %> prohibited this applicant from being saved:</h2>
+      <h2><%= pluralize(@applicant.errors.count, 'error') %> prohibited this applicant from being saved:</h2>
 
       <ul>
       <% @applicant.errors.full_messages.each do |msg| %>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :work_study %><br>
+    <%= f.label :work_study, 'Eligible for work study' %>
     <%= f.check_box :work_study %>
   </div>
 

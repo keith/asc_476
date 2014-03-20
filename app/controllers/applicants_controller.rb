@@ -28,8 +28,9 @@ class ApplicantsController < ApplicationController
       professor = Professor.find_by_email(position.professor.email)
       position.professor = professor if professor
     end
-    
+
     if @applicant.save
+      # TODO: Email applicant with info
       redirect_to @applicant, notice: 'Applicant was successfully created.'
     else
       render action: 'new'

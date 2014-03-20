@@ -3,7 +3,7 @@
 <%= form_for(@applicant, method: 'create') do |f| %>
   <% if @applicant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@applicant.errors.count, "error") %> prohibited this applicant from being saved:</h2>
+      <h2><%= pluralize(@applicant.errors.count, 'error') %> prohibited this applicant from being saved:</h2>
 
       <ul>
       <% @applicant.errors.full_messages.each do |msg| %>
@@ -19,6 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :email %><br>
+    <%# TODO: The email suffix get's put on a newline when there are errors %>
     <%= f.text_field :email %> <%= EMAIL_SUFFIX %>
   </div>
   <div class="field">
@@ -50,15 +51,16 @@
     <%= f.check_box :work_study %>
   </div>
 
+  <%# TODO: Show one course and available time as soon as the view loads %>
   <%= f.fields_for :available_times do |available_time_fields| %>
-      <%= render "available_time_fields", :f => available_time_fields %>
-    <% end %>
-    <p><%= link_to_add_fields "Add Available Time", f, :available_times %></p>
+    <%= render 'available_time_fields', :f => available_time_fields %>
+  <% end %>
+  <p><%= link_to_add_fields 'Add Availability', f, :available_times %></p>
 
   <%= f.fields_for :positions do |position_fields| %>
-    <%= render "position_fields", :f => position_fields %>
+    <%= render 'position_fields', :f => position_fields %>
   <% end %>
-  <p><%= link_to_add_fields "Add Position", f, :positions %></p>
+  <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
 
   <div class="actions">
     <%= f.submit 'Submit Application' %>

@@ -54,8 +54,8 @@
 </p>
 
 <p>
-  <strong>Work study:</strong>
-  <%= @applicant.work_study %>
+  <strong>Eligible for work study:</strong>
+  <%= @applicant.work_study ? 'Yes' : 'No' %>
 </p>
 
 <%= link_to 'Edit', edit_applicant_path(@applicant) %> |

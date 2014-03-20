@@ -7,13 +7,13 @@
       <th>Email</th>
       <th>Wuid</th>
       <th>Phone number</th>
-      <th>Class standing</th>
-      <th>Gpa</th>
-      <th>Gpa timestamp</th>
+      <th>Class</th>
+      <th>GPA</th>
+      <th>GPA Edited</th>
       <th>Comment</th>
       <th>Major</th>
       <th>Minor</th>
-      <th>Work study</th>
+      <th>Eligible for work study</th>
       <th></th>
       <th></th>
       <th></th>
@@ -29,11 +29,15 @@
         <td><%= applicant.phone_number %></td>
         <td><%= applicant.class_standing %></td>
         <td><%= applicant.gpa %></td>
-        <td><%= applicant.gpa_timestamp %></td>
+        <% if applicant.gpa %>
+          <td><%= applicant.gpa_timestamp %></td>
+        <% else %>
+          <td>Never</td>
+        <% end %>
         <td><%= applicant.comment %></td>
         <td><%= applicant.major %></td>
         <td><%= applicant.minor %></td>
-        <td><%= applicant.work_study %></td>
+        <td><%= applicant.work_study ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Show', applicant %></td>
         <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
         <td><%= link_to 'Destroy', applicant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
