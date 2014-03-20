@@ -9,7 +9,7 @@
       <th>Phone number</th>
       <th>Class</th>
       <th>GPA</th>
-      <th>GPA Edited</th>
+      <th>GPA Last Edited</th>
       <th>Comment</th>
       <th>Major</th>
       <th>Minor</th>
@@ -24,13 +24,13 @@
     <% @applicants.each do |applicant| %>
       <tr>
         <td><%= applicant.name %></td>
-        <td><%= applicant.email %></td>
+        <td><%= applicant.email %><%= EMAIL_SUFFIX %></td>
         <td><%= applicant.wuid %></td>
         <td><%= applicant.phone_number %></td>
         <td><%= applicant.class_standing %></td>
         <td><%= applicant.gpa %></td>
         <% if applicant.gpa %>
-          <td><%= applicant.gpa_timestamp %></td>
+          <td><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
         <% else %>
           <td>Never</td>
         <% end %>

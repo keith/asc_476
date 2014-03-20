@@ -7,7 +7,7 @@
 
 <p>
   <strong>Email:</strong>
-  <%= @applicant.email %>
+  <%= @applicant.email %><%= EMAIL_SUFFIX %>
 </p>
 
 <p>
@@ -28,7 +28,7 @@
 <% if logged_in_admin? %>
   <% if @applicant.gpa %>
     <p>
-      <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT) %>):</strong>
+      <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT_TEXT) %>):</strong>
       <%= @applicant.gpa %>
     </p>
   <% else %>

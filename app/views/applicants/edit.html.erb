@@ -25,7 +25,7 @@
   <% if logged_in_admin? %>
     <div class="field">
       <% if @applicant.gpa_timestamp %>
-        <%= f.label :gpa, "GPA (#{ @applicant.gpa_timestamp.strftime(DATE_FORMAT) })" %><br>
+        <%= f.label :gpa, "GPA (#{ @applicant.gpa_timestamp.strftime(DATE_FORMAT_TEXT) })" %><br>
       <% else %>
         <%= f.label :gpa, 'GPA' %><br>
       <% end %>
