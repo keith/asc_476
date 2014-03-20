@@ -8,4 +8,5 @@
   | <%= link_to 'All Professors', professors_path %>
 <% else %>
   <%# TODO: Include view passing professor for pending recommendations %>
+  <%= render 'pending', { positions: @professor.positions } %>
 <% end %>

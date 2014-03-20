@@ -1,0 +1,6 @@
+<ul>
+  <% for position in positions %>
+    <%# TODO: More info, fields, or just edit link (would need unique id) %>
+    <li><%= position.applicant.name %> <%= position.course.full_name %></li>
+  <% end %>
+</ul>
