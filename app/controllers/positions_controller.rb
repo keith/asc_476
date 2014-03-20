@@ -11,11 +11,6 @@ class PositionsController < ApplicationController
   def show
   end
 
-  # GET /positions/new
-  def new
-    @position = Position.new
-  end
-
   # GET /positions/1/edit
   def edit
   end

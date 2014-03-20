@@ -1,6 +1,6 @@
 Asc476::Application.routes.draw do
   root 'applicants#new'
-  resources :positions
+  resources :positions, except: [:new]
   resources :professors, except: [:create, :new]
 
   resources :users, except: [:show]
