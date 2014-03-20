@@ -40,10 +40,10 @@ describe 'Professors' do
       end
 
       it 'should allow the edit' do
-        expect(@prof.email).not_to eq('abc@example.com')
-        fill_in 'Email', with: 'abc@example.com'
+        expect(@prof.email).not_to eq('abc')
+        fill_in 'Email', with: 'abc'
         click_button 'Update'
-        expect(@prof.reload.email).to eq('abc@example.com')
+        expect(@prof.reload.email).to eq('abc')
       end
     end
   end
