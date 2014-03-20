@@ -21,11 +21,11 @@ describe Professor do
   describe 'lowercase emails' do
     before do
       Professor.delete_all
-      @prof.email = 'AbC@dEf.com'
+      @prof.email = 'AbC'
       @prof.save!
     end
 
-    specify { expect(@prof.email == 'abc@def.com').to be_true }
+    specify { expect(@prof.email == 'abc').to be_true }
   end
 
   describe 'changing identifiers' do

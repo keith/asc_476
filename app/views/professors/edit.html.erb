@@ -20,13 +20,13 @@
   <% if logged_in_admin? %>
     <div class="field">
       <%= f.label :email %><br>
-      <%= f.text_field :email %>
+      <%= f.text_field :email %><%= EMAIL_SUFFIX %>
     </div>
   <% else %>
     <p>
       <%# TODO: link to asc contact here %>
       Email (Contact the ASC to edit your email address):<br>
-      <%= @professor.email %>
+      <%= @professor.email %><%= EMAIL_SUFFIX %>
     </p>
   <% end %>
   <div class="actions">
@@ -34,5 +34,4 @@
   </div>
 <% end %>
 
-<%= link_to 'Show', @professor %> |
-<%= link_to 'Back', professors_path %>
+<%= link_to 'View', @professor %>

@@ -15,7 +15,7 @@
     <% @professors.each do |professor| %>
       <tr>
         <td><%= professor.name %></td>
-        <td><%= professor.email %></td>
+        <td><%= professor.email %><%= EMAIL_SUFFIX %></td>
         <td><%= link_to 'Show', professor %></td>
         <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
         <td><%= link_to 'Destroy', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>

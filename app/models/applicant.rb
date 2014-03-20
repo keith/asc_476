@@ -12,7 +12,8 @@ class Applicant < ActiveRecord::Base
 
   validate :gpa_update, on: :update
   validate :static_identifier, on: :update
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+  validates :email, presence: true, uniqueness: { case_sensitive: false },
+    format: { with: EMAIL_REGEX }
   validates_presence_of :name
 
   def to_param
