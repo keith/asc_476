@@ -8,14 +8,16 @@ describe 'positions/index' do
         professor_verdict: false,
         professor_taught: false,
         application_status: 1,
-        asc_comments: 'ASCText'
+        asc_comments: 'ASCText',
+        identifier: 'abc'
       ),
       stub_model(Position,
         professor_comments: 'MyText',
         professor_verdict: false,
         professor_taught: false,
         application_status: 1,
-        asc_comments: 'ASCText'
+        asc_comments: 'ASCText',
+        identifier: 'abc'
       )
     ])
   end

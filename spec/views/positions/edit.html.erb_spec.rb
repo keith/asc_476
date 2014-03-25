@@ -7,7 +7,8 @@ describe 'positions/edit' do
       professor_verdict: false,
       professor_taught: false,
       application_status: 1,
-      asc_comments: 'MyText'
+      asc_comments: 'MyText',
+      identifier: 'abc'
     ))
   end
 
