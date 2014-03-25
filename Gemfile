@@ -28,7 +28,10 @@ group :development do
   gem 'puma', '~> 2.7.1'
   gem 'better_errors', '~> 1.1.0'
   gem 'binding_of_caller', '~> 0.7.2'
-
+  # To test emails locally you need to install mailcatcher manually
+  # gem install mailcatcher
+  # mailcatcher
+  # Visit localhost:1080
   gem 'sdoc', '~> 0.3.20'
   gem 'guard-rspec', '~> 4.0.1', require: false
   gem 'guard-livereload', require: false
