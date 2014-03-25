@@ -4,9 +4,9 @@ Status = Struct.new(:name, :desc, :num) do
   def self.statuses
     [
       Status.new('Pending', 'Waiting for further action', 0),
-      Status.new('Denied', 'Rejected by ASC' ,1),
-      Status.new('Not Now', 'On hold for now by the ASC' ,2),
-      Status.new('Approved', 'Confirmed by the ASC' ,3),
+      Status.new('Denied', 'Rejected by ASC', 1),
+      Status.new('Not Now', 'On hold for now by the ASC', 2),
+      Status.new('Approved', 'Confirmed by the ASC', 3),
     ]
   end
 
