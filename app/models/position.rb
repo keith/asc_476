@@ -9,6 +9,7 @@ class Position < ActiveRecord::Base
   before_create { self.identifier = new_positions_identifier }
 
   validate :static_identifier, on: :update
+  validates :application_status, inclusion: { in: 0...Status.names.count }
   # TODO: Validate status integer range
 
   def to_param
