@@ -30,8 +30,11 @@ class ApplicantsController < ApplicationController
     end
 
     if @applicant.save
-      # TODO: Email professor with pending applications URL
       ApplicantMailer.account_email(@applicant).deliver
+      @applicant.positions.each do |position|
+        professor = position.professor
+        ProfessorMailer.pending_recommendation(professor).deliver
+      end
       redirect_to @applicant, notice: 'Applicant was successfully created.'
     else
       render action: 'new'
