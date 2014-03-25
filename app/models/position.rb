@@ -7,15 +7,15 @@ class Position < ActiveRecord::Base
   accepts_nested_attributes_for  :professor
 
   before_create { self.identifier = new_positions_identifier }
+  before_create { self.application_status = 0 }
 
   validate :static_identifier, on: :update
-  validates :application_status, inclusion: { in: 0...Status.names.count }
-  # TODO: Validate status integer range
+  validates :application_status, on: :update, inclusion: { in: 0...Status.names.count }
 
   def to_param
     identifier
   end
-  # TODO: Default status integer to something
+
   private
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
