@@ -30,7 +30,8 @@ class ApplicantsController < ApplicationController
     end
 
     if @applicant.save
-      # TODO: Email applicant with info
+      # TODO: Email professor with pending applications URL
+      ApplicantMailer.account_email(@applicant).deliver
       redirect_to @applicant, notice: 'Applicant was successfully created.'
     else
       render action: 'new'
