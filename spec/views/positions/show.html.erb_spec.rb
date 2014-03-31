@@ -8,7 +8,8 @@ describe 'positions/show' do
       professor_verdict: false,
       professor_taught: false,
       application_status: 1,
-      asc_comments: 'ASCText'
+      asc_comments: 'ASCText',
+      identifier: 'abc'
     ))
   end
 
