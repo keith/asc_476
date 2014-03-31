@@ -1,6 +1,6 @@
-<h1>New applicant</h1>
+<h2>Tutor Application</h2>
 
-<%= form_for(@applicant, method: 'create') do |f| %>
+<%= form_for(@applicant, method: 'create',  :html => {:class => "form-inline"}) do |f| %>
   <% if @applicant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@applicant.errors.count, 'error') %> prohibited this applicant from being saved:</h2>
@@ -14,49 +14,42 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: "Name" %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
     <%# TODO: The email suffix get's put on a newline when there are errors %>
-    <%= f.text_field :email %> <%= EMAIL_SUFFIX %>
+    <%= f.text_field :email , placeholder: "Email" %> <%= EMAIL_SUFFIX %>
   </div>
   <div class="field">
-    <%= f.label :wuid %><br>
-    <%= f.text_field :wuid %>
+    <%= f.text_field :wuid, placeholder: "Winthop Id" %>
   </div>
   <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
+    <%= f.text_field :phone_number, placeholder: "Phone Number" %>
   </div>
   <div class="field">
-    <%= f.label :class_standing %><br>
-    <%= f.text_field :class_standing %>
+    <%= f.text_field :class_standing, placeholder: "Class Standing" %>
   </div>
   <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, placeholder: "Comments" %>
   </div>
   <div class="field">
-    <%= f.label :major %><br>
-    <%= f.text_field :major %>
+    <%= f.text_field :major, placeholder: "Major" %>
   </div>
   <div class="field">
-    <%= f.label :minor %><br>
-    <%= f.text_field :minor %>
+    <%= f.text_field :minor, placeholder: "Minor" %>
   </div>
-  <div class="field">
-    <%= f.label :work_study %><br>
-    <%= f.check_box :work_study %>
+  <div class="field checkbox inline">
+    <%= f.check_box :work_study %> Work Study
   </div>
 
   <%# TODO: Show one course and available time as soon as the view loads %>
+  <h4>Availability</h4>
   <%= f.fields_for :available_times do |available_time_fields| %>
     <%= render 'available_time_fields', :f => available_time_fields %>
   <% end %>
   <p><%= link_to_add_fields 'Add Availability', f, :available_times %></p>
 
+  <h4>Courses</h4>
   <%= f.fields_for :positions do |position_fields| %>
     <%= render 'position_fields', :f => position_fields %>
   <% end %>
