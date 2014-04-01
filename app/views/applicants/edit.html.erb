@@ -18,8 +18,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :class_standing %><br>
-    <%= f.text_field :class_standing %>
+    <%= f.label :class_standing %>
+    <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
   </div>
 
   <% if logged_in_admin? %>

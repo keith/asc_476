@@ -22,7 +22,7 @@
 
 <p>
   <strong>Class standing:</strong>
-  <%= @applicant.class_standing %>
+  <%= Standing.for_number(@applicant.class_standing) %>
 </p>
 
 <% if logged_in_admin? %>
@@ -62,8 +62,10 @@
   <strong>Courses:</strong>
   <ul>
     <% @applicant.positions.each do |p| %>
-      <li><%= p.course.full_name %> <%= p.professor.name %>
-      (<%= mail_to("foobar@gmail.com") %>)</li>
+      <% if p.course %>
+        <li><%= p.course.full_name %> <%= p.professor.name %>
+        (<%= mail_to(p.professor.email + EMAIL_SUFFIX) %>)</li>
+      <% end %>
     <% end %>
   </ul>
 </p>

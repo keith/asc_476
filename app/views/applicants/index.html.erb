@@ -19,13 +19,13 @@
       <tr>
         <td><%= applicant.name %></td>
         <td><%= applicant.email %><%= EMAIL_SUFFIX %></td>
-        <td class="data-right"><%= applicant.gpa %></td>
+        <td><%= applicant.gpa %></td>
         <% if applicant.gpa %>
-          <td class="data-right"><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
+          <td><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
         <% else %>
-          <td class="data-right">Never</td>
+          <td>Never</td>
         <% end %>
-        <td class="data-right"><%= applicant.work_study ? 'Yes' : 'No' %></td>
+        <td><%= applicant.work_study ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Show', applicant %></td>
         <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
       </tr>

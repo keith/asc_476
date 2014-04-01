@@ -15,6 +15,7 @@ class Applicant < ActiveRecord::Base
   validates :phone_number, length: { minimum: 10 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
     format: { with: EMAIL_REGEX }
+  validates :class_standing, on: :update, inclusion: { in: 0...Standing.names.count }
   validates_presence_of :name
 
   def to_param
