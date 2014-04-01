@@ -5,8 +5,28 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <style type="text/css">body { 
+    padding-top: 60px; 
+}</style>
 </head>
 <body>
+<%= nav_bar :fixed => :top, :brand => "ASC Tutoring", :responsive => true do %>
+  <%= menu_group do %>
+    <%= menu_item "Home", root_path %>
+    <%= menu_divider %>
+    <%= drop_down "Reports" do %>
+      <%= menu_item "Applicants", applicants_path %>
+      <%= menu_item "Professors", "" %>
+    <% end %>
+  <% end %>
+  <%= menu_group :pull => :right do %>
+    <% if logged_in_admin? or logged_in_moderator? %>
+      <%= menu_item "Log Out", signout_path, method: :delete %>
+    <% else %>
+      <%= menu_item "Sign In", signin_path %>
+    <% end -%>
+  <% end %>
+<% end %>
 
 <%= yield %>
 
