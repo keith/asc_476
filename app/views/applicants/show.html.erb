@@ -58,5 +58,15 @@
   <%= @applicant.work_study ? 'Yes' : 'No' %>
 </p>
 
+<p>
+  <strong>Courses:</strong>
+  <ul>
+    <% @applicant.positions.each do |p| %>
+      <li><%= p.course.full_name %> <%= p.professor.name %>
+      (<%= mail_to("foobar@gmail.com") %>)</li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
 <%= link_to 'Back', applicants_path %>
