@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325172212) do
+ActiveRecord::Schema.define(version: 20140401152121) do
 
   create_table "applicants", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "wuid"
     t.string   "phone_number"
-    t.string   "class_standing"
+    t.integer  "class_standing"
     t.float    "gpa"
     t.datetime "gpa_timestamp"
     t.text     "comment"
