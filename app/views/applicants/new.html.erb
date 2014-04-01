@@ -1,6 +1,6 @@
 <h2>Tutor Application</h2>
 
-<%= form_for(@applicant, method: 'create',  :html => {:class => "form-inline"}) do |f| %>
+<%= form_for(@applicant, method: 'create',  :html => {:class => "form-horizontal"}) do |f| %>
   <% if @applicant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@applicant.errors.count, 'error') %> prohibited this applicant from being saved:</h2>
@@ -14,29 +14,29 @@
   <% end %>
 
   <div class="field">
-    <%= f.text_field :name, placeholder: "Name" %>
+    <%= f.text_field :name,  class: 'form-control', placeholder: "Name" %>
   </div>
   <div class="field">
     <%# TODO: The email suffix get's put on a newline when there are errors %>
-    <%= f.text_field :email , placeholder: "Email" %> <%= EMAIL_SUFFIX %>
+    <%= f.text_field :email , class: 'form-control', placeholder: "Email" %> <%= EMAIL_SUFFIX %>
   </div>
   <div class="field">
-    <%= f.text_field :wuid, placeholder: "Winthop Id" %>
+    <%= f.text_field :wuid, class: 'form-control', placeholder: "Winthop Id" %>
   </div>
   <div class="field">
-    <%= f.text_field :phone_number, placeholder: "Phone Number" %>
+    <%= f.text_field :phone_number, class: 'form-control', placeholder: "Phone Number" %>
   </div>
   <div class="field">
-    <%= f.text_field :class_standing, placeholder: "Class Standing" %>
+    <%= f.text_field :class_standing, class: 'form-control', placeholder: "Class Standing" %>
   </div>
   <div class="field">
-    <%= f.text_area :comment, placeholder: "Comments" %>
+    <%= f.text_area :comment, class: 'form-control', placeholder: "Comments" %>
   </div>
   <div class="field">
-    <%= f.text_field :major, placeholder: "Major" %>
+    <%= f.text_field :major, class: 'form-control', placeholder: "Major" %>
   </div>
   <div class="field">
-    <%= f.text_field :minor, placeholder: "Minor" %>
+    <%= f.text_field :minor, class: 'form-control', placeholder: "Minor" %>
   </div>
   <div class="field checkbox inline">
     <%= f.check_box :work_study %> Work Study

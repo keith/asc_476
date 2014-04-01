@@ -16,9 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 
 #see https://github.com/seyhunak/twitter-bootstrap-rails
-#uses the ruby racer
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => "bootstrap3"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.0.4'
