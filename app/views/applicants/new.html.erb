@@ -27,7 +27,8 @@
     <%= f.text_field :phone_number, class: 'form-control', placeholder: "Phone Number" %>
   </div>
   <div class="field">
-    <%= f.text_field :class_standing, class: 'form-control', placeholder: "Class Standing" %>
+    <%= f.label :class_standing %>
+    <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
   </div>
   <div class="field">
     <%= f.text_area :comment, class: 'form-control', placeholder: "Comments" %>
