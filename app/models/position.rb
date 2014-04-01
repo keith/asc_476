@@ -9,6 +9,7 @@ class Position < ActiveRecord::Base
   before_create { self.identifier = new_positions_identifier }
   before_create { self.application_status = 0 }
 
+  # TODO: finish validations, no 404 on index page
   validate :static_identifier, on: :update
   validates :application_status, on: :update, inclusion: { in: 0...Status.names.count }
 

@@ -10,3 +10,12 @@
   <%# TODO: Include view passing professor for pending recommendations %>
   <%= render 'pending', { positions: @professor.positions } %>
 <% end %>
+
+<ul>
+  <% @professor.positions.each do |position| %>
+    <li>
+      <%= position.applicant.name %> (<%= position.applicant.email + EMAIL_SUFFIX %>):
+      <%= position.course.full_name %>
+    </li>
+  <% end %>
+</ul>
