@@ -6,10 +6,8 @@
       <th>Name</th>
       <th>Email</th>
       <th>GPA</th>
-      <th>GPA Last Edited</th>
-      <th>Major</th>
-      <th>Minor</th>
-      <th>Eligible for work study</th>
+      <th>GPA Last Updated</th>
+      <th>Work study</th>
       <th></th>
       <th></th>
       <th></th>
@@ -21,13 +19,13 @@
       <tr>
         <td><%= applicant.name %></td>
         <td><%= applicant.email %><%= EMAIL_SUFFIX %></td>
-        <td><%= applicant.gpa %></td>
+        <td class="data-right"><%= applicant.gpa %></td>
         <% if applicant.gpa %>
-          <td><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
+          <td class="data-right"><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
         <% else %>
-          <td>Never</td>
+          <td class="data-right">Never</td>
         <% end %>
-        <td><%= applicant.work_study ? 'Yes' : 'No' %></td>
+        <td class="data-right"><%= applicant.work_study ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Show', applicant %></td>
         <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
       </tr>
