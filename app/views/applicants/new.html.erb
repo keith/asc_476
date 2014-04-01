@@ -1,4 +1,5 @@
 <h2>Tutor Application</h2>
+<div class = "col-md-8">
 
 <%= form_for(@applicant, method: 'create',  :html => {:class => "form-horizontal"}) do |f| %>
   <% if @applicant.errors.any? %>
@@ -42,14 +43,6 @@
   <div class="field checkbox inline">
     <%= f.check_box :work_study %> Work Study
   </div>
-
-  <%# TODO: Show one course and available time as soon as the view loads %>
-  <h4>Availability</h4>
-  <%= f.fields_for :available_times do |available_time_fields| %>
-    <%= render 'available_time_fields', :f => available_time_fields %>
-  <% end %>
-  <p><%= link_to_add_fields 'Add Availability', f, :available_times %></p>
-
   <h4>Courses</h4>
   <%= f.fields_for :positions do |position_fields| %>
     <%= render 'position_fields', :f => position_fields %>
@@ -59,6 +52,7 @@
   <div class="actions">
     <%= f.submit 'Submit Application' %>
   </div>
+</div>
 <% end %>
 
 <%= link_to 'Back', applicants_path %>
