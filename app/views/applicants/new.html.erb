@@ -43,7 +43,6 @@
     <%= f.check_box :work_study %> Work Study
   </div>
 
-  <%# TODO: Show one course and available time as soon as the view loads %>
   <h4>Availability</h4>
   <%= f.fields_for :available_times do |available_time_fields| %>
     <%= render 'available_time_fields', :f => available_time_fields %>

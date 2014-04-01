@@ -26,7 +26,6 @@ class ProfessorsController < ApplicationController
   end
 
   # DELETE /professors/1
-  # TODO: Should we allow deleting professors?
   def destroy
     @professor.destroy
     redirect_to professors_url, notice: 'Professor was successfully destroyed.'

@@ -4,7 +4,7 @@ describe 'Courses' do
   before do
     @admin = FactoryGirl.create(:admin)
     visit signin_path
-    fill_in 'Email', with: @admin.email
+    fill_in 'Email Address', with: @admin.email
     fill_in 'Password', with: 'abcdef'
     click_button 'Sign in'
   end
@@ -67,4 +67,3 @@ describe 'Courses' do
     end
   end
 end
-

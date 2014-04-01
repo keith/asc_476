@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+<%= notice %>
+</p>
 
 <%# TODO: Center this at the top %>
 <%= @professor.name %>
@@ -15,7 +17,9 @@
   <% @professor.positions.each do |position| %>
     <li>
       <%= position.applicant.name %> (<%= position.applicant.email + EMAIL_SUFFIX %>):
-      <%= position.course.full_name %>
+      <% if position.course %>
+        <%= position.course.full_name %>
+      <% end %>
     </li>
   <% end %>
 </ul>
