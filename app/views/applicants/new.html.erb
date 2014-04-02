@@ -15,16 +15,20 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name, class: "sr-only" %><br>
     <%= f.text_field :name,  class: 'form-control', placeholder: "Name" %>
   </div>
   <div class="field">
     <%# TODO: The email suffix get's put on a newline when there are errors %>
-    <%= f.text_field :email , class: 'form-control', placeholder: "Email" %> <%= EMAIL_SUFFIX %>
+    <%= f.label :email, class: "sr-only" %><br>
+    <%= f.text_field :email , class: 'form-control', placeholder: "Winthrop Username, example: hiottj4" %> 
   </div>
   <div class="field">
+    <%= f.label :wuid, class: "sr-only" %><br>
     <%= f.text_field :wuid, class: 'form-control', placeholder: "Winthop Id" %>
   </div>
   <div class="field">
+    <%= f.label :phone_number, class: "sr-only" %><br>
     <%= f.text_field :phone_number, class: 'form-control', placeholder: "Phone Number" %>
   </div>
   <div class="field">
@@ -32,15 +36,19 @@
     <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
   </div>
   <div class="field">
+    <%= f.label :comment, class: "sr-only" %><br>
     <%= f.text_area :comment, class: 'form-control', placeholder: "Comments" %>
   </div>
   <div class="field">
+    <%= f.label :major, class: "sr-only" %><br>
     <%= f.text_field :major, class: 'form-control', placeholder: "Major" %>
   </div>
   <div class="field">
+    <%= f.label :minor, class: "sr-only" %><br>
     <%= f.text_field :minor, class: 'form-control', placeholder: "Minor" %>
   </div>
   <div class="field checkbox inline">
+    <%= f.label :work_study, class: "sr-only" %><br>
     <%= f.check_box :work_study %> Work Study
   </div>
   <h4>Courses</h4>
