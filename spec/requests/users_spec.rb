@@ -8,7 +8,7 @@ describe 'Users' do
       @admin = FactoryGirl.create(:admin)
       @admin2 = FactoryGirl.create(:admin)
       visit signin_path
-      fill_in 'Email Address', with: @admin.email
+      fill_in 'Email', with: @admin.email
       fill_in 'Password', with: 'abcdef'
       click_button 'Sign in'
     end
@@ -36,7 +36,7 @@ describe 'Users' do
     before do
       @admin = FactoryGirl.create(:admin)
       visit signin_path
-      fill_in 'Email Address', with: @admin.email
+      fill_in 'Email', with: @admin.email
       fill_in 'Password', with: 'abcdef'
       click_button 'Sign in'
     end
@@ -66,7 +66,7 @@ describe 'Users' do
 
       it 'should be able to add a user' do
         fill_in 'Name', with: 'bob'
-        fill_in 'Email Address', with: bobemail
+        fill_in 'Email', with: bobemail
         expect {
           click_button 'Create User'
         }.to change(User, :count).by(1)
@@ -78,7 +78,7 @@ describe 'Users' do
     describe 'POST /users' do
       before do
         visit new_user_path
-        fill_in 'Email Address', with: ''
+        fill_in 'Email', with: ''
       end
 
       it 'should require an email' do
@@ -99,7 +99,7 @@ describe 'Users' do
       end
 
       it 'should be able to change the user' do
-        fill_in 'Email Address', with: bobemail
+        fill_in 'Email', with: bobemail
         expect {
           click_button 'Update User'
         }.not_to change(User, :count)
@@ -132,7 +132,7 @@ describe 'Users' do
       @admin = FactoryGirl.create(:admin)
       @user = FactoryGirl.create(:moderator)
       visit signin_path
-      fill_in 'Email Address', with: @user.email
+      fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'abcdef'
       click_button 'Sign in'
     end
@@ -145,7 +145,7 @@ describe 'Users' do
 
     it 'should be able to edit its own user' do
       visit edit_user_path(@user)
-      fill_in 'Email Address', with: bobemail
+      fill_in 'Email', with: bobemail
       click_button 'Update User'
       expect(@user.reload.email).to eq(bobemail)
     end
@@ -160,7 +160,7 @@ describe 'Users' do
     before do
       @mod = FactoryGirl.create(:moderator)
       visit signin_path
-      fill_in 'Email Address', with: @mod.email
+      fill_in 'Email', with: @mod.email
       fill_in 'Password', with: 'abcdef'
       click_button 'Sign in'
     end
@@ -169,7 +169,7 @@ describe 'Users' do
       before { visit users_path }
 
       it 'should redirect moderators' do
-        current_path.should == signin_path
+        current_path.should == applicants_path
       end
     end
 
@@ -177,7 +177,7 @@ describe 'Users' do
       before { visit new_user_path }
 
       it 'should redirect moderators' do
-        current_path.should == signin_path
+        current_path.should == applicants_path
       end
     end
   end
