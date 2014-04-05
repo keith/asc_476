@@ -28,7 +28,7 @@ class ApplicantsController < ApplicationController
 
     # PATCH/PUT /applicants/1
   def update
-      @applicant.positions.each do |position|
+    @applicant.positions.each do |position|
       professor = Professor.find_by_email(position.professor.email)
       position.professor = professor if professor
     end
