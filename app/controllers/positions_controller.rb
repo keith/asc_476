@@ -51,7 +51,7 @@ class PositionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_position
-      @position = Position.find(params[:id])
+      @position = Position.find_by_identifier(params[:id])
     end
 
     def professor_position_params
