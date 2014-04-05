@@ -12,5 +12,6 @@ FactoryGirl.define do
     minor { ['Accounting', 'Philosophy', 'Dance'].sample }
     work_study { [true, false].sample }
     asc_comments Faker::Lorem.paragraph
+    interviewed { [true, false].sample }
   end
 end
