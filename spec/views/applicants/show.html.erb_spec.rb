@@ -8,7 +8,7 @@ describe 'applicants/show' do
       email: 'Email',
       wuid: 'Wuid',
       phone_number: 'Phone Number',
-      class_standing: 'Class Standing',
+      class_standing: 0,
       gpa: 1.5,
       gpa_timestamp: Date.today,
       comment: 'MyText',
@@ -26,7 +26,7 @@ describe 'applicants/show' do
     rendered.should match(/Email/)
     rendered.should match(/Wuid/)
     rendered.should match(/Phone Number/)
-    rendered.should match(/Class Standing/)
+    rendered.should match(/Freshman/)
     rendered.should match(/1.5/)
     rendered.should match(/MyText/)
     rendered.should match(/Major/)
