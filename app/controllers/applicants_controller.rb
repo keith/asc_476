@@ -36,8 +36,10 @@ class ApplicantsController < ApplicationController
       begin
         ApplicantMailer.account_email(@applicant).deliver
         @applicant.positions.each do |position|
+          next if position.professor_emailed
           professor = position.professor
           ProfessorMailer.pending_recommendation(professor).deliver
+          position.professor_emailed = true
         end
       rescue Errno::ECONNREFUSED
         redirect_to @applicant,
