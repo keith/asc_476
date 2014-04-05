@@ -21,7 +21,7 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
-    professor = Professor
+    professor = Professor.new
     position = @applicant.positions.build
     positions.professor = professor
   end
