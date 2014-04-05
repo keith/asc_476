@@ -8,7 +8,9 @@ describe 'positions/edit' do
       professor_taught: false,
       application_status: 1,
       asc_comments: 'MyText',
-      identifier: 'abc'
+      identifier: 'abc',
+      applicant: mock_model(Applicant, FactoryGirl.attributes_for(:applicant)),
+      course: mock_model(Course, FactoryGirl.attributes_for(:course).merge({ full_name: 'CSCI 123' }))
     ))
   end
 
@@ -18,8 +20,11 @@ describe 'positions/edit' do
 
     assert_select 'form[action=?][method=?]', position_path(@position), 'post' do
       assert_select 'textarea#position_professor_comments[name=?]', 'position[professor_comments]'
-      assert_select 'input#position_professor_verdict[name=?]', 'position[professor_verdict]'
-      assert_select 'input#position_professor_taught[name=?]', 'position[professor_taught]'
+      assert_select 'input#position_professor_verdict_true[name=?]', 'position[professor_verdict]'
+      assert_select 'input#position_professor_verdict_false[name=?]', 'position[professor_verdict]'
+      assert_select 'input#position_professor_taught_true[name=?]', 'position[professor_taught]'
+      assert_select 'input#position_professor_taught_false[name=?]', 'position[professor_taught]'
+      rendered.should match(/CSCI\s123/)
     end
   end
 
