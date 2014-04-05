@@ -5,7 +5,7 @@ Asc476::Application.routes.draw do
 
   resources :users, except: [:show]
 
-  resources :applicants, except: [:destroy]
+  resources :applicants
 
   resources :courses, only: [:create, :index, :new] do
     put 'update_multiple', on: :collection

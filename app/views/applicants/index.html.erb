@@ -31,6 +31,8 @@
         <% end %>
         <td><%= link_to 'Show', applicant %></td>
         <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
+        <td><%= link_to 'Destroy', applicant,
+          method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
