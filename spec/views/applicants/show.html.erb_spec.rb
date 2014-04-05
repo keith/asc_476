@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'applicants/show' do
   before(:each) do
-    view.stub(:logged_in_admin?).and_return(true)
+    view.stub(:logged_in_moderator?).and_return(true)
     @applicant = assign(:applicant, stub_model(Applicant,
       name: 'Name',
       email: 'Email',

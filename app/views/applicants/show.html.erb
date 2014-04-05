@@ -25,7 +25,7 @@
   <%= Standing.for_number(@applicant.class_standing) %>
 </p>
 
-<% if logged_in_admin? %>
+<% if logged_in_moderator? %>
   <% if @applicant.gpa %>
     <p>
       <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT_TEXT) %>):</strong>
