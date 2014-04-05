@@ -39,6 +39,9 @@ group :development do
   gem 'sdoc', '~> 0.3.20'
   gem 'guard-rspec', '~> 4.0.1', require: false
   gem 'guard-livereload', require: false
+  
+  #https://github.com/voormedia/rails-erd
+  gem 'rails-erd'
 end
 
 group :development, :test do
