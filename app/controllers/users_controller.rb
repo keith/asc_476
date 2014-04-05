@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
     def set_user_admin_or_current
       set_user
-      redirect_to signin_path unless admin_or_current
+      redirect_to applicants_path unless admin_or_current
     end
 
     def admin_or_current
