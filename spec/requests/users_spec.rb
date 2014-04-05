@@ -152,7 +152,7 @@ describe 'Users' do
 
     it 'should not  be able to visit other users edit pages' do
       visit edit_user_path(@admin)
-      current_path.should == signin_path
+      current_path.should == applicants_path
     end
   end
 
