@@ -24,7 +24,6 @@
         <td><%= position.professor_verdict ? 'Yes' : 'No' %></td>
         <td><%= position.professor_taught ? 'Yes' : 'No' %></td>
         <td><%= Status.for_number(position.application_status) %></td>
-        <td><%= position.asc_comments %></td>
         <td><%= position.professor.name if position.professor  %></td>
         <td><%= position.professor.email if position.professor %></td>
         <td><%= link_to 'Show', position %></td>

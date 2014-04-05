@@ -48,6 +48,17 @@
     <%= f.text_field :minor %>
   </div>
 
+  <p>
+    <strong>Courses:</strong>
+    <ul>
+      <% @applicant.positions.each do |p| %>
+        <% if p.course %>
+          <li><%= p.course.full_name %> <%= p.professor.name %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </p>
+
   <div class="field">
     <%= f.label :work_study, 'Eligible for work study' %>
     <%= f.check_box :work_study %>

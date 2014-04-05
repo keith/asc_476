@@ -8,7 +8,6 @@ describe 'positions/show' do
       professor_verdict: false,
       professor_taught: false,
       application_status: 1,
-      asc_comments: 'ASCText',
       identifier: 'abc'
     ))
   end
@@ -19,6 +18,5 @@ describe 'positions/show' do
     rendered.should match(/MyText/)
     rendered.should match(/No/)
     rendered.should match(/#{ Status.for_number(1) }/)
-    rendered.should match(/ASCText/)
   end
 end
