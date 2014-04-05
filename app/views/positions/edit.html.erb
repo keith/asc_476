@@ -38,14 +38,19 @@
       <%= f.text_area :professor_comments %>
     </div>
     <div class="field">
-      <%# TODO: Switch to use radio buttons for these %>
-      <%= f.label :professor_verdict %>:
-      <%= f.check_box :professor_verdict %>
+      <%# TODO: Wording %>
+      <%= f.label :professor_verdict, "Would you recommend #{ @position.applicant.name } to be a student tutor?" %>:
+      <%= f.label :professor_verdict , 'Yes', value: true %>
+      <%= f.radio_button :professor_verdict , true %>
+      <%= f.label :professor_verdict, 'No', value: false %>
+      <%= f.radio_button :professor_verdict, false %>
     </div>
     <div class="field">
-      <%# TODO: Switch to use radio buttons for these %>
-      <%= f.label :professor_taught %>:
-      <%= f.check_box :professor_taught %>
+      <%= f.label :professor_taught, "Did you teach #{ @position.applicant.name } in #{ @position.course.full_name }?" %>:
+      <%= f.label :professor_taught, 'Yes', value: true %>
+      <%= f.radio_button :professor_taught, true %>
+      <%= f.label :professor_taught, 'No', value: false %>
+      <%= f.radio_button :professor_taught, false %>
     </div>
   <% end %>
   <div class="actions">

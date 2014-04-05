@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140405151958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "identifier"
+    t.boolean  "professor_emailed",  default: false
   end
 
   create_table "professors", force: true do |t|

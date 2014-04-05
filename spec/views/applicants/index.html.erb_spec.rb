@@ -28,7 +28,7 @@ describe 'applicants/index' do
         comment: 'MyText',
         major: 'Major',
         minor: 'Minor',
-        work_study: false,
+        work_study: true,
         identifier: 'def'
       )
     ])
@@ -36,15 +36,15 @@ describe 'applicants/index' do
 
   it 'renders a list of applicants' do
     render
-    assert_select 'tr>td', text: 'Name', count: 2
+    rendered.should match(/Name/)
+    rendered.should match(/\(Work Study\)/)
     assert_select 'tr>td', text: "Email#{ EMAIL_SUFFIX }", count: 2
+    assert_select 'tr>td', text: 1.5.to_s, count: 2
     # assert_select 'tr>td', text: 'Wuid', count: 2
     # assert_select 'tr>td', text: 'Phone Number', count: 2
     # assert_select 'tr>td', text: 'Class Standing', count: 2
-    assert_select 'tr>td', text: 1.5.to_s, count: 2
     # assert_select 'tr>td', text: 'MyText', count: 2
     # assert_select 'tr>td', text: 'Major', count: 2
     # assert_select 'tr>td', text: 'Minor', count: 2
-    assert_select 'tr>td', text: 'No', count: 2
   end
 end

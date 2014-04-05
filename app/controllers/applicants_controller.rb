@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index]
+  before_action :signed_in_user, only: [:index, :destroy]
 
   # GET /applicants
   def index
@@ -36,8 +36,10 @@ class ApplicantsController < ApplicationController
       begin
         ApplicantMailer.account_email(@applicant).deliver
         @applicant.positions.each do |position|
+          next if position.professor_emailed
           professor = position.professor
           ProfessorMailer.pending_recommendation(professor).deliver
+          position.professor_emailed = true
         end
       rescue Errno::ECONNREFUSED
         redirect_to @applicant,
@@ -48,6 +50,13 @@ class ApplicantsController < ApplicationController
     else
       render action: 'new'
     end
+  end
+
+  # DELETE /applicants/1
+  def destroy
+    @applicant.destroy
+    redirect_to applicants_url,
+      notice: 'Applicant was successfully deleted.'
   end
 
   # PATCH/PUT /applicants/1

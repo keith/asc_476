@@ -7,7 +7,6 @@
       <th>Email</th>
       <th>GPA</th>
       <th>GPA Last Updated</th>
-      <th>Work study</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,7 +16,12 @@
   <tbody>
     <% @applicants.each do |applicant| %>
       <tr>
-        <td><%= applicant.name %></td>
+        <td>
+          <%= applicant.name %>
+          <% if applicant.work_study %>
+            (Work Study)
+          <% end %>
+        </td>
         <td><%= applicant.email %><%= EMAIL_SUFFIX %></td>
         <td><%= applicant.gpa %></td>
         <% if applicant.gpa %>
@@ -25,9 +29,10 @@
         <% else %>
           <td>Never</td>
         <% end %>
-        <td><%= applicant.work_study ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Show', applicant %></td>
         <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
+        <td><%= link_to 'Destroy', applicant,
+          method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
