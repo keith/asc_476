@@ -7,7 +7,6 @@ describe 'positions/edit' do
       professor_verdict: false,
       professor_taught: false,
       application_status: 1,
-      asc_comments: 'MyText',
       identifier: 'abc'
     ))
   end
@@ -30,7 +29,6 @@ describe 'positions/edit' do
     assert_select 'form[action=?][method=?]', position_path(@position), 'post' do
       rendered.should match(/No/)
       rendered.should match(/#{ Status.for_number(1) }/)
-      assert_select 'textarea#position_asc_comments[name=?]', 'position[asc_comments]'
     end
   end
 end

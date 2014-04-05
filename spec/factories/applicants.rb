@@ -11,5 +11,6 @@ FactoryGirl.define do
     major { ['Computer Science', 'Mathematics', 'Music', 'Theology'].sample }
     minor { ['Accounting', 'Philosophy', 'Dance'].sample }
     work_study { [true, false].sample }
+    asc_comments Faker::Lorem.paragraph
   end
 end

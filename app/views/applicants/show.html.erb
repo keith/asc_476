@@ -70,5 +70,16 @@
   </ul>
 </p>
 
+<% if logged_in_moderator? %>
+  <p>
+    <strong>ASC Comments:</strong>
+    <%= @applicant.asc_comments %>
+  </p>
+  <p>
+    <strong>Applicant Interviewed</strong>
+    <%= @applicant.interviewed ? 'Yes' : 'No' %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
 <%= link_to 'Back', applicants_path %>

@@ -53,6 +53,18 @@
     <%= f.check_box :work_study %>
   </div>
 
+  <% if logged_in_moderator? %>
+    <div class="field">
+      <%= f.label :asc_comments, '' %>
+      <%= f.text_area :asc_comments %>
+    </div>
+
+    <div class="field">
+      <%= f.label :interviewed %>
+      <%= f.check_box :interviewed %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
