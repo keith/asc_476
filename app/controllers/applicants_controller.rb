@@ -21,12 +21,9 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
-    professor = Professor.new
-    position = @applicant.positions.build
-    positions.professor = professor
   end
 
-    # PATCH/PUT /applicants/1
+  # PATCH/PUT /applicants/1
   def update
     @applicant.positions.each do |position|
       professor = Professor.find_by_email(position.professor.email)
