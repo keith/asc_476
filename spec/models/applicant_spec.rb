@@ -37,6 +37,12 @@ describe Applicant do
       specify { @bad.should_not be_valid }
       specify { @good.should be_valid }
     end
+
+    describe 'no wuid' do
+      before { @applicant.wuid = nil }
+      it { should_not be_valid }
+    end
+
   end
 
   describe 'gpa timestamp changed on update' do

@@ -17,6 +17,7 @@ class Applicant < ActiveRecord::Base
     format: { with: EMAIL_REGEX }
   validates :class_standing, on: :update, inclusion: { in: 0...Standing.names.count }
   validates_presence_of :name
+  validates_presence_of :wuid
 
   def to_param
     identifier
