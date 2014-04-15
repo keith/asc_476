@@ -1,0 +1,28 @@
+<h1>Listing emails</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Body</th>
+      <th>Subject</th>
+      <th>Reply to</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @emails.each do |email| %>
+      <tr>
+        <td><%= email.description %></td>
+        <td><%= email.body %></td>
+        <td><%= email.subject %></td>
+        <td><%= email.reply_to %></td>
+        <td><%= link_to 'Show', email %></td>
+        <td><%= link_to 'Edit', edit_email_path(email) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
