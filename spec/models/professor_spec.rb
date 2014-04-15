@@ -3,9 +3,6 @@ require 'spec_helper'
 describe Professor do
   before { @prof = FactoryGirl.create(:professor) }
   subject { @prof }
-  after(:each) do
-    ActionMailer::Base.deliveries.clear
-  end
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
@@ -37,6 +34,10 @@ describe Professor do
   end
 
   describe 'changing professor emails' do
+    after(:each) do
+      ActionMailer::Base.deliveries.clear
+    end
+
     context 'email changed' do
       before do
         @prof.email = @prof.email + 'a'
