@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @email.body %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @email.subject %>
+</p>
+
+<p>
+  <strong>Reply to:</strong>
+  <%= @email.reply_to %>
+</p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @email.identifier %>
+</p>
+
+<%= link_to 'Edit', edit_email_path(@email) %> |
+<%= link_to 'Back', emails_path %>

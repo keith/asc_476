@@ -1,4 +1,6 @@
 Asc476::Application.routes.draw do
+  resources :emails
+
   root 'applicants#new'
   resources :positions, except: [:new]
   resources :professors, except: [:create, :new]
