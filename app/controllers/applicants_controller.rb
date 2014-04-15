@@ -25,9 +25,10 @@ class ApplicantsController < ApplicationController
 
   # PATCH/PUT /applicants/1
   def update
-    @applicant.positions.each do |position|
-      professor = Professor.find_by_email(position.professor.email)
-      position.professor = professor if professor
+    if @applicant.update(applicant_params)
+      redirect_to @applicant, notice: params
+    else
+      render action: 'edit'
     end
   end
 
@@ -42,7 +43,13 @@ class ApplicantsController < ApplicationController
 
     if @applicant.save
       begin
-        @applicant.send_emails
+        ApplicantMailer.account_email(@applicant).deliver
+        @applicant.positions.each do |position|
+          next if position.professor_emailed
+          professor = position.professor
+          ProfessorMailer.pending_recommendation(professor).deliver
+          position.professor_emailed = true
+        end
       rescue Errno::ECONNREFUSED
         redirect_to @applicant,
           notice: 'Your application was saved but the emails failed to send. Save this URL and contact the ASC for assistance'
@@ -59,15 +66,6 @@ class ApplicantsController < ApplicationController
     @applicant.destroy
     redirect_to applicants_url,
       notice: 'Applicant was successfully deleted.'
-  end
-
-  # PATCH/PUT /applicants/1
-  def update
-    if @applicant.update(applicant_params)
-      redirect_to @applicant, notice: 'Applicant was successfully updated.'
-    else
-      render action: 'edit'
-    end
   end
 
   private

@@ -5,7 +5,7 @@ class Applicant < ActiveRecord::Base
 
   has_many :available_times
   has_many :positions
-  accepts_nested_attributes_for :positions
+  accepts_nested_attributes_for :positions , reject_if: :reject_posts
 
   before_create { self.identifier = new_applicant_identifier }
   before_save { email.downcase! }
@@ -41,5 +41,10 @@ class Applicant < ActiveRecord::Base
 
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
+    end
+  
+    def reject_posts(attributed)
+      attributed['course_id'].blank? and 
+          attributed['professor_attributes']["name"].blank? and attributed['professor_attributes']['email'].blank?
     end
 end
