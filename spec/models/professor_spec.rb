@@ -34,7 +34,7 @@ describe Professor do
   end
 
   describe 'changing professor emails' do
-    after(:each) do
+    before(:each) do
       ActionMailer::Base.deliveries.clear
     end
 
