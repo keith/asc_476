@@ -44,5 +44,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
+  # Seed the database before running for Emails
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
+
   config.include Capybara::DSL
 end
