@@ -1,6 +1,15 @@
+<% if !positions || positions.empty? %>
+  <p>No pending reviews</p>
+<% else %>
 <ul>
   <% for position in positions %>
     <%# TODO: More info, fields, or just edit link (would need unique id) %>
-    <li><%= position.applicant.name %> <%= position.course.full_name %></li>
+      <%= position.applicant.name %>
+      <% if position.course %>
+        <%= position.course.full_name %>
+      <% end %>
+      <%= link_to('Review', edit_position_path(position)) %>
+    </li>
   <% end %>
 </ul>
+<% end %>

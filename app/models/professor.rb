@@ -15,6 +15,13 @@ class Professor < ActiveRecord::Base
     identifier
   end
 
+  def pending_positions
+    self.positions.select do |position|
+      return false unless position
+      position.professor_verdict.nil?
+    end
+  end
+
   private
 
     def static_identifier

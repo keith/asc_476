@@ -1,6 +1,4 @@
-<p id="notice">
-<%= notice %>
-</p>
+<p id="notice"><%= notice %></p>
 
 <%# TODO: Center this at the top %>
 <%= @professor.name %>
@@ -8,19 +6,6 @@
 <%= link_to 'Edit', edit_professor_path(@professor) %>
 <% if logged_in_admin? %>
   | <%= link_to 'All Professors', professors_path %>
-<% else %>
-  <%# TODO: Include view passing professor for pending recommendations %>
-  <%= render 'pending', { positions: @professor.positions } %>
 <% end %>
 
-<ul>
-  <% @professor.positions.each do |position| %>
-    <li>
-      <%= position.applicant.name %> (<%= position.applicant.email + EMAIL_SUFFIX %>):
-      <% if position.course %>
-        <%= position.course.full_name %>
-      <% end %>
-      <%= link_to('Review', edit_position_path(position)) %>
-    </li>
-  <% end %>
-</ul>
+<%= render 'pending', { positions: @professor.pending_positions } %>

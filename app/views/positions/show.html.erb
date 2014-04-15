@@ -1,19 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @position.applicant.name %> recommendation by <%= @position.professor.name %></h2>
+
 <%# TODO: Add more info about the student and course for this position %>
 <p>
-  <strong>Professor comments:</strong>
+  <strong><%= professor_name_string(@position) %>'s comments:</strong>
   <%= @position.professor_comments %>
 </p>
 
 <p>
-  <strong>Professor verdict:</strong>
-  <%= @position.professor_verdict ? 'Yes' : 'No' %>
+  <strong><%= professor_name_string(@position) %>'s verdict:</strong>
+  <%= bool_string(@position.professor_verdict) %>
 </p>
 
 <p>
-  <strong>Professor taught:</strong>
-  <%= @position.professor_taught ? 'Yes' : 'No' %>
+  <strong><%= professor_name_string(@position) %> taught <%= @position.applicant.name %>:</strong>
+  <%= bool_string(@position.professor_taught) %>
 </p>
 
 <% if logged_in_admin? %>
