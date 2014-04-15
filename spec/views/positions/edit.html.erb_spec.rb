@@ -9,6 +9,7 @@ describe 'positions/edit' do
       application_status: 1,
       identifier: 'abc',
       applicant: mock_model(Applicant, FactoryGirl.attributes_for(:applicant)),
+      professor: mock_model(Professor, FactoryGirl.attributes_for(:professor)),
       course: mock_model(Course, FactoryGirl.attributes_for(:course).merge({ full_name: 'CSCI 123' }))
     ))
   end

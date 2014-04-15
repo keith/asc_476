@@ -3,7 +3,8 @@
 <% else %>
 <ul>
   <% for position in positions %>
-    <%# TODO: More info, fields, or just edit link (would need unique id) %>
+    <%# TODO: More info %>
+    <li>
       <%= position.applicant.name %>
       <% if position.course %>
         <%= position.course.full_name %>

@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
+      <th>Pending Recommendations</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= professor.name %></td>
         <td><%= professor.email %><%= EMAIL_SUFFIX %></td>
+        <td><%= professor.pending_positions.count %></td>
         <td><%= link_to 'Show', professor %></td>
         <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
         <td><%= link_to 'Delete', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
