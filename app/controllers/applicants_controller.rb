@@ -1,6 +1,7 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :destroy]
+  before_action :professor_check, only: [:update]
 
   # GET /applicants
   def index
@@ -25,9 +26,10 @@ class ApplicantsController < ApplicationController
 
   # PATCH/PUT /applicants/1
   def update
-    @applicant.positions.each do |position|
-      professor = Professor.find_by_email(position.professor.email)
-      position.professor = professor if professor
+    if @applicant.update(applicant_params)
+      redirect_to @applicant, notice: params
+    else
+      render action: 'edit'
     end
   end
 
@@ -67,15 +69,6 @@ class ApplicantsController < ApplicationController
       notice: 'Applicant was successfully deleted.'
   end
 
-  # PATCH/PUT /applicants/1
-  def update
-    if @applicant.update(applicant_params)
-      redirect_to @applicant, notice: 'Applicant was successfully updated.'
-    else
-      render action: 'edit'
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant
@@ -87,4 +80,12 @@ class ApplicantsController < ApplicationController
     def applicant_params
       params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study, :interviewed, :asc_comments, positions_attributes: [:course_id, professor_attributes: [:name, :email]])
     end
+def professor_check
+        @applicant.positions.each do |position|
+        professor = Professor.find_by_email(position.professor.email)
+        if professor
+          position.professor = professor
+          
+        end
+end
 end

@@ -52,11 +52,18 @@
     <strong>Courses:</strong>
     <ul>
       <% @applicant.positions.each do |p| %>
-        <% if p.course %>
-          <li><%= p.course.full_name %> <%= p.professor.name %></li>
+        <% if !p.new_record? %>
+          <% if p.course %>
+            <li><%= p.course.full_name %> <%= p.professor.name %></li>
+          <% end %>
+        <% else %>
+          <%= f.fields_for :positions, p do |position_fields| %>
+            <%= render 'position_fields', :f => position_fields %>
+          <% end %>
         <% end %>
       <% end %>
     </ul>
+    <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
   </p>
 
   <div class="field">
