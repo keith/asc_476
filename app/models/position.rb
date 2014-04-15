@@ -13,6 +13,7 @@ class Position < ActiveRecord::Base
   validate :static_identifier, on: :update
   validates :application_status, on: :update, inclusion: { in: 0...Status.names.count }
   validates_presence_of :applicant
+  validates_presence_of :professor
 
   def to_param
     identifier
