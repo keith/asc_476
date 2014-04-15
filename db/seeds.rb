@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+email_count = 2
 reply_to = 'mahona@winthrop.edu'
 professor_email = <<END
 [NAME],
@@ -20,7 +21,7 @@ Email.create(body: professor_email,
              reply_to: reply_to,
              identifier: 'ProfessorMailer:pending_recommendation',
              description: 'Email sent to professors for pending recommendations',
-             id: 1) unless Email.count == 2
+             id: 1) unless Email.count == email_count
 
 applicant_email = <<END
 [NAME],
@@ -40,4 +41,4 @@ Email.create(body: applicant_email,
              reply_to: reply_to,
              identifier: 'ApplicantMailer:account_email',
              description: 'Email sent for new applicants',
-             id: 2) unless Email.count == 2
+             id: 2) unless Email.count == email_count
