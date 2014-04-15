@@ -1,7 +1,6 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :destroy]
-  before_action :professor_check, only: [:update]
 
   # GET /applicants
   def index
@@ -44,7 +43,13 @@ class ApplicantsController < ApplicationController
 
     if @applicant.save
       begin
-        @applicant.send_emails
+        ApplicantMailer.account_email(@applicant).deliver
+        @applicant.positions.each do |position|
+          next if position.professor_emailed
+          professor = position.professor
+          ProfessorMailer.pending_recommendation(professor).deliver
+          position.professor_emailed = true
+        end
       rescue Errno::ECONNREFUSED
         redirect_to @applicant,
           notice: 'Your application was saved but the emails failed to send. Save this URL and contact the ASC for assistance'
@@ -74,12 +79,4 @@ class ApplicantsController < ApplicationController
     def applicant_params
       params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study, :interviewed, :asc_comments, positions_attributes: [:course_id, professor_attributes: [:name, :email]])
     end
-def professor_check
-        @applicant.positions.each do |position|
-        professor = Professor.find_by_email(position.professor.email)
-        if professor
-          position.professor = professor
-          
-        end
-end
 end
