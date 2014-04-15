@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <h1>All professors</h1>
 
 <table>
@@ -6,6 +8,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Pending Recommendations</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -21,6 +24,7 @@
         <td><%= link_to 'Show', professor %></td>
         <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
         <td><%= link_to 'Delete', professor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Email', email_professor_path(professor), method: :post %></td>
       </tr>
     <% end %>
   </tbody>

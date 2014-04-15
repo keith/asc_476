@@ -1,6 +1,6 @@
 class ProfessorsController < ApplicationController
-  before_action :signed_in_admin, only: [:index, :destroy]
-  before_action :set_professor, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_admin, only: [:index, :destroy, :email]
+  before_action :set_professor, only: [:show, :edit, :update, :destroy, :email]
 
   # GET /professors
   def index
@@ -29,6 +29,18 @@ class ProfessorsController < ApplicationController
   def destroy
     @professor.destroy
     redirect_to professors_url, notice: 'Professor was successfully destroyed.'
+  end
+
+  # POST /professors/1/email
+  def email
+    begin
+      ProfessorMailer.pending_recommendation(@professor).deliver
+    rescue Errno::ECONNREFUSED
+      redirect_to professors_url,
+        notice: "The email failed to send. You can manually send the professor their URL: #{ professor_url(@professor) }"
+    else
+      redirect_to professors_url, notice: 'The email was sent successfully'
+    end
   end
 
   private

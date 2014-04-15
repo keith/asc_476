@@ -43,13 +43,7 @@ class ApplicantsController < ApplicationController
 
     if @applicant.save
       begin
-        ApplicantMailer.account_email(@applicant).deliver
-        @applicant.positions.each do |position|
-          next if position.professor_emailed
-          professor = position.professor
-          ProfessorMailer.pending_recommendation(professor).deliver
-          position.professor_emailed = true
-        end
+        @applicant.send_emails
       rescue Errno::ECONNREFUSED
         redirect_to @applicant,
           notice: 'Your application was saved but the emails failed to send. Save this URL and contact the ASC for assistance'

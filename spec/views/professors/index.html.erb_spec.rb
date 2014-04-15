@@ -5,12 +5,12 @@ describe 'professors/index' do
     assign(:professors, [
       stub_model(Professor,
         name: 'Name',
-        email: 'Email',
+        email: 'addr',
         identifier: 'abc'
       ),
       stub_model(Professor,
         name: 'Name',
-        email: 'Email',
+        email: 'addr',
         identifier: 'abc'
       )
     ])
@@ -18,8 +18,9 @@ describe 'professors/index' do
 
   it 'renders a list of professors' do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
+
     assert_select 'tr>td', text: 'Name'.to_s, count: 2
-    assert_select 'tr>td', text: "Email#{ EMAIL_SUFFIX }".to_s, count: 2
+    assert_select 'tr>td', text: "addr#{ EMAIL_SUFFIX }".to_s, count: 2
+    rendered.should match(/Email/)
   end
 end
