@@ -15,7 +15,11 @@ Please fill out the recommendations here: [URL]
 Thank you,
 ASC Staff
 END
-Email.create(body: professor_email, subject: 'Pending ASC tutoring recommendations', reply_to: reply_to)
+Email.create(body: professor_email,
+             subject: 'Pending ASC tutoring recommendations',
+             reply_to: reply_to,
+             identifier: 'ProfessorMailer:pending_recommendation',
+             id: 1) unless Email.count > 0
 
 applicant_email = <<END
 [NAME],
@@ -30,4 +34,8 @@ recommendation has been submitted.
 
 Thank you, ASC Staff
 END
-Email.create(body: applicant_email, subject: 'Your ASC tutoring application', reply_to: reply_to)
+Email.create(body: applicant_email,
+             subject: 'Your ASC tutoring application',
+             reply_to: reply_to,
+             identifier: 'ApplicantMailer:account_email',
+             id: 2) unless Email.count > 0
