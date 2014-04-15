@@ -14,9 +14,6 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @applicant = Applicant.new
-    professor = Professor.new
-    position = @applicant.positions.build
-    position.professor = professor
   end
 
   # GET /applicants/1/edit
@@ -42,12 +39,6 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   def create
     @applicant = Applicant.new(applicant_params)
-
-    @applicant.positions.each do |position|
-      professor = Professor.find_by_email(position.professor.email)
-      position.professor = professor if professor
-    end
-
     if @applicant.save
       begin
         @applicant.send_emails

@@ -3,7 +3,7 @@ class Applicant < ActiveRecord::Base
 
   EMAIL_REGEX = /\A\w+\z/
 
-  has_many :positions, dependent: :destroy
+  has_many :positions, before_add: :initialize_position, dependent: :destroy
   accepts_nested_attributes_for :positions , reject_if: :reject_posts
 
   before_create { self.identifier = new_applicant_identifier }
@@ -41,6 +41,10 @@ class Applicant < ActiveRecord::Base
 
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
+    end
+
+    def initialize_position(position)
+      position.applicant ||= self
     end
   
     def reject_posts(attributed)
