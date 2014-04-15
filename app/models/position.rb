@@ -4,7 +4,7 @@ class Position < ActiveRecord::Base
   belongs_to :applicant
   belongs_to :course
   belongs_to :professor
-  accepts_nested_attributes_for :professor
+  accepts_nested_attributes_for :professor, reject_if: :check_professor
 
   before_create { self.identifier = new_positions_identifier }
   before_create { self.application_status = 0 }
@@ -23,5 +23,14 @@ class Position < ActiveRecord::Base
   private
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
+    end
+
+    def check_professor(prof_attr)
+      if prof = Professor.find_by_email(prof_attr['email'])
+        self.professor = prof
+        return true
+      else
+        return false
+      end
     end
 end
