@@ -4,7 +4,7 @@ class Professor < ActiveRecord::Base
   EMAIL_REGEX = /\A\w+\z/
 
   before_create { self.identifier = new_professor_identifier }
-  before_save { email.downcase! }
+  before_save { email.downcase!; email_changed }
   has_many :positions
   validate :static_identifier, on: :update
   validates_presence_of :name
@@ -19,5 +19,11 @@ class Professor < ActiveRecord::Base
 
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
+    end
+
+    def email_changed
+      return unless self.persisted?
+      return if self.email.downcase == self.email_was.downcase
+      ProfessorMailer.pending_recommendation(self).deliver
     end
 end
