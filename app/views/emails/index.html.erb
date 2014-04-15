@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Description</th>
       <th>Body</th>
       <th>Subject</th>
       <th>Reply to</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @emails.each do |email| %>
       <tr>
+        <td><%= email.description %></td>
         <td><%= email.body %></td>
         <td><%= email.subject %></td>
         <td><%= email.reply_to %></td>

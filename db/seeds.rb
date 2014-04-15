@@ -19,7 +19,8 @@ Email.create(body: professor_email,
              subject: 'Pending ASC tutoring recommendations',
              reply_to: reply_to,
              identifier: 'ProfessorMailer:pending_recommendation',
-             id: 1) unless Email.count > 0
+             description: 'Email sent to professors for pending recommendations',
+             id: 1) unless Email.count == 2
 
 applicant_email = <<END
 [NAME],
@@ -38,4 +39,5 @@ Email.create(body: applicant_email,
              subject: 'Your ASC tutoring application',
              reply_to: reply_to,
              identifier: 'ApplicantMailer:account_email',
-             id: 2) unless Email.count > 0
+             description: 'Email sent for new applicants',
+             id: 2) unless Email.count == 2
