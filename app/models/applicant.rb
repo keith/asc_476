@@ -3,8 +3,7 @@ class Applicant < ActiveRecord::Base
 
   EMAIL_REGEX = /\A\w+\z/
 
-  has_many :available_times
-  has_many :positions
+  has_many :positions, dependent: :destroy
   accepts_nested_attributes_for :positions , reject_if: :reject_posts
 
   before_create { self.identifier = new_applicant_identifier }

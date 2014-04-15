@@ -42,7 +42,6 @@ describe Applicant do
       before { @applicant.wuid = nil }
       it { should_not be_valid }
     end
-
   end
 
   describe 'gpa timestamp changed on update' do
@@ -81,6 +80,21 @@ describe Applicant do
       end
 
       it { should be_valid }
+    end
+  end
+
+  describe 'destroy applicant' do
+    before do
+      @position = FactoryGirl.create(:position)
+      @applicant = FactoryGirl.create(:applicant, positions: [@position])
+    end
+
+    it 'cascades into positions' do
+      @applicant.positions.count.should == 1
+      @applicant.destroy!
+      @applicant.positions.count.should == 0
+      @position.persisted?.should be_false
+      @applicant.persisted?.should be_false
     end
   end
 end
