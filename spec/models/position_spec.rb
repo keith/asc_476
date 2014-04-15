@@ -54,6 +54,26 @@ describe Position do
     end
   end
 
+  describe 'course association' do
+    describe 'without course' do
+      before { @position.course = nil }
+      it { should_not be_valid }
+    end
+
+    describe 'with non-existant course' do
+      before { @position.course_id = 0 }
+      it { should_not be_valid }
+    end
+
+    describe 'with existant course' do
+      before {
+        @course = FactoryGirl.create(:course)
+        @position.course = @course
+      }
+      it { should be_valid }
+    end
+  end
+
   describe 'validates application status' do
     describe 'too low' do
       before { @position.application_status = -1 }
