@@ -26,7 +26,14 @@ class ApplicantsController < ApplicationController
   # PATCH/PUT /applicants/1
   def update
     if @applicant.update(applicant_params)
-      redirect_to @applicant, notice: params
+      begin
+        @applicant.send_emails
+      rescue Errno::ECONNREFUSED
+        redirect_to @applicant,
+          notice: 'Your application was updated but the emails failed to send. Save this URL and contact the ASC for assistance'
+      else
+        redirect_to @applicant, notice: 'Your application was saved succesfully'
+      end
     else
       render action: 'edit'
     end
