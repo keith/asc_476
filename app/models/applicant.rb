@@ -4,7 +4,7 @@ class Applicant < ActiveRecord::Base
   EMAIL_REGEX = /\A\w+\z/
 
   has_many :positions, before_add: :initialize_position, dependent: :destroy
-  accepts_nested_attributes_for :positions , reject_if: :reject_posts
+  accepts_nested_attributes_for :positions , reject_if: :reject_position?
 
   before_create { self.identifier = new_applicant_identifier }
   before_save { email.downcase! }
@@ -47,8 +47,19 @@ class Applicant < ActiveRecord::Base
       position.applicant ||= self
     end
   
-    def reject_posts(attributed)
-      attributed['course_id'].blank? and 
-          attributed['professor_attributes']["name"].blank? and attributed['professor_attributes']['email'].blank?
+    # Ignore extra fields in the form
+    def reject_position?(pos_attr)
+      pos_attr['course_id'].blank? and 
+      pos_attr['professor_attributes']["name"].blank? and
+      pos_attr['professor_attributes']['email'].blank? or
+      duplicate_position_course?(pos_attr)
+    end
+
+    def duplicate_position_course?(position_attr)
+      if self.positions.find_by_course_id(position_attr['course_id'])
+        return true
+      else
+        return false
+      end
     end
 end
