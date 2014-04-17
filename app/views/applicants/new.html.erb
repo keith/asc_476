@@ -1,9 +1,9 @@
 <h2>Tutor Application</h2>
-<div class = "col-md-8">
+<div class="col-md-8">
 
-<%= form_for(@applicant, method: 'create',  :html => {:class => "form-horizontal"}) do |f| %>
+<%= form_for(@applicant, method: 'create',  :html => { :class => 'form-horizontal' }) do |f| %>
   <% if @applicant.errors.any? %>
-    <div id="error_explanation">
+    <div id='error_explanation'>
       <h2><%= pluralize(@applicant.errors.count, 'error') %> prohibited this applicant from being saved:</h2>
 
       <ul>
@@ -15,40 +15,40 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, class: "sr-only" %><br>
-    <%= f.text_field :name,  class: 'form-control', placeholder: "Name" %>
+    <%= f.label :name, class: 'sr-only' %><br>
+    <%= f.text_field :name,  class: 'form-control', placeholder: 'Name' %>
   </div>
   <div class="field">
     <%# TODO: The email suffix get's put on a newline when there are errors %>
-    <%= f.label :email, class: "sr-only" %><br>
-    <%= f.text_field :email , class: 'form-control', placeholder: "Winthrop Username, example: hiottj4" %> 
+    <%= f.label :email, class: 'sr-only' %><br>
+    <%= f.text_field :email , class: 'form-control', placeholder: 'Winthrop Username' %>
   </div>
   <div class="field">
-    <%= f.label :wuid, class: "sr-only" %><br>
-    <%= f.text_field :wuid, class: 'form-control', placeholder: "Winthop Id" %>
+    <%= f.label :wuid, class: 'sr-only' %><br>
+    <%= f.text_field :wuid, class: 'form-control', placeholder: 'Winthop Id' %>
   </div>
   <div class="field">
-    <%= f.label :phone_number, class: "sr-only" %><br>
-    <%= f.text_field :phone_number, class: 'form-control', placeholder: "Phone Number" %>
+    <%= f.label :phone_number, class: 'sr-only' %><br>
+    <%= f.text_field :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
   </div>
   <div class="field">
     <%= f.label :class_standing %>
     <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
   </div>
   <div class="field">
-    <%= f.label :comment, class: "sr-only" %><br>
-    <%= f.text_area :comment, class: 'form-control', placeholder: "Comments" %>
+    <%= f.label :comment, class: 'sr-only' %><br>
+    <%= f.text_area :comment, class: 'form-control', placeholder: 'Comments' %>
   </div>
   <div class="field">
-    <%= f.label :major, class: "sr-only" %><br>
-    <%= f.text_field :major, class: 'form-control', placeholder: "Major" %>
+    <%= f.label :major, class: 'sr-only' %><br>
+    <%= f.text_field :major, class: 'form-control', placeholder: 'Major' %>
   </div>
   <div class="field">
-    <%= f.label :minor, class: "sr-only" %><br>
-    <%= f.text_field :minor, class: 'form-control', placeholder: "Minor" %>
+    <%= f.label :minor, class: 'sr-only' %><br>
+    <%= f.text_field :minor, class: 'form-control', placeholder: 'Minor' %>
   </div>
   <div class="field checkbox inline">
-    <%= f.label :work_study, class: "sr-only" %><br>
+    <%= f.label :work_study, class: 'sr-only' %><br>
     <%= f.check_box :work_study %> Work Study
   </div>
   <h4>Courses</h4>
@@ -56,6 +56,7 @@
     <%= render 'position_fields', :f => position_fields %>
   <% end %>
   <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
+  <p>Note: You have to have taken the courses at Winthrop</p>
 
   <div class="actions">
     <%= f.submit 'Submit Application' %>
