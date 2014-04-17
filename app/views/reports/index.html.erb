@@ -3,23 +3,20 @@
 <table>
   <thead>
     <tr>
-      <th></th>
+      <th><%= sortable 'name', 'Applicant Name' %></th>
       <th></th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @reports.each do |report| %>
+    <% @applicants.each do |applicant| %>
       <tr>
-        <td><%= link_to 'Show', report %></td>
-        <td><%= link_to 'Edit', edit_report_path(report) %></td>
-        <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= applicant.name %> (<%= mail_to("#{ applicant.name }#{ EMAIL_SUFFIX }") %>)</td>
+        <%# <td><%= link_to 'Show', report %1></td> %>
+        <%# <td><%= link_to 'Edit', edit_report_path(report) %1></td> %>
+        <%# <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %1></td> %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Report', new_report_path %>
