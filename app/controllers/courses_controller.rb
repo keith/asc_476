@@ -25,14 +25,21 @@ class CoursesController < ApplicationController
   # PUT /courses/update_multiple
   def update_multiple
     values = params[:courses]
+    failed = []
     @courses = Course.find(values.keys)
     @courses.each do |c|
       attrs = values[c.id.to_s].slice(:hidden, :disabled)
       c.update_attributes(update_params(attrs))
-      # TODO: Store falses and return errors for failed saves
-      c.save if c.changed?
+      next unless c.changed?
+      if !c.save
+        failed << c.full_name
+      end
     end
-    redirect_to courses_path, notice: 'Courses updated successfully'
+    notice = 'Courses updated successfully'
+    if !failed.empty?
+      notice = "#{ failed.join(', ') } failed to update"
+    end
+    redirect_to courses_path, notice: notice
   end
 
   private
