@@ -42,11 +42,18 @@ class ApplicantsController < ApplicationController
 
   # POST /applicants
   def create
+    positions = applicant_params[:positions_attributes]
+    positions.each do |arr|
+      professor = arr.last[:professor_attributes]
+      existing = Professor.find_by_email(professor[:email])
+      Professor.create!(professor) unless existing
+    end
+
     @applicant = Applicant.new(applicant_params)
     if @applicant.save
       begin
         @applicant.send_emails
-      rescue Errno::ECONNREFUSED
+      rescue
         redirect_to @applicant,
           # TODO: Add url
           notice: 'The application was saved but the emails failed to send. Save this URL and contact the ASC for assistance'

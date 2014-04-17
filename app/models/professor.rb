@@ -32,5 +32,6 @@ class Professor < ActiveRecord::Base
       return unless self.persisted?
       return if self.email.downcase == self.email_was.downcase
       ProfessorMailer.pending_recommendation(self).deliver
+      true
     end
 end

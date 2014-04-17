@@ -6,6 +6,7 @@ class ApplicantMailer < ActionMailer::Base
   def account_email(user)
     email_identifier = self.class.name + ':' + __method__.to_s
     template, body = template_helper(email_identifier, user)
+    return unless template && body
     email = user.email + EMAIL_SUFFIX
     mail(to: email,
          body: body,
@@ -17,6 +18,7 @@ class ApplicantMailer < ActionMailer::Base
   def acceptance_email(user)
     email_identifier = self.class.name + ':' + __method__.to_s
     template, body = template_helper(email_identifier, user)
+    return unless template && body
     email = user.email + EMAIL_SUFFIX
     mail(to: email,
          body: body,
