@@ -33,6 +33,10 @@ class Applicant < ActiveRecord::Base
     end
   end
 
+  def email_acceptance
+    ApplicantMailer.acceptance_email(self).deliver
+  end
+
   private
 
     def gpa_update
@@ -46,10 +50,10 @@ class Applicant < ActiveRecord::Base
     def initialize_position(position)
       position.applicant ||= self
     end
-  
+
     # Ignore extra fields in the form
     def reject_position?(pos_attr)
-      pos_attr['course_id'].blank? and 
+      pos_attr['course_id'].blank? and
       pos_attr['professor_attributes']["name"].blank? and
       pos_attr['professor_attributes']['email'].blank? or
       duplicate_position_course?(pos_attr)

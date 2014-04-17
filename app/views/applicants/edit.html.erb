@@ -67,18 +67,18 @@
   </p>
 
   <div class="field">
-    <%= f.label :work_study, 'Eligible for work study' %>
+    <%= f.label :work_study, 'Eligible for work study:' %>
     <%= f.check_box :work_study %>
   </div>
 
   <% if logged_in_moderator? %>
     <div class="field">
-      <%= f.label :asc_comments, '' %>
+      <%= f.label :asc_comments, 'ASC Comments:' %>
       <%= f.text_area :asc_comments %>
     </div>
 
     <div class="field">
-      <%= f.label :interviewed %>
+      <%= f.label :interviewed, 'Has been interviewed:' %>
       <%= f.check_box :interviewed %>
     </div>
   <% end %>

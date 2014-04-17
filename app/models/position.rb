@@ -8,6 +8,7 @@ class Position < ActiveRecord::Base
 
   before_create { self.identifier = new_positions_identifier }
   before_create { self.application_status = 0 }
+  before_save { status_update }
 
   # TODO: finish validations
   validate :static_identifier, on: :update
@@ -21,6 +22,11 @@ class Position < ActiveRecord::Base
   end
 
   private
+    def status_update
+      return unless self.application_status_changed?
+      self.applicant.email_acceptance if self.application_status == 3
+    end
+
     def static_identifier
       errors[:identifier] = "can't be changed" if self.identifier_changed?
     end
