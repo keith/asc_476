@@ -28,6 +28,9 @@ gem 'turbolinks', '~> 2.1.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# Pagniate stuff
+gem 'will_paginate', '~> 3.0'
+
 group :development do
   gem 'puma', '~> 2.7.1'
   gem 'better_errors', '~> 1.1.0'

@@ -18,6 +18,9 @@ class Applicant < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :wuid
 
+  # For will_paginate
+  self.per_page = 5
+
   def to_param
     identifier
   end

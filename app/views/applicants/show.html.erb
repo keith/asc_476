@@ -83,3 +83,6 @@
 
 <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
 <%= link_to 'Back', applicants_path %>
+<% if logged_in_admin? %>
+  | <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

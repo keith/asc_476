@@ -13,10 +13,9 @@
     <% @applicants.each do |applicant| %>
       <tr>
         <td><%= applicant.name %> (<%= mail_to("#{ applicant.name }#{ EMAIL_SUFFIX }") %>)</td>
-        <%# <td><%= link_to 'Show', report %1></td> %>
-        <%# <td><%= link_to 'Edit', edit_report_path(report) %1></td> %>
-        <%# <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %1></td> %>
+        <td><%= link_to 'Details', applicant %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @applicants %>
