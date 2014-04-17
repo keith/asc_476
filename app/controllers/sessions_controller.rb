@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :redirect_signed_in, only: [:new]
   include SessionsHelper
 
   def new
@@ -19,14 +18,4 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to signin_path
   end
-
-  private
-
-    def redirect_signed_in
-      if logged_in_admin? || logged_in_moderator?
-        # TODO: Where should users go when signed in
-        redirect_to applicants_path
-      end
-    end
 end
-
