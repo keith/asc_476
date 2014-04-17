@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'applicants/index' do
   before(:each) do
+    view.stub(:logged_in_admin?).and_return(true)
     assign(:applicants, [
       stub_model(Applicant,
         name: 'Name',
