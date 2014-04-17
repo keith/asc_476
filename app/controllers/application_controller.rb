@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in_admin
-    redirect_to signin_path unless logged_in_admin?
+    redirect_to signin_path, alert: 'You must be logged in as an administrator' unless logged_in_admin?
   end
 end
-

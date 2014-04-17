@@ -18,12 +18,11 @@
   <%= bool_string(@position.professor_taught) %>
 </p>
 
-<% if logged_in_admin? %>
+<% if logged_in? %>
   <p>
     <strong>Application status:</strong>
     <%= Status.for_number(@position.application_status) %>
   </p>
-
 <% end %>
 
 <%= link_to 'Edit', edit_position_path(@position) %> |

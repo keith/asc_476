@@ -18,8 +18,8 @@ FactoryGirl.define do
   end
 
   factory :moderator, class: User do
-    email    { Faker::Internet.email }
     name     { Faker::Name.name }
+    email    { 'mod@example.com' }
     password 'abcdef'
     password_confirmation 'abcdef'
     level 2
