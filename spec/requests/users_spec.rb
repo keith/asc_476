@@ -169,7 +169,7 @@ describe 'Users' do
       before { visit users_path }
 
       it 'should redirect moderators' do
-        current_path.should == applicants_path
+        current_path.should == signin_path
       end
     end
 
@@ -177,7 +177,7 @@ describe 'Users' do
       before { visit new_user_path }
 
       it 'should redirect moderators' do
-        current_path.should == applicants_path
+        current_path.should == signin_path
       end
     end
   end
