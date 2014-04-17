@@ -1,4 +1,5 @@
 Asc476::Application.routes.draw do
+
   root 'applicants#new'
   resources :emails, except: [:new, :create, :destroy]
   resources :positions, except: [:new]
@@ -7,7 +8,7 @@ Asc476::Application.routes.draw do
   end
 
   resources :users, except: [:show]
-
+  resources :reports, only: [:index]
   resources :applicants
 
   resources :courses, only: [:create, :index, :new] do
