@@ -14,6 +14,9 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @applicant = Applicant.new
+    professor = Professor.new
+    position = @applicant.positions.build
+    position.professor = professor
   end
 
   # GET /applicants/1/edit
