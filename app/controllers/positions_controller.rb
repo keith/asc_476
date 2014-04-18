@@ -1,5 +1,4 @@
 class PositionsController < ApplicationController
-  # TODO: Possibly create a unique ID for positions for editing
   before_action :set_position, only: [:show, :edit, :update, :destroy]
 
   # GET /positions

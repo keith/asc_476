@@ -10,7 +10,6 @@ class Position < ActiveRecord::Base
   before_create { self.application_status = 0 }
   before_save { status_update }
 
-  # TODO: finish validations
   validate :static_identifier, on: :update
   validates :application_status, on: :update, inclusion: { in: 0...Status.names.count }
   validates_presence_of :applicant
