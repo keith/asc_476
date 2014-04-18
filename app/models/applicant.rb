@@ -14,7 +14,7 @@ class Applicant < ActiveRecord::Base
   validate :static_identifier, on: :update
   validates :phone_number, length: { minimum: 10 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
-    format: { with: EMAIL_REGEX }
+    format: { with: EMAIL_REGEX, message: 'is invalid (only enter before the @ symbol)' }
   validates :class_standing, on: :update, inclusion: { in: 0...Standing.names.count }
   validates_presence_of :name
   validates_presence_of :wuid

@@ -46,7 +46,7 @@ class ApplicantsController < ApplicationController
     positions.each do |arr|
       professor = arr.last[:professor_attributes]
       existing = Professor.find_by_email(professor[:email])
-      Professor.create!(professor) unless existing
+      Professor.create(professor) unless existing
     end
 
     @applicant = Applicant.new(applicant_params)
