@@ -8,7 +8,6 @@ class ProfessorsController < ApplicationController
   end
 
   # GET /professors/1
-  # TODO: Use this action to show all applications waiting their recommendation
   def show
   end
 
