@@ -1,9 +1,13 @@
 class ReportsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  # GET /reports/filter
+  def new
+  end
+
   # GET /reports
   def index
-    @applicants = Applicant.page(params[:page]).order(sort_column + ' ' + sort_direction)
+    @applicants = Applicant.filtered_with_params(params).page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
 
   private

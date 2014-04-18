@@ -8,7 +8,9 @@ Asc476::Application.routes.draw do
   end
 
   resources :users, except: [:show]
-  resources :reports, only: [:index]
+  resources :reports, only: [:index] do
+    get 'filter', to: :new, on: :collection
+  end
   resources :applicants
 
   resources :courses, only: [:create, :index, :new] do

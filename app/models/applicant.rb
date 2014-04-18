@@ -40,6 +40,10 @@ class Applicant < ActiveRecord::Base
     ApplicantMailer.acceptance_email(self).deliver
   end
 
+  def self.filtered_with_params(p)
+    Applicant.all
+  end
+
   private
 
     def gpa_update
