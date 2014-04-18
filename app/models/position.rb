@@ -7,7 +7,7 @@ class Position < ActiveRecord::Base
   accepts_nested_attributes_for :professor, reject_if: :check_professor
 
   before_create { self.identifier = new_positions_identifier }
-  before_create { self.application_status = 0 }
+  before_create { self.application_status = Status.pending }
   before_save { status_update }
 
   # TODO: finish validations
@@ -23,8 +23,17 @@ class Position < ActiveRecord::Base
 
   private
     def status_update
-      return unless self.application_status_changed?
-      self.applicant.email_acceptance if self.application_status == 3
+      if !self.professor_verdict.nil?
+        self.application_status = update_status(Status.undecided)
+      end
+      return true unless self.application_status_changed?
+      self.applicant.email_acceptance if Status.hired?(self.application_status)
+    end
+
+    def update_status(status)
+      if self.application_status < status
+        self.application_status = status
+      end
     end
 
     def static_identifier
