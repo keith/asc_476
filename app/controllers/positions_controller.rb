@@ -28,7 +28,6 @@ class PositionsController < ApplicationController
 
   # PATCH/PUT /positions/1
   def update
-    args = params
     if logged_in_admin?
       args = asc_position_params
     else
@@ -59,6 +58,6 @@ class PositionsController < ApplicationController
     end
 
     def asc_position_params
-      params.require(:position).permit(:application_status, :asc_comments)
+      params.require(:position).permit(:application_status, :professor_comments, :professor_verdict, :professor_taught)
     end
 end
