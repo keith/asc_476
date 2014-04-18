@@ -67,10 +67,6 @@ class Applicant < ActiveRecord::Base
     end
 
     def duplicate_position_course?(position_attr)
-      if self.positions.find_by_course_id(position_attr['course_id'])
-        return true
-      else
-        return false
-      end
+      !!self.positions.find_by_course_id(position_attr['course_id'])
     end
 end
