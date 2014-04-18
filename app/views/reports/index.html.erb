@@ -12,7 +12,7 @@
   <tbody>
     <% @applicants.each do |applicant| %>
       <tr>
-        <td><%= applicant.name %> (<%= mail_to("#{ applicant.name }#{ EMAIL_SUFFIX }") %>)</td>
+        <td><%= applicant.name %> (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)</td>
         <td><%= link_to 'Details', applicant %></td>
       </tr>
     <% end %>

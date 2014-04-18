@@ -4,7 +4,6 @@ class ReportsController < ApplicationController
   # GET /reports
   def index
     @applicants = Applicant.page(params[:page]).order(sort_column + ' ' + sort_direction)
-    # @applicants = Applicant.order(sort_column + ' ' + sort_direction)
   end
 
   private
