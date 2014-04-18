@@ -46,7 +46,7 @@ class ApplicantsController < ApplicationController
     positions.each do |arr|
       professor = arr.last[:professor_attributes]
       existing = Professor.find_by_email(professor[:email])
-      Professor.create!(professor) unless existing
+      Professor.create(professor) unless existing
     end
 
     @applicant = Applicant.new(applicant_params)
@@ -54,11 +54,10 @@ class ApplicantsController < ApplicationController
       begin
         @applicant.send_emails
       rescue
-        redirect_to @applicant,
-          # TODO: Add url
-          notice: 'The application was saved but the emails failed to send. Save this URL and contact the ASC for assistance'
+        redirect_to thankyou_path,
+          notice: 'The application was saved but the emails failed to send. Contact the ASC for assistance'
       else
-        redirect_to @applicant, notice: 'The application was saved succesfully'
+        redirect_to thankyou_path, notice: 'The application was saved succesfully'
       end
     else
       render action: 'new'

@@ -9,7 +9,7 @@ class Professor < ActiveRecord::Base
   validate :static_identifier, on: :update
   validates_presence_of :name
   validates :email, presence: true, uniqueness: { case_sensitive: false },
-    format: { with: EMAIL_REGEX }
+    format: { with: EMAIL_REGEX, message: 'is invalid (only enter before the @ symbol)' }
 
   def to_param
     identifier
