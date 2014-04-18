@@ -30,6 +30,7 @@ class Position < ActiveRecord::Base
     end
 
     def update_status(status)
+      return if self.application_status.nil?
       if self.application_status < status
         self.application_status = status
       end
