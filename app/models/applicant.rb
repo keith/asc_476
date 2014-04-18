@@ -8,6 +8,7 @@ class Applicant < ActiveRecord::Base
 
   before_create { self.identifier = new_applicant_identifier }
   before_save { email.downcase! }
+  after_validation :duplicate_email
 
   validate :gpa_update, on: :update
   validate :static_identifier, on: :update
@@ -45,6 +46,23 @@ class Applicant < ActiveRecord::Base
   end
 
   private
+
+    def duplicate_email
+      return true if self.errors.empty?
+      existing = Applicant.find_by_email(self.email)
+      if existing
+        error = 'application already exists for this Winthrop username. Check your email for the link to edit your existing application.'
+        begin
+          ApplicantMailer.account_email(existing).deliver
+          raise
+        rescue
+          error += 'The email failed to send. Please contact the ASC for assistance.'
+        end
+
+        errors[:another] = error
+      end
+      false
+    end
 
     def gpa_update
       self.gpa_timestamp = Time.now if self.gpa_changed?
