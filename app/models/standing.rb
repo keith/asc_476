@@ -5,7 +5,7 @@ Standing = Struct.new(:name, :num) do |args|
       Standing.new('Sophomore', 1),
       Standing.new('Junior', 2),
       Standing.new('Senior', 3),
-      Standing.new('Graduate', 5)
+      Standing.new('Graduate', 4)
     ]
   end
 

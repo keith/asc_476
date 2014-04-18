@@ -1,1 +1,68 @@
-Form goes here. #trololol
+<h2>Tutor Application</h2>
+<div class="col-md-8">
+
+<%= form_tag("/reports", method: "get") do %>
+
+  <div id = "field">
+    <%= label_tag(:name, nil, class: 'sr-only') %>
+    <%= text_field_tag :name, nil, class: 'form-control', placeholder: 'Name' %>
+  </div>
+  <div id = "field">
+    <%= label_tag(:wuid, nil, class: 'sr-only') %>
+    <%= text_field_tag :wuid, nil, class: 'form-control', placeholder: 'WUId' %>
+  </div>
+  <div id = "field">
+    <%= label_tag(:email, nil, class: 'sr-only') %>
+    <%= text_field_tag :email, nil, class: 'form-control', placeholder: 'Email' %>
+  </div>
+  <hr>
+  <div id="field">
+    <%= label_tag(:referred, "Professor Recommened") %>
+    <%= check_box_tag :referred, '0' %>
+    <%= label_tag(:referred, "Professor did not recommend") %>
+    <%= check_box_tag :referred, '1' %>
+    <%= label_tag(:referred, "Professor has not submitted recommendation") %>
+    <%= check_box_tag(:referred, nil) %>
+  </div>
+  <hr>
+  <div id="field">
+    <%= label_tag(:interviewed, "Interviewed Student") %>
+    <%= check_box_tag(:interviewed, nil) %>
+  </div>
+  <hr>
+  <div id="field">
+    <div id="courseArea">
+    <%= collection_select  Course, :courses,
+        Course.find_all_by_hidden_and_disabled(false, false),
+          :id, :full_name %>
+      </div>
+    <button id="addCourse">Add Course</button>
+  </div>
+  <hr>
+  <!-- Standing -->
+  <div id = "field">
+    <%= label_tag(:standing, "Freshmen") %>
+    <%= check_box_tag :standing, '0' %>
+    <%= label_tag(:standing, "Sophmore") %>
+    <%= check_box_tag :standing, '1' %>
+    <%= label_tag(:standing, "Junior") %>
+    <%= check_box_tag :standing, '2' %>
+    <%= label_tag(:standing, "Senior") %>
+    <%= check_box_tag :standing, '3' %>
+    <%= label_tag(:standing, "Graduate") %>
+    <%= check_box_tag :standing, '4' %>
+  </div>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= link_to 'Back', applicants_path %>
+
+
+<script>
+  $(document).ready(function(){
+    $("#addCourse").click(function (evt) {
+      evt.preventDefault();
+      $("#courseArea").append("<br/><%= escape_javascript(collection_select  Course, :courses, Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name ) %>");
+    });
+  });
+</script>
