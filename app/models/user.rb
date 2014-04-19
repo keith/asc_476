@@ -31,6 +31,6 @@ class User < ActiveRecord::Base
     token = User.new_token
     self.password = token
     self.password_confirmation = token
+    UserMailer.temporary_password(self).deliver
   end
 end
-

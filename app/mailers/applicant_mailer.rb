@@ -1,7 +1,6 @@
 class ApplicantMailer < ActionMailer::Base
   # TODO: Fix these email from addresses
   default from: 'from@example.com'
-  #     reply_to: 'foo@example.com'
 
   def account_email(user)
     email_identifier = self.class.name + ':' + __method__.to_s

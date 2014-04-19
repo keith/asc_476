@@ -18,6 +18,7 @@
   <% end %>
   <%= menu_group pull: :right do %>
     <% if logged_in_admin? or logged_in_moderator? %>
+      <%= menu_item current_user.email, edit_user_path(current_user) %>
       <%= menu_item 'Log Out', signout_path, method: :delete %>
     <% else %>
       <%= menu_item 'Sign In', signin_path %>

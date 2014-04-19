@@ -15,7 +15,7 @@
   <% end %>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -36,7 +36,8 @@
           <td><%= Level.for_number(user.level).name %></td>
         <% end %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Reset password', email_user_path(user), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
@@ -44,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= button_to 'New User', new_user_path, method: :get %>

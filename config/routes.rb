@@ -7,7 +7,10 @@ Asc476::Application.routes.draw do
     post :email, on: :member
   end
 
-  resources :users, except: [:show]
+  resources :users, except: [:show] do
+    post :email, on: :member
+  end
+
   resources :reports, only: [:index] do
     get :filter, to: :new, on: :collection
   end
