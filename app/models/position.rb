@@ -26,7 +26,11 @@ class Position < ActiveRecord::Base
         self.application_status = update_status(Status.undecided)
       end
       return true unless self.application_status_changed?
-      self.applicant.email_acceptance if Status.hired?(self.application_status)
+      begin
+        self.applicant.email_acceptance if Status.hired?(self.application_status)
+      rescue
+        self.errors[:email] = 'failed to send. Please contact the candidate manually.'
+      end
     end
 
     def update_status(status)

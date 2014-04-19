@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<% if @position.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@position.errors.count, 'error') %> prohibited this position from being saved:</h2>
+
+    <ul>
+    <% @position.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2><%= @position.applicant.name %> recommendation by <%= @position.professor.name %></h2>
 
 <%# TODO: Add more info about the student and course for this position %>

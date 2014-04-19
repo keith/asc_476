@@ -34,7 +34,11 @@ class PositionsController < ApplicationController
     end
 
     if @position.update(args)
-      redirect_to @position, notice: 'Position was successfully updated.'
+      notice = 'Position was successfully updated.'
+      unless @position.errors.empty?
+        notice = "Email #{ @position.errors[:email].first }"
+      end
+      redirect_to @position, notice: notice
     else
       render action: 'edit'
     end
