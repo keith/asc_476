@@ -9,12 +9,14 @@ Asc476::Application.routes.draw do
 
   resources :users, except: [:show]
   resources :reports, only: [:index] do
-    get 'filter', to: :new, on: :collection
+    get :filter, to: :new, on: :collection
   end
-  resources :applicants
+  resources :applicants do
+    post :email, on: :member
+  end
 
   resources :courses, only: [:create, :index, :new] do
-    put 'update_multiple', on: :collection
+    put :update_multiple, on: :collection
   end
 
   match '/signout', to: 'sessions#destroy', via: :delete

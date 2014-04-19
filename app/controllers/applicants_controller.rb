@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :set_applicant, only: [:show, :edit, :update, :destroy]
+  before_action :set_applicant, only: [:show, :edit, :update, :destroy, :email]
   before_action :signed_in_user, only: [:index, :destroy]
 
   # GET /applicants
@@ -70,6 +70,17 @@ class ApplicantsController < ApplicationController
     @applicant.destroy
     redirect_to applicants_url,
       notice: 'Applicant was successfully deleted.'
+  end
+
+  def email
+    begin
+      @applicant.send_emails
+    rescue
+      redirect_to @applicant,
+        notice: "The email failed to send. You can manually send the applicant their URL: #{ applicant_url(@applicant) }"
+    else
+      redirect_to @applicant, notice: 'The email was sent successfully'
+    end
   end
 
   private

@@ -34,7 +34,7 @@ class ProfessorsController < ApplicationController
   def email
     begin
       ProfessorMailer.pending_recommendation(@professor).deliver
-    rescue Errno::ECONNREFUSED
+    rescue
       redirect_to professors_url,
         notice: "The email failed to send. You can manually send the professor their URL: #{ professor_url(@professor) }"
     else
