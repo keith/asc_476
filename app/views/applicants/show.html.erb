@@ -58,23 +58,6 @@
   <%= @applicant.work_study ? 'Yes' : 'No' %>
 </p>
 
-<p>
-  <strong>Courses:</strong>
-  <ul>
-    <% @applicant.positions.each do |p| %>
-      <% if p.course %>
-        <li>
-          <%= p.course.full_name %> <%= p.professor.name %>
-          (<%= mail_to(p.professor.email + EMAIL_SUFFIX) %>)
-          <% if logged_in_admin? %>
-            <%= link_to 'Review', p %>
-          <% end %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-</p>
-
 <% if logged_in_moderator? %>
   <p>
     <strong>ASC Comments:</strong>
@@ -86,8 +69,26 @@
   </p>
 <% end %>
 
-<%= link_to 'Edit', edit_applicant_path(@applicant) %> |
-<%= link_to 'Back', applicants_path %>
+<p>
+  <strong>Courses:</strong>
+  <ul>
+    <% @applicant.positions.each do |p| %>
+      <% if p.course %>
+        <li>
+          <%# TODO: Link course to filter on course_id %>
+          <%= p.course.full_name %> <%= p.professor.name %>
+          <% if logged_in_admin? %>
+            <%= link_to 'Review', p %>
+            (<%= Status.for_number(p.application_status) %>)
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_applicant_path(@applicant) %>
 <% if logged_in_admin? %>
+  | <%= link_to 'Back', applicants_path %>
   | <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

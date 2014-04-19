@@ -90,5 +90,9 @@
 <% end %>
 
 
-<%= link_to 'Show', @applicant %> |
-<%= link_to 'Back', applicants_path %>
+<% if logged_in_moderator? %>
+  <%= link_to 'View', @applicant %>
+  | <%= link_to 'Back', applicants_path %>
+<% else %>
+  <%= link_to 'Back', @applicant %>
+<% end %>
