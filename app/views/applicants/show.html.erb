@@ -7,7 +7,7 @@
 
 <p>
   <strong>Email:</strong>
-  <%= @applicant.email %><%= EMAIL_SUFFIX %>
+  <%= mail_to("#{ @applicant.email }#{ EMAIL_SUFFIX }") %>
 </p>
 
 <p>
@@ -63,8 +63,13 @@
   <ul>
     <% @applicant.positions.each do |p| %>
       <% if p.course %>
-        <li><%= p.course.full_name %> <%= p.professor.name %>
-        (<%= mail_to(p.professor.email + EMAIL_SUFFIX) %>)</li>
+        <li>
+          <%= p.course.full_name %> <%= p.professor.name %>
+          (<%= mail_to(p.professor.email + EMAIL_SUFFIX) %>)
+          <% if logged_in_admin? %>
+            <%= link_to 'Review', p %>
+          <% end %>
+        </li>
       <% end %>
     <% end %>
   </ul>

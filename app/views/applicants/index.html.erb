@@ -1,42 +1,38 @@
 <h1>Listing applicants</h1>
 
-<table>
+<table class="table table-hover clickable">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
+      <th><%= sortable 'name' %></th>
+      <th><%= sortable 'email' %></th>
       <th>GPA</th>
       <th>GPA Last Updated</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Courses</th>
     </tr>
   </thead>
 
   <tbody>
     <% @applicants.each do |applicant| %>
-      <tr>
+      <tr id="<%= applicant_path(applicant) %>">
         <td>
-          <%= applicant.name %>
+          <%= link_to(applicant.name, applicant) %>
           <% if applicant.work_study %>
             (Work Study)
           <% end %>
         </td>
-        <td><%= applicant.email %><%= EMAIL_SUFFIX %></td>
+        <td><%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %></td>
         <td><%= applicant.gpa %></td>
         <% if applicant.gpa %>
           <td><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
         <% else %>
           <td>Never</td>
         <% end %>
-        <td><%= link_to 'Show', applicant %></td>
-        <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
-        <td><%= link_to 'Destroy', applicant,
-          method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= applicant.comma_courses %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @applicants %>
 
 <br>
 

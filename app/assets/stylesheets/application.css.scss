@@ -30,3 +30,7 @@ th .asc {
 th .desc {
   background-image: url(/images/down_arrow.gif);
 }
+
+table.clickable tbody tr {
+  cursor: pointer;
+}

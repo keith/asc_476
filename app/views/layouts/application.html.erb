@@ -2,24 +2,25 @@
 <html>
 <head>
   <title>Asc476</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= nav_bar :fixed => :top, :brand => "ASC Tutoring", :responsive => true do %>
+
+<%= nav_bar fixed: :top, brand: 'ASC Tutoring', responsive: true do %>
   <%= menu_group do %>
-    <%= menu_item "Home", root_path %>
-    <%= drop_down "Reports" do %>
-      <%= menu_item "Applicants", applicants_path %>
-      <%= menu_item "Professors", "" %>
+    <%= menu_item 'Home', root_path %>
+    <%= drop_down 'Reports' do %>
+      <%= menu_item 'Applicants', applicants_path %>
+      <%= menu_item 'Professors', '' %>
     <% end %>
   <% end %>
-  <%= menu_group :pull => :right do %>
+  <%= menu_group pull: :right do %>
     <% if logged_in_admin? or logged_in_moderator? %>
-      <%= menu_item "Log Out", signout_path, method: :delete %>
+      <%= menu_item 'Log Out', signout_path, method: :delete %>
     <% else %>
-      <%= menu_item "Sign In", signin_path %>
+      <%= menu_item 'Sign In', signin_path %>
     <% end -%>
   <% end %>
 <% end %>
@@ -27,6 +28,12 @@
 <%= yield %>
 
 <%= debug(params) if Rails.env.development? %>
+
+<script type="text/javascript">
+$('table.clickable tbody tr').click(function() {
+  window.location = this.id;
+});
+</script>
 
 </body>
 </html>

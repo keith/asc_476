@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'applicants/index' do
   before(:each) do
     view.stub(:logged_in_admin?).and_return(true)
+    view.stub(:sortable).and_return('')
+    view.stub(:will_paginate).and_return('')
     assign(:applicants, [
       stub_model(Applicant,
         name: 'Name',

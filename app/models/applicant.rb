@@ -41,6 +41,15 @@ class Applicant < ActiveRecord::Base
     ApplicantMailer.acceptance_email(self).deliver
   end
 
+  def comma_courses
+    courses = ''
+    self.positions.each do |position|
+      courses += "#{ position.course.full_name } (#{ Status.for_number(position.application_status).name }), "
+    end
+
+    courses.chomp(', ')
+  end
+
   def self.filtered_with_params(p)
     Applicant.all
   end
@@ -54,7 +63,6 @@ class Applicant < ActiveRecord::Base
         error = 'application already exists for this Winthrop username. Check your email for the link to edit your existing application.'
         begin
           ApplicantMailer.account_email(existing).deliver
-          raise
         rescue
           error += 'The email failed to send. Please contact the ASC for assistance.'
         end

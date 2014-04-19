@@ -1,10 +1,11 @@
 class ApplicantsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :destroy]
 
   # GET /applicants
   def index
-    @applicants = Applicant.all
+    @applicants = Applicant.page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
 
   # GET /applicants/1
@@ -81,5 +82,13 @@ class ApplicantsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def applicant_params
       params.require(:applicant).permit(:name, :email, :wuid, :phone_number, :class_standing, :gpa, :comment, :major, :minor, :work_study, :interviewed, :asc_comments, positions_attributes: [:course_id, professor_attributes: [:name, :email]])
+    end
+
+    def sort_column
+      Applicant.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 end
