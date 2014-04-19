@@ -103,7 +103,7 @@ describe 'Users' do
         expect {
           click_button 'Update User'
         }.not_to change(User, :count)
-        current_path.should == users_path
+        current_path.should == applicants_path
         expect(page).to have_content(bobemail)
         expect(@admin.reload.email).to eq(bobemail)
       end

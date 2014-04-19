@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   before_save { email.downcase! }
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
   validates :level, presence: true, inclusion: { in: 0..3 }
 
@@ -31,6 +32,9 @@ class User < ActiveRecord::Base
     token = User.new_token
     self.password = token
     self.password_confirmation = token
+  end
+
+  def send_password_email
     UserMailer.temporary_password(self).deliver
   end
 end

@@ -20,15 +20,15 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    begin
-      @user.set_temporary_password
-    rescue
-      redirect_to users_path, notice: 'Email failed to send. Please try again later'
-      return
-    end
-
+    @user.set_temporary_password
     if @user.save
-      redirect_to users_path, notice: 'User was successfully created.'
+      begin
+        @user.send_password_email
+      rescue
+        redirect_to users_path, notice: 'Email failed to send. Please try again later'
+      else
+        redirect_to users_path, notice: 'User was successfully created.'
+      end
     else
       render action: 'new'
     end
@@ -58,11 +58,15 @@ class UsersController < ApplicationController
   def email
     begin
       @user.set_temporary_password
-      @user.save
+      @user.send_password_email
     rescue
       redirect_to users_path, notice: "The user's password could not be reset. Please try again later."
     else
-      redirect_to users_path, notice: 'Password reset succesfully. The user will get an email with a temporary password'
+      if @user.save
+        redirect_to users_path, notice: 'Password reset succesfully. The user will get an email with a temporary password'
+      else
+        redirect_to users_path, notice: 'User changes could not be saved. Consider deleting and re-creating the user'
+      end
     end
   end
 
