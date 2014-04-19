@@ -1,10 +1,12 @@
 class ProfessorsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :signed_in_admin, only: [:index, :destroy, :email]
   before_action :set_professor, only: [:show, :edit, :update, :destroy, :email]
 
   # GET /professors
+  # TODO: Allow sorting by pending recommendations
   def index
-    @professors = Professor.all
+    @professors = Professor.page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
 
   # GET /professors/1
@@ -56,5 +58,13 @@ class ProfessorsController < ApplicationController
       else
         params.require(:professor).permit(:name)
       end
+    end
+
+    def sort_column
+      Professor.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 end

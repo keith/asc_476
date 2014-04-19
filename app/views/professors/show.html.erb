@@ -3,9 +3,14 @@
 <%# TODO: Center this at the top %>
 <%= @professor.name %>
  (<%= mail_to("#{ @professor.email }#{ EMAIL_SUFFIX }") %>)
-<%= link_to 'Edit', edit_professor_path(@professor) %>
-<% if logged_in_admin? %>
-  | <%= link_to 'All Professors', professors_path %>
-<% end %>
 
 <%= render 'pending', { positions: @professor.pending_positions } %>
+
+<% if logged_in_admin? %>
+  <%= link_to 'Edit', edit_professor_path(@professor) %>
+  | <%= link_to 'Back', professors_path %>
+  | <%= link_to 'Delete', @professor, method: :delete, data: { confirm: 'Are you sure?' } %>
+  | <%= link_to 'Email', email_professor_path(@professor), method: :post %>
+<% else %>
+  <%= link_to 'Edit', edit_professor_path(@professor) %>
+<% end %>

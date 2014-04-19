@@ -11,6 +11,8 @@ class Professor < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false },
     format: { with: EMAIL_REGEX, message: 'is invalid (only enter before the @ symbol)' }
 
+  self.per_page = 20
+
   def to_param
     identifier
   end
