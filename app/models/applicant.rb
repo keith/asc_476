@@ -26,8 +26,8 @@ class Applicant < ActiveRecord::Base
     identifier
   end
 
-  def send_emails
-    ApplicantMailer.account_email(self).deliver
+  def send_emails(update=false)
+    ApplicantMailer.account_email(self).deliver unless update
     self.positions.each do |position|
       next if position.professor_emailed
       professor = position.professor

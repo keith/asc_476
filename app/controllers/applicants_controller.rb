@@ -28,11 +28,11 @@ class ApplicantsController < ApplicationController
   def update
     if @applicant.update(applicant_params)
       begin
-        @applicant.send_emails
-      rescue Errno::ECONNREFUSED
+        @applicant.send_emails(true)
+      rescue
         redirect_to @applicant,
           # TODO: Add url
-          notice: 'The application was updated but the emails failed to send. Save this URL and contact the ASC for assistance'
+          notice: 'The application was updated but the emails failed to send. Contact the ASC for assistance'
       else
         redirect_to @applicant, notice: 'The application was saved succesfully'
       end
