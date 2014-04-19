@@ -21,7 +21,7 @@ describe 'emails/index' do
   it 'renders a list of emails' do
     render
 
-    assert_select 'tr>td', text: 'MyText'.to_s, count: 2
+    assert_select 'tr>td', text: 'MyText'.to_s, count: 0
     assert_select 'tr>td', text: 'Subject'.to_s, count: 2
     assert_select 'tr>td', text: 'Reply To'.to_s, count: 2
     assert_select 'tr>td', text: 'Identifier'.to_s, count: 0

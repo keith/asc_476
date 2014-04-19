@@ -16,7 +16,7 @@
     <% @professors.each do |professor| %>
       <tr id="<%= professor_url(professor) %>">
         <td><%= link_to(professor.name, professor) %></td>
-        <td><%= mail_to("#{ professor.email } #{ EMAIL_SUFFIX }") %></td>
+        <td><%= mail_to("#{ professor.email }#{ EMAIL_SUFFIX }") %></td>
         <td><%= professor.pending_positions.count %></td>
         <td><%= link_to 'Email', email_professor_path(professor), method: :post %></td>
       </tr>
