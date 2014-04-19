@@ -31,6 +31,11 @@
   </div>
   <hr>
   <div id="field">
+      <%= label_tag :application_status,  "Application Status" %>
+      <%= collection_select(Status, :application_status, Status.statuses, :num, :to_s) %>
+  </div>
+  <hr>
+  <div id="field">
     <div id="courseArea">
     <%= collection_select  Course, :courses,
         Course.find_all_by_hidden_and_disabled(false, false),
@@ -51,6 +56,11 @@
     <%= check_box_tag :standing, '3' %>
     <%= label_tag(:standing, "Graduate") %>
     <%= check_box_tag :standing, '4' %>
+  </div>
+  <hr>
+  <div id = "field">
+      <%= label_tag(:work_study, "Work Study") %>
+      <%= check_box_tag :work_study, 'true' %>
   </div>
   <%= submit_tag("Search") %>
 <% end %>
