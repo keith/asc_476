@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'courses/index' do
   before(:each) do
+    view.stub(:sortable).and_return('')
     assign(:courses, [
       stub_model(Course,
         :designator => 'CSCI',
@@ -27,7 +28,7 @@ describe 'courses/index' do
     assert_select 'tr>td', :text => 202.to_s, :count => 1
 
     assert_select 'input[type=checkbox]', count: 4
-    assert_select 'input[type=submit]', count: 1
+    assert_select 'input[type=submit]', count: 2
   end
 end
 

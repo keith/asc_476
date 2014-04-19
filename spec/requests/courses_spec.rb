@@ -24,7 +24,7 @@ describe 'Courses' do
     it 'should have the correct HTML' do
       expect(page).to have_content('Listing courses')
       expect(page).to have_button('Update Courses')
-      expect(page).to have_link('New Course', href: new_course_path)
+      expect(page).to have_button('New Course',  new_course_path)
       expect(page).to have_content(@course.designator)
       expect(page).to have_content(@course.number)
     end
