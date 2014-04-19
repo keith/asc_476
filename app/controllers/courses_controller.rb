@@ -1,9 +1,14 @@
 class CoursesController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :signed_in_admin
 
   # GET /courses
   def index
-    @courses = Course.all
+    sort_text = "#{ sort_column } #{ sort_direction }"
+    if sort_column.downcase == 'designator'
+      sort_text += ",number #{ sort_direction }"
+    end
+    @courses = Course.order(sort_text)
   end
 
   # GET /courses/new
@@ -43,12 +48,19 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
     def create_params
       params.require(:course).permit(:designator, :number, :hidden, :disabled)
     end
 
     def update_params(p)
       p.permit(:hidden, :disabled)
+    end
+
+    def sort_column
+      Course.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
 end

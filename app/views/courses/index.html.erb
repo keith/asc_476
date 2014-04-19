@@ -16,13 +16,23 @@
   <% end %>
 <% end %>
 
-<table>
+<%= button_to 'New Course', new_course_path, method: :get %>
+<ul>
+  <li>
+    (Hidden courses will not appear in new applications)
+  </li>
+  <li>
+    (Disabled courses will not show up in reports or new applicants)
+  </li>
+</ul>
+
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Designator</th>
-      <th>Number</th>
-      <th>Hidden</th>
-      <th>Disabled</th>
+      <th><%= sortable 'designator' %></th>
+      <th><%= sortable 'number' %></th>
+      <th><%= sortable 'hidden' %></th>
+      <th><%= sortable 'disabled' %></th>
     </tr>
   </thead>
 
@@ -39,8 +49,6 @@
       <% end %>
     <% end %>
     <%= submit_tag 'Update Courses' %>
-    <%= link_to 'New Course', new_course_path %>
   <% end %>
   </tbody>
 </table>
-

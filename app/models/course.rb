@@ -32,4 +32,3 @@ class Course < ActiveRecord::Base
       self.hidden = true if disabled?
     end
 end
-
