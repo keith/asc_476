@@ -55,10 +55,10 @@ class ApplicantsController < ApplicationController
       begin
         @applicant.send_emails
       rescue
-        redirect_to thankyou_path,
+        redirect_to thanks_path,
           notice: 'The application was saved but the emails failed to send. Contact the ASC for assistance'
       else
-        redirect_to thankyou_path, notice: 'The application was saved succesfully'
+        redirect_to thanks_path, notice: 'The application was saved succesfully'
       end
     else
       render action: 'new'
