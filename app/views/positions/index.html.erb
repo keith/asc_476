@@ -29,7 +29,12 @@
         <td><%= position.professor_taught ? 'Yes' : 'No' %></td>
         <td><%= Status.for_number(position.application_status) %></td>
 
-        <td><%= position.professor.name if position.professor  %> (<%= mail_to("#{ position.professor.email }#{ EMAIL_SUFFIX }") %>)</td>
+        <% if position.professor %>
+          <td>
+            <%= position.professor.name %>
+            (<%= mail_to("#{ position.professor.email }#{ EMAIL_SUFFIX }") %>)
+          </td>
+        <% end %>
 
         <td><%= link_to 'Show', position %></td>
         <td><%= link_to 'Edit', edit_position_path(position) %></td>
