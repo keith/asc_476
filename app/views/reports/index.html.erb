@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th><%= sortable 'name', 'Applicant Name' %></th>
+      <th><%= 'Positions' %></th>
       <th></th>
       <th></th>
     </tr>
@@ -12,7 +13,12 @@
   <tbody>
     <% @applicants.each do |applicant| %>
       <tr>
-        <td><%= applicant.name %> (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)</td>
+        <td><%= link_to applicant.name, applicant%> (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)</td>
+        <td>
+          <% applicant.positions.each do |p| %>
+            <%= link_to p.course.full_name, p %>
+          <% end %>
+        </td>
         <td><%= link_to 'Details', applicant %></td>
       </tr>
     <% end %>
