@@ -1,12 +1,10 @@
 <h1>Listing reports</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th><%= sortable 'name', 'Applicant Name' %></th>
       <th><%= 'Positions' %></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -16,10 +14,9 @@
         <td><%= link_to applicant.name, applicant%> (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)</td>
         <td>
           <% applicant.positions.each do |p| %>
-            <%= link_to p.course.full_name, p %>
+            <%= link_to "#{p.course.full_name} (#{Status.for_number(p.application_status).name})", p %>
           <% end %>
         </td>
-        <td><%= link_to 'Details', applicant %></td>
       </tr>
     <% end %>
   </tbody>

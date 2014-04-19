@@ -8,14 +8,11 @@ class ReportsController < ApplicationController
 
   # GET /reports
   def index
-    #@applicants = Applicant.filtered_with_params(params)
-    #
+    # TODO: Carry over params when hitting sort button
     app_params_trimmed = app_params.delete_if {|k, v| v.empty?}
     app_filter = { applicants: app_params_trimmed } unless app_params_trimmed.empty?
     pos_params_trimmed = pos_params.delete_if {|k, v| v.empty?}
     pos_filter = { positions: pos_params_trimmed } unless pos_params_trimmed.empty?
-
-    pos = Position.where(application_status: 0)
 
     @applicants = Applicant.where(app_filter).joins(:positions).where(pos_filter).distinct.page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
