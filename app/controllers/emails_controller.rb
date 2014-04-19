@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :signed_in_admin
-  before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_email, only: [:show, :edit, :update]
 
   # GET /emails
   def index
