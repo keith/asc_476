@@ -22,8 +22,11 @@
   </div>
   <hr>
   <div id="field">
-      <%= label_tag :application_status,  "Application Status" %>
-      <%= collection_select(Status, :application_status, Status.statuses, :num, :to_s, {}, name: "application_status[]") %>
+    <%= label_tag :application_status,  "Application Status" %><br/>
+    <% Status.statuses.each do |status| %>
+      <%= label_tag(:status, status.name) %>
+      <%= check_box_tag("application_status[]", status.num) %>
+    <% end %>
   </div>
   <hr>
   <div id="field">
