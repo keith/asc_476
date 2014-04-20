@@ -6,7 +6,8 @@ class Course < ActiveRecord::Base
 
   COURSE_REGEX = /\A([a-z])*\z/i
   validates :designator, presence: true, format: { with: COURSE_REGEX }, length: { is: 4 }
-  validates :number, presence: true, uniqueness: { scope: :designator }
+  validates_uniqueness_of :designator, scope: :number, case_sensitive: false, message: 'this course has already been added'
+  validates :number, presence: true, length: { is: 3 }, numericality: { only_integer: true }
 
   def hidden?
     !!self.hidden || disabled?
@@ -24,11 +25,11 @@ class Course < ActiveRecord::Base
     def default_values
       self.hidden ||= false
       self.disabled ||= false
+      self.designator.upcase!
       nil
     end
 
     def save_action
-      designator.upcase!
       self.hidden = true if disabled?
     end
 end
