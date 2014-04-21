@@ -44,6 +44,7 @@
       <% end %>
     </div>
     <a href ="#" id="addCourse">Add Course</a>
+    (courses beginning with '-' have been marked as hidden)
   </div>
   <hr>
   <!-- Standing -->
@@ -68,10 +69,10 @@
 
 <script>
   $(document).ready(function(){
-    $("#addCourse").click(gefunction (evt) {
+    $("#addCourse").click(function (evt) {
       evt.preventDefault();
       var div_html = '<div id="class">';
-      div_html += "<%= escape_javascript(collection_select  Course, :all, Course.all.order('hidden ASC, designator ASC'), :id, :full_name, {prompt: 'Select Course'}, name: "course_id[]" ) %> ";
+      div_html += "<%= escape_javascript(collection_select  Course, :all, Course.all.order('hidden ASC, designator ASC'), :id, :full_name, { prompt: 'Select Course' }, name: 'course_id[]' ) %> ";
       div_html += "<%= escape_javascript (link_to_remove_closest('Remove', '#class')) %>" ;
       div_html += "</div>";
       $("#courseArea").append(div_html);
