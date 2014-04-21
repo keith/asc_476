@@ -14,8 +14,7 @@ class ReportsController < ApplicationController
     app_filter = { applicants: app_params_trimmed } unless app_params_trimmed.empty?
     pos_params_trimmed = pos_params.delete_if {|k, v| v.empty?}
     pos_filter = { positions: pos_params_trimmed } unless pos_params_trimmed.empty?
-
-    @applicants = Applicant.where(app_filter).joins(:positions).where(pos_filter).distinct.page(params[:page]).order(sort_column + ' ' + sort_direction)
+    @applicants = Applicant.where("name like?", "%#{app_name_param}%").where(app_filter).joins(:positions).where(pos_filter).distinct.page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
 
   private
@@ -31,7 +30,11 @@ class ReportsController < ApplicationController
     end
 
     def app_params
-      params.permit(:name, :wuid, :email, :interviewed, :work_study, class_standing: [])
+      params.permit(:wuid, :email, :interviewed, :work_study, class_standing: [])
+    end
+
+    def app_name_param
+      params.permit(:name)[:name]
     end
 
     def pos_params
