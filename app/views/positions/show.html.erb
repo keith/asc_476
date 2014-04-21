@@ -21,7 +21,7 @@
 
   <p>
     <strong>Recommending Professor:</strong>
-    <%= @position.professor.name %>
+    <%= @position.professor.name if @position.professor %>
   </p>
 
   <p>
