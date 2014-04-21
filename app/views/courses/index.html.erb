@@ -1,51 +1,46 @@
-<h1>Listing courses</h1>
+<div class="col-md-8">
+  <h1>Listing courses</h1>
 
-<% if notice %>
-  <p id="notice"><%= notice %></p>
-<% end %>
-
-<% @courses.each do |course| %>
-  <% if course.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% course.errors.each do |key, value| %>
-          <li><%= value %></li>
-        <% end %>
-      </ul>
-    </div>
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
   <% end %>
-<% end %>
 
-<h4>
-  <%= link_to 'New Course', new_course_path %>
-</h4>
-<ul>
-  <li>
-    (Hidden courses will not appear in new applications)
-  </li>
-</ul>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= sortable 'designator' %></th>
-      <th><%= sortable 'number' %></th>
-      <th><%= sortable 'hidden' %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <%= form_tag(update_multiple_courses_path, method: :put) do %>
-    <% @courses.each do |course| %>
-      <%= fields_for 'courses[]', course do |f| %>
-        <tr>
-          <td><%= course.designator %></td>
-          <td><%= course.number %></td>
-          <td><%= f.check_box :hidden %></td>
-        </tr>
-      <% end %>
+  <% @courses.each do |course| %>
+    <% if course.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% course.errors.each do |key, value| %>
+            <li><%= value %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    <%= submit_tag 'Update Courses' %>
   <% end %>
-  </tbody>
-</table>
+  <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable 'designator' %></th>
+        <th><%= sortable 'number' %></th>
+        <th><%= sortable 'hidden' %>*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= form_tag(update_multiple_courses_path, method: :put) do %>
+        <% @courses.each do |course| %>
+          <%= fields_for 'courses[]', course do |f| %>
+            <tr>
+              <td><%= course.designator %></td>
+              <td><%= course.number %></td>
+              <td><%= f.check_box :hidden %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <%= submit_tag 'Update Courses', class: 'btn btn-primary' %>
+      <% end %>
+    </tbody>
+  </table>
+  <p>* Hidden courses will not appear in new applications</p>
+</div>
