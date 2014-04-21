@@ -13,11 +13,6 @@
 <% end %>
 
 <div class="col-xs-6">
-  <% if @position.applicant.name.last == 's' %>
-    <% name = @position.applicant.name + "'" %>
-  <% else %>
-    <% name = @position.applicant.name + "'s" %>
-  <% end %>
   <h2><%= get_possessive(@position.applicant.name) %> recommendation</h2>
 
   <%# TODO: Add more info about the student and course for this position %>
