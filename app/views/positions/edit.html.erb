@@ -65,11 +65,10 @@
     <div class="actions">
       <%= f.submit 'Submit' %>
     </div>
-  <% end %>
-</div>
-
-<% if logged_in_admin? %>
-  <%= link_to 'Back', positions_path %>
-<% else %>
-  <%= link_to 'Back', professor_path(@position.professor) %>
+    <% if logged_in_admin? %>
+      <%= link_to 'Back', positions_path %>
+    <% else %>
+      <%= link_to 'Back', professor_path(@position.professor) %>
+    <% end %>
+  </div>
 <% end %>

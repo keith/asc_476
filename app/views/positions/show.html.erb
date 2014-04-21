@@ -41,7 +41,6 @@
       <%= Status.for_number(@position.application_status) %>
     </p>
   <% end %>
+  <%= link_to 'Edit', edit_position_path(@position) %> |
+  <%= link_to 'Back', positions_path %>
 </div>
-
-<%= link_to 'Edit', edit_position_path(@position) %> |
-<%= link_to 'Back', positions_path %>

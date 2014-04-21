@@ -22,9 +22,9 @@
   </div>
   <hr>
   <div id="field">
-    <%= label_tag :application_status,  "Application Status" %><br/>
+    <%= label_tag :application_statuses,  "Application Status" %><br/>
     <% Status.statuses.each do |status| %>
-      <%= label_tag(:status, status.name) %>
+      <%= label_tag(:application_status, status.name) %>
       <% status_check = @values[:application_status].include?(status.num.to_s) if  @values[:application_status] != nil %>
       <%= check_box_tag("application_status[]", status.num, checked = status_check ) %>
     <% end %>
@@ -42,7 +42,6 @@
         <% end %>
       <% end %>
     </div>
-
     <a href ="#" id="addCourse">Add Course</a>
   </div>
   <hr>
