@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
 
   # GET /reports/filter
   def new
+    @values = params
   end
 
   # GET /reports
