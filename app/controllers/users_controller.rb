@@ -93,11 +93,16 @@ class UsersController < ApplicationController
 
     def set_user_admin_or_current
       set_user
-      redirect_to applicants_path unless admin_or_current
+      logged_in_user
+      if @current_user.nil?
+        redirect_to signin_path
+      else
+        redirect_to applicants_path unless admin_or_current
+      end
     end
 
     def admin_or_current
-      logged_in_user
+      signed_in_user
       @current_user.admin? || @current_user == @user
     end
 end
