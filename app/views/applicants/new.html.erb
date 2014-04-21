@@ -43,14 +43,16 @@
     <%= f.label :minor, class: 'sr-only' %><br>
     <%= f.text_field :minor, class: 'form-control', placeholder: 'Minor' %>
   </div>
+  <br/>
   <div class="field row">
     <div class="col-md-3">
       <%= f.collection_select(:class_standing, Standing.standings, :num, :name, { prompt: 'Class Standing' }, class: 'form-control') %>
     </div>
   </div>
   <div class="field checkbox inline">
-    <%= f.label :work_study, 'Are you eligible for work study?' %>
-    <%= f.check_box :work_study %>
+    <label>
+      <%= f.check_box :work_study %> Are you eligible for work study?
+    </label>
   </div>
   <h4>Courses</h4>
   <%= f.fields_for :positions do |position_fields| %>
