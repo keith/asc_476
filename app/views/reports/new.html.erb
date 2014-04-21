@@ -13,7 +13,7 @@
   </div>
   <div id = "field">
     <%= label_tag(:email, nil, class: 'sr-only') %>
-    <%= text_field_tag :email, @values[:email], class: 'form-control', placeholder: 'Email' %>
+    <%= text_field_tag :email, @values[:email], class: 'form-control', placeholder: 'Email' %><%= EMAIL_SUFFIX %>
   </div>
   <hr>
   <div id="field">
