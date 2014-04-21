@@ -1,7 +1,7 @@
 <p>
   <div class="field fields">
   <%= f.collection_select  :course_id,
-    Course.find_all_by_hidden_and_disabled(false, false),
+    Course.find_all_by_hidden(false),
     :id, :full_name, prompt: true %>
 
   <%= f.fields_for :professor do |professor_fields| %>

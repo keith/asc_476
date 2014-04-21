@@ -2,20 +2,15 @@ class Course < ActiveRecord::Base
   has_many :positions
 
   before_create :default_values
-  before_save :save_action
 
   COURSE_REGEX = /\A([a-z])*\z/i
-  validates :designator, presence: true, format: { with: COURSE_REGEX }, length: { is: 4 }
-  validates_uniqueness_of :designator, scope: :number, case_sensitive: false, message: 'this course has already been added'
-  validates :number, presence: true, length: { is: 3 }, numericality: { only_integer: true }
+  validates :designator, presence: true,
+    format: { with: COURSE_REGEX }, length: { is: 4 }
 
-  def hidden?
-    !!self.hidden || disabled?
-  end
+  validates_uniqueness_of :designator, scope: :number, case_sensitive: false,
+    message: 'this course has already been added'
 
-  def disabled?
-    !!self.disabled
-  end
+  validates :number, presence: true
 
   def full_name
     if self.hidden
@@ -27,13 +22,8 @@ class Course < ActiveRecord::Base
 
   private
     def default_values
-      self.hidden ||= false
-      self.disabled ||= false
+      self.hidden = false
       self.designator.upcase!
       nil
-    end
-
-    def save_action
-      self.hidden = true if disabled?
     end
 end

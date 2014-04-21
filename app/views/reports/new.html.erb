@@ -68,7 +68,7 @@
 
 <script>
   $(document).ready(function(){
-    $("#addCourse").click(function (evt) {
+    $("#addCourse").click(gefunction (evt) {
       evt.preventDefault();
       var div_html = '<div id="class">';
       div_html += "<%= escape_javascript(collection_select  Course, :all, Course.all.order('hidden ASC, designator ASC'), :id, :full_name, {prompt: 'Select Course'}, name: "course_id[]" ) %> ";

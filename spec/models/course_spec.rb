@@ -7,7 +7,7 @@ describe Course do
   it { should respond_to(:designator) }
   it { should respond_to(:number) }
   it { should respond_to(:hidden) }
-  it { should respond_to(:disabled) }
+  it { should_not respond_to(:disabled) }
   it { should be_valid }
 
   describe 'invalid fields' do
@@ -58,48 +58,22 @@ describe Course do
   end
 
   describe 'hidden' do
-    describe 'hidden not disabled' do
+    describe 'hidden' do
       before do
         @course.hidden = true
-        @course.disabled = false
         @course.save!
       end
 
       specify { expect(@course.hidden).to be_true }
-      specify { expect(@course.disabled).to be_false }
     end
 
-    describe 'not hidden not disabled' do
+    describe 'not hidden' do
       before do
         @course.hidden = false
-        @course.disabled = false
         @course.save!
       end
 
       specify { expect(@course.hidden).to be_false }
-      specify { expect(@course.disabled).to be_false }
-    end
-
-    describe 'hidden disabled' do
-      before do
-        @course.hidden = true
-        @course.disabled = true
-        @course.save!
-      end
-
-      specify { expect(@course.hidden).to be_true }
-      specify { expect(@course.hidden).to be_true }
-    end
-
-    describe 'not hidden disabled' do
-      before do
-        @course.hidden = false
-        @course.disabled = true
-        @course.save!
-      end
-
-      specify { expect(@course.hidden).to be_true }
-      specify { expect(@course.hidden).to be_true }
     end
   end
 end

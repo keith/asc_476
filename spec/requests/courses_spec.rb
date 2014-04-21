@@ -12,7 +12,6 @@ describe 'Courses' do
   describe 'GET /courses' do
     before do
       @course = FactoryGirl.create(:course)
-      @course.disabled = false
       @course.save
       visit courses_path
     end
@@ -27,15 +26,6 @@ describe 'Courses' do
       expect(page).to have_button('New Course',  new_course_path)
       expect(page).to have_content(@course.designator)
       expect(page).to have_content(@course.number)
-    end
-
-    it 'should save and update' do
-      check_id = "courses_#{ @course.id }_disabled"
-      expect(page).to have_unchecked_field(check_id)
-      page.check(check_id)
-      click_button 'Update Courses'
-      current_path.should == courses_path
-      expect(page).to have_checked_field(check_id)
     end
   end
 
