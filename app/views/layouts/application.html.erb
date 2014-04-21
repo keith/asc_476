@@ -27,20 +27,20 @@
         <ul class="nav navbar-nav ">
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li class="active"><a href="<%= applicants_path %>">Applicants</a></li>
-              <li><a href="<%= professors_path %>">Professors</a></li>
-              <li><a href="<%= courses_path %>">Courses</a></li>
+              <li class="<%= 'active' if params[:controller] == 'applicants' %>"><a href="<%= applicants_path %>">Applicants</a></li>
+              <li class="<%= 'active' if params[:controller] == 'professors' %>"><a href="<%= professors_path %>">Professors</a></li>
+              <li class="<%= 'active' if params[:controller] == 'courses' %>"><a href="<%= courses_path %>">Courses</a></li>
             </ul>
           </li>
-          <li><a href="<%= filter_reports_path %>">Reports</a></li>
+          <li class="<%= 'active' if params[:controller] == 'reports' %>"><a href="<%= filter_reports_path %>">Reports</a></li>
         </ul>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in_admin? %>
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="<%= users_path %>">Users</a></li>
-              <li><a href="<%= emails_path %>">Emails</a></li>
+              <li class="<%= 'active' if params[:controller] == 'users' %>"><a href="<%= users_path %>">Users</a></li>
+              <li class="<%= 'active' if params[:controller] == 'emails' %>"><a href="<%= emails_path %>">Emails</a></li>
             </ul>
           </li>
         <% end %>
