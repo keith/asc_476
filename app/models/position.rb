@@ -22,9 +22,7 @@ class Position < ActiveRecord::Base
 
   private
     def status_update
-      if !self.professor_verdict.nil?
-        self.application_status = update_status(Status.undecided)
-      end
+      update_status(Status.undecided) if !self.professor_verdict.nil?
       return true unless self.application_status_changed?
       begin
         self.applicant.email_acceptance if Status.hired?(self.application_status)

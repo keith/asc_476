@@ -1,10 +1,5 @@
 class PositionsController < ApplicationController
-  before_action :set_position, only: [:show, :edit, :update, :destroy]
-
-  # GET /positions
-  def index
-    @positions = Position.all
-  end
+  before_action :set_position, only: [:show, :edit, :update]
 
   # GET /positions/1
   def show
@@ -12,17 +7,6 @@ class PositionsController < ApplicationController
 
   # GET /positions/1/edit
   def edit
-  end
-
-  # POST /positions
-  def create
-    @position = Position.new(position_params)
-
-    if @position.save
-      redirect_to @position, notice: 'Position was successfully created.'
-    else
-      render action: 'new'
-    end
   end
 
   # PATCH/PUT /positions/1
@@ -34,7 +18,7 @@ class PositionsController < ApplicationController
     end
 
     if @position.update(args)
-      notice = 'Position was successfully updated.'
+      notice = 'Recommendation was saved successfully'
       unless @position.errors.empty?
         notice = "Email #{ @position.errors[:email].first }"
       end
@@ -44,14 +28,7 @@ class PositionsController < ApplicationController
     end
   end
 
-  # DELETE /positions/1
-  def destroy
-    @position.destroy
-    redirect_to positions_url, notice: 'Position was successfully destroyed.'
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_position
       @position = Position.find_by_identifier(params[:id])
     end
