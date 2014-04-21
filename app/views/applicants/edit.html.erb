@@ -1,3 +1,4 @@
+<div class="col-md-8">
 <h1>Editing applicant</h1>
 <%= form_for(@applicant) do |f| %>
   <% if @applicant.errors.any? %>
@@ -14,12 +15,13 @@
 
   <div class="field">
     <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
+    <%= f.text_field :phone_number, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :class_standing %>
-    <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
+    <%= f.collection_select(:class_standing, Standing.standings,
+                            :num, :name, {}, class: 'form-control') %>
   </div>
 
   <% if logged_in_admin? %>
@@ -29,24 +31,31 @@
       <% else %>
         <%= f.label :gpa, 'GPA' %><br>
       <% end %>
-      <%= f.text_field :gpa %>
+      <%= f.text_field :gpa, class: 'form-control' %>
     </div>
   <% end %>
 
   <div class="field">
     <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :major %><br>
-    <%= f.text_field :major %>
+    <%= f.text_field :major, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :minor %><br>
-    <%= f.text_field :minor %>
+    <%= f.text_field :minor, class: 'form-control' %>
   </div>
+
+  <div class="field">
+    <%= f.label :work_study, 'Eligible for work study:' %>
+    <%= f.check_box :work_study %>
+  </div>
+
+  <hr>
 
   <p>
     <strong>Courses:</strong>
@@ -70,15 +79,11 @@
     <p>Note: You have to have taken the course at Winthrop</p>
   </p>
 
-  <div class="field">
-    <%= f.label :work_study, 'Eligible for work study:' %>
-    <%= f.check_box :work_study %>
-  </div>
-
   <% if logged_in_moderator? %>
+    <hr>
     <div class="field">
       <%= f.label :asc_comments, 'ASC Comments:' %><br>
-      <%= f.text_area :asc_comments %>
+      <%= f.text_area :asc_comments, class: 'form-control' %>
     </div>
 
     <div class="field">
@@ -87,9 +92,12 @@
     </div>
   <% end %>
 
+  <hr>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
 
 <%= link_to 'Back', @applicant %>
+</div>
