@@ -51,6 +51,7 @@
     <%= label_tag(:class_standings, "Class Standing") %><br/>
     <% Standing.standings.each do |standing| %>
       <%= label_tag(:class_standing, standing.name) %>
+      <% standing_check = true #default value %>
       <% standing_check = @values[:class_standing].include?(standing.num.to_s) if @values[:class_standing] != nil %>
       <%= check_box_tag "class_standing[]", standing.num, checked = standing_check %>
     <% end %>
