@@ -14,8 +14,10 @@ class Applicant < ActiveRecord::Base
   validate :static_identifier, on: :update
   validates :phone_number, length: { minimum: 10 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
-    format: { with: EMAIL_REGEX, message: 'is invalid (only enter before the @ symbol)' }
-  validates :class_standing, inclusion: { in: 0...Standing.names.count, message: 'is not valid' }
+    format: { with: EMAIL_REGEX,
+              message: 'is invalid (only enter before the @ symbol)' }
+  validates :class_standing, inclusion: { in: 0...Standing.names.count,
+                                          message: 'is not valid' }
   validates_presence_of :name
   validates_presence_of :wuid
 
@@ -59,7 +61,7 @@ class Applicant < ActiveRecord::Base
     def duplicate_email
       return true if self.errors.empty?
       existing = Applicant.find_by_email(self.email)
-      if existing
+      unless existing == self
         error = 'application already exists for this Winthrop username. Check your email for the link to edit your existing application.'
         begin
           ApplicantMailer.account_email(existing).deliver
@@ -68,8 +70,8 @@ class Applicant < ActiveRecord::Base
         end
 
         errors[:another] = error
+        false
       end
-      false
     end
 
     def gpa_update
