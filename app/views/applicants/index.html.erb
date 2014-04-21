@@ -29,7 +29,11 @@
         <% else %>
           <td>Never</td>
         <% end %>
-        <td><%= applicant.comma_courses %></td>
+        <td>
+          <% applicant.positions.each do |p| %>
+            <%= link_to("#{ p.course.full_name } (#{Status.for_number(p.application_status).name})", p) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -96,7 +96,7 @@ class ApplicantsController < ApplicationController
     end
 
     def sort_column
-      Applicant.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+      Applicant.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
     end
 
     def sort_direction

@@ -76,7 +76,13 @@
       <% if p.course %>
         <li>
           <%# TODO: Link course to filter on course_id %>
-          <%= p.course.full_name %> <%= p.professor.name %>
+          <% if p.course %>
+            <%= link_to(p.course.full_name,
+                        reports_path(course_id: [p.course.id])) %>
+          <% end %>
+          <% if p.professor %>
+            <%= p.professor.name %>
+          <% end %>
           <% if logged_in_admin? %>
             <%= link_to 'Review', p %>
             (<%= Status.for_number(p.application_status) %>)
