@@ -70,27 +70,31 @@
 <% end %>
 
 <p>
-  <strong>Courses:</strong>
-  <ul>
-    <% @applicant.positions.each do |p| %>
-      <% if p.course %>
-        <li>
-          <%# TODO: Link course to filter on course_id %>
-          <% if p.course %>
-            <%= link_to(p.course.full_name,
-                        reports_path(course_id: [p.course.id])) %>
-          <% end %>
-          <% if p.professor %>
-            <%= p.professor.name %>
-          <% end %>
-          <% if logged_in_admin? %>
-            <%= link_to 'Review', p %>
-            (<%= Status.for_number(p.application_status) %>)
-          <% end %>
-        </li>
+<% if @applicant.positions.count > 0 %>
+    <strong>Courses:</strong>
+    <ul>
+      <% @applicant.positions.each do |p| %>
+        <% if p.course %>
+          <li>
+            <%# TODO: Link course to filter on course_id %>
+            <% if p.course %>
+              <%= link_to(p.course.full_name,
+                          reports_path(course_id: [p.course.id])) %>
+            <% end %>
+            <% if p.professor %>
+              <%= p.professor.name %>
+            <% end %>
+            <% if logged_in_admin? %>
+              <%= link_to 'Review', p %>
+              (<%= Status.for_number(p.application_status) %>)
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+<% else %>
+  <strong>No courses found</strong>
+<% end %>
 </p>
 
 <%= link_to 'Edit', edit_applicant_path(@applicant) %>

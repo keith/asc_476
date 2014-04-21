@@ -14,11 +14,16 @@
 
     <h2>Reviewing <%= @position.applicant.name %></h2>
     <%= render 'applicant_info',
-      { applicant: @position.applicant, course_name: @position.course.full_name }  %>
+      { applicant: @position.applicant,
+        course: @position.course }  %>
 
     <% if logged_in_admin? %>
       <div class="field">
-        <%= f.label :professor_comments,  "#{ @position.professor.name }'s Comments:" %><br>
+        <% if @position.professor %>
+          <%= f.label :professor_comments, "#{ @position.professor.name }'s Comments:" %><br>
+        <% else %>
+          <%= f.label :professor_comments %>
+        <% end %>
         <%= f.text_area :professor_comments, class: "form-control", rows: "6" %>
       </div>
 
