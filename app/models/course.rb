@@ -13,11 +13,9 @@ class Course < ActiveRecord::Base
   validates :number, presence: true
 
   def full_name
-    if self.hidden
-      "-#{ designator } #{ number }"
-    else
-      "#{ designator } #{ number }"
-    end
+    name = "#{ designator } #{ number }"
+    name.prepend('- ') if self.hidden
+    name
   end
 
   private
