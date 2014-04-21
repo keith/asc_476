@@ -1,6 +1,8 @@
 <h1>Listing applicants</h1>
 
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <table class="table table-hover table-striped clickable">
   <thead>

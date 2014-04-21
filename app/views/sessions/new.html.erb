@@ -1,7 +1,9 @@
 <% provide(:title, 'Login') %>
 <h1 class="sr-only">Login</h1>
 
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 <div class="alert">
   <%= alert %>
 </div>

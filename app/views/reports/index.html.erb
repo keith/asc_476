@@ -1,7 +1,9 @@
 <h1>Listing reports</h1>
 <%= link_to 'Refine Results', filter_reports_path(params) %>
 
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <table class="table table-hover table-striped clickable">
   <thead>

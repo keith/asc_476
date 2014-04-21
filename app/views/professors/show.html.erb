@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
-<%# TODO: Center this at the top %>
 <%= @professor.name %>
  (<%= mail_to("#{ @professor.email }#{ EMAIL_SUFFIX }") %>)
 
