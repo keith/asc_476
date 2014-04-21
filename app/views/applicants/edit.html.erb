@@ -58,7 +58,7 @@
           <% end %>
         <% else %>
           <%= f.fields_for :positions, p do |position_fields| %>
-            <%= render 'position_fields', :f => position_fields %>
+            <%= render 'position_fields', :f => position_fields, removable: false %>
           <% end %>
         <% end %>
       <% end %>

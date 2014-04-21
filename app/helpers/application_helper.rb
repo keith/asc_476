@@ -11,7 +11,7 @@ module ApplicationHelper
     new_object = f.object.class.reflect_on_association(association).klass.new
     new_object.professor = Professor.new if new_object.is_a? Position
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
-      render(association.to_s.singularize + "_fields", f: builder, removeable: true)
+      render(association.to_s.singularize + "_fields", f: builder, removable: true)
     end
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end

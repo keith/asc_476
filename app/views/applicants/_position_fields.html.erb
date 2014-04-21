@@ -10,7 +10,6 @@
     <%= professor_fields.text_field :email,
       :placeholder => 'Professor Email' %> <%= EMAIL_SUFFIX %>
   <% end %>
-  <% removeable ||= false %>
-  <%= link_to_remove_closest('Remove', ".fields") if removeable %>
+  <%= link_to_remove_closest('Remove', ".fields") if removable %>
   </div>
 </p>
