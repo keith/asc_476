@@ -19,8 +19,18 @@ class ProfessorsController < ApplicationController
 
   # PATCH/PUT /professors/1
   def update
-    if @professor.update(professor_params)
-      redirect_to @professor, notice: 'Professor was successfully updated.'
+    notice  = 'Professor was successfully updated.'
+    @professor.assign_attributes(professor_params)
+    unless @professor.email.downcase == @professor.email_was.downcase
+      begin
+        ProfessorMailer.pending_recommendation(self).deliver
+      rescue
+        notice = "The email address was updated but the notification email failed to send. Please manually send them their URL: #{ professor_url(@professor) }"
+      end
+    end
+
+    if @professor.save
+      redirect_to @professor, notice: notice
     else
       render action: 'edit'
     end
@@ -37,7 +47,7 @@ class ProfessorsController < ApplicationController
     begin
       ProfessorMailer.pending_recommendation(@professor).deliver
     rescue
-      redirect_to professors_url,
+      redirect_to :back,
         notice: "The email failed to send. You can manually send the professor their URL: #{ professor_url(@professor) }"
     else
       redirect_to professors_url, notice: 'The email was sent successfully'
