@@ -8,7 +8,6 @@
 
 <% if logged_in_admin? %>
   <%= link_to 'Edit', edit_professor_path(@professor) %>
-  | <%= link_to 'Back', professors_path %>
   | <%= link_to 'Delete', @professor, method: :delete, data: { confirm: 'Are you sure?' } %>
   | <%= link_to 'Email', email_professor_path(@professor), method: :post %>
 <% else %>
