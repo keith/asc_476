@@ -2,7 +2,7 @@
 <div class="col-md-8">
 
 <%= form_tag("/reports", method: "get") do %>
-
+rak
   <div id = "field">
     <%= label_tag(:name, nil, class: 'sr-only') %>
     <%= text_field_tag :name, @values[:name], class: 'form-control', placeholder: 'Name' %>
@@ -24,9 +24,13 @@
   <div id="field">
     <%= label_tag :application_statuses,  "Application Status" %><br/>
     <% Status.statuses.each do |status| %>
-      <%= label_tag("status_#{ status.num }", status.name) %>
-      <% status_check = @values[:application_status].include?(status.num.to_s) if  @values[:application_status] != nil %>
-      <%= check_box_tag("application_status[]", status.num, checked = status_check, id: "status_#{ status.num }" ) %>
+      <div class="checkbox inline">
+        <label>
+          <% status_check = @values[:application_status].include?(status.num.to_s) if  @values[:application_status] != nil %>
+          <%= check_box_tag("application_status[]", status.num, checked = status_check, id: "status_#{ status.num }" ) %>
+          <%= status.name %>
+        </label>
+      </div>
     <% end %>
   </div>
   <hr>
@@ -51,10 +55,14 @@
   <div id = "field">
     <%= label_tag(:class_standings, 'Class Standing') %><br/>
     <% Standing.standings.each do |standing| %>
-      <%= label_tag("standing_#{ standing.num }", standing.name) %>
-      <% standing_check = true #default value %>
-      <% standing_check = @values[:class_standing].include?(standing.num.to_s) unless @values[:class_standing].nil? %>
-      <%= check_box_tag 'class_standing[]', standing.num, checked = standing_check, id: "standing_#{ standing.num }" %>
+      <div class="checkbox inline">
+        <label>
+          <% standing_check = true #default value %>
+          <% standing_check = @values[:class_standing].include?(standing.num.to_s) unless @values[:class_standing].nil? %>
+          <%= check_box_tag 'class_standing[]', standing.num, checked = standing_check, id: "standing_#{ standing.num }" %>
+          <%= standing.name %>
+        </label>
+      </div>
     <% end %>
   </div>
   <hr>
