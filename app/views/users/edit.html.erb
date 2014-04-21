@@ -1,3 +1,4 @@
+<div class="col-md-5">
 <h1>Editing user</h1>
 
 <%= form_for(@user) do |f| %>
@@ -15,22 +16,22 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class: 'form-control'  %>
   </div>
 
   <% if current_user == @user %>
     <div class="field">
       <%= f.label :password %><br>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: 'form-control'  %>
     </div>
     <div class="field">
       <%= f.label :password_confirmation %><br>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control'  %>
     </div>
   <% else %>
     <div class="field">
@@ -39,9 +40,11 @@
     </div>
   <% end %>
 
+  <br>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil, class: 'btn btn-primary' %>
+    <%= link_to 'Back', users_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
-
-<%= link_to 'Back', users_path %>
+</div>

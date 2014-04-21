@@ -1,16 +1,18 @@
-<% if notice %>
-  <p id="notice"><%= notice %></p>
-<% end %>
+<div class="col-md-8">
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
 
-<%= @professor.name %>
- (<%= mail_to("#{ @professor.email }#{ EMAIL_SUFFIX }") %>)
+  <%= @professor.name %>
+  (<%= mail_to("#{ @professor.email }#{ EMAIL_SUFFIX }") %>)
 
-<%= render 'pending', { positions: @professor.pending_positions } %>
+  <%= render 'pending', { positions: @professor.pending_positions } %>
 
-<% if logged_in_admin? %>
-  <%= link_to 'Edit', edit_professor_path(@professor) %>
-  | <%= link_to 'Delete', @professor, method: :delete, data: { confirm: 'Are you sure?' } %>
-  | <%= link_to 'Email', email_professor_path(@professor), method: :post %>
-<% else %>
-  <%= link_to 'Edit', edit_professor_path(@professor) %>
-<% end %>
+  <% if logged_in_admin? %>
+    <%= link_to 'Edit', edit_professor_path(@professor), class: 'btn btn-primary' %>
+    <%= link_to 'Delete', @professor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+    <%= link_to 'Email', email_professor_path(@professor), method: :post, class: 'btn btn-primary' %>
+  <% else %>
+    <%= link_to 'Edit', edit_professor_path(@professor), class: 'btn btn-primary' %>
+  <% end %>
+</div>
