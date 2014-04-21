@@ -39,14 +39,14 @@
         <% if logged_in_admin? %>
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li class="<%= 'active' if params[:controller] == 'users' %>"><a href="<%= users_path %>">Users</a></li>
+              <li class="<%= 'active' if params[:controller] == 'users' and params[:action] == 'index' %>"><a href="<%= users_path %>">Users</a></li>
               <li class="<%= 'active' if params[:controller] == 'emails' %>"><a href="<%= emails_path %>">Emails</a></li>
             </ul>
           </li>
         <% end %>
 
         <% if logged_in_moderator? %>
-          <li><a href="<%= edit_user_path(current_user) %>">test@example.com</a></li>
+          <li class="<%= 'active' if params[:controller] == 'users' and params[:action] == "edit" %>"><a href="<%= edit_user_path(current_user) %>"><%= current_user.email %></a></li>
           <li><a data-method="delete" href="<%= signout_path %>" rel="nofollow">Log Out</a></li>
         <% else %>
           <li><a href="<%= signin_path %>" rel="nofollow">Log In</a></li>
