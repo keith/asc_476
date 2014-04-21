@@ -53,7 +53,7 @@
   </div>
   <h4>Courses</h4>
   <%= f.fields_for :positions do |position_fields| %>
-    <%= render 'position_fields', :f => position_fields %>
+    <%= render 'position_fields', f: position_fields, removable: false %>
   <% end %>
   <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
   <p>Note: You have to have taken the courses at Winthrop</p>

@@ -1,5 +1,5 @@
 <p>
-  <div class="field">
+  <div class="field fields">
   <%= f.collection_select  :course_id,
     Course.find_all_by_hidden_and_disabled(false, false),
     :id, :full_name, prompt: true %>
@@ -10,5 +10,6 @@
     <%= professor_fields.text_field :email,
       :placeholder => 'Professor Email' %> <%= EMAIL_SUFFIX %>
   <% end %>
+  <%= link_to_remove_closest('Remove', ".fields") if removable %>
   </div>
 </p>
