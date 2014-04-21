@@ -84,8 +84,8 @@
               <% end %>
               <% if logged_in_admin? %>
                 <%= link_to(p.professor.name, p.professor) %>
-                <%= link_to 'Review', p %>
                 (<%= Status.for_number(p.application_status) %>)
+                <%= link_to 'Review', p %>
               <% else %>
                 <%= p.professor.name %>
               <% end %>
@@ -98,9 +98,9 @@
   <% end %>
   </p>
 
-  <%= link_to 'Edit', edit_applicant_path(@applicant) %>
+  <%= link_to 'Edit', edit_applicant_path(@applicant), class: 'btn btn-primary' %>
   <% if logged_in_admin? %>
-    | <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' } %>
-    | <%= link_to 'Email', email_applicant_path(@applicant), method: :post %>
+    <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+    <%= link_to 'Email', email_applicant_path(@applicant), method: :post, class: 'btn btn-primary' %>
   <% end %>
 </div>

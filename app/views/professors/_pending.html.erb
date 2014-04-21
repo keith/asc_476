@@ -1,16 +1,22 @@
-<ul>
-  <% if !positions || positions.empty? %>
-    <p>No pending reviews</p>
-  <% else %>
-    <% for position in positions %>
-      <%# TODO: More info %>
-      <li>
-        <%= position.applicant.name %>
-        <% if position.course %>
-          <%= position.course.full_name %>
-        <% end %>
-        <%= link_to('Review', edit_position_path(position)) %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+<% if !positions || positions.empty? %>
+  <p>No pending reviews</p>
+<% else %>
+  <table class="table table-striped table-hover clickable">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Course</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for position in positions %>
+        <% next unless position.applicant %>
+        <% next unless position.course %>
+        <tr id="<%= position_path(position) %>">
+          <td><%= position.applicant.name %></td>
+          <td><%= position.course.full_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

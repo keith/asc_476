@@ -1,37 +1,40 @@
-<h1>Editing professor</h1>
+<div class="col-md-4">
+  <h1>Editing professor</h1>
 
-<%= form_for(@professor) do |f| %>
-  <% if @professor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@professor.errors.count, "error") %> prohibited this professor from being saved:</h2>
+  <%= form_for(@professor) do |f| %>
+    <% if @professor.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@professor.errors.count, "error") %> prohibited this professor from being saved:</h2>
 
-      <ul>
-      <% @professor.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+          <% @professor.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <% if logged_in_admin? %>
     <div class="field">
-      <%= f.label :email %><br>
-      <%= f.text_field :email %><%= EMAIL_SUFFIX %>
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
-  <% else %>
-    <p>
-      <%# TODO: link to asc contact here %>
-      Email (Contact the ASC to edit your email address):<br>
-      <%= @professor.email %><%= EMAIL_SUFFIX %>
-    </p>
+    <br>
+    <% if logged_in_admin? %>
+      <div class="field">
+        <%= f.label :email %><br>
+        <%= f.text_field :email, class: 'form-control' %><%= EMAIL_SUFFIX %>
+      </div>
+    <% else %>
+      <p>
+        <%# TODO: link to asc contact here %>
+        <strong>Email</strong> (Contact the ASC to edit your email address):
+        <br>
+        <%= @professor.email %><%= EMAIL_SUFFIX %>
+      </p>
+    <% end %>
+    <div class="actions">
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <%= link_to 'Back', @professor, class: 'btn btn-primary' %>
+    </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit 'Update' %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', @professor %>
+</div>

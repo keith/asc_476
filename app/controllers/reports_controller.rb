@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :fill_form
+  before_action :signed_in_admin
 
   # GET /reports/filter
   def new
@@ -24,9 +24,6 @@ class ReportsController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-    end
-
-    def fill_form
     end
 
     def app_params

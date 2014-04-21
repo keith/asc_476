@@ -1,28 +1,28 @@
-<% if notice %>
-  <p id="notice"><%= notice %></p>
-<% end %>
+<div class="col-md-6">
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @email.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @email.description %>
+  </p>
 
-<p>
-<strong>Body:</strong>
-<pre>
-<%= @email.body %>
-</pre>
-</p>
+  <p>
+    <strong>Body:</strong>
+    <%= text_area_tag nil, @email.body, class: 'form-control', rows: 10, disabled: true %>
+  </p>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @email.subject %>
-</p>
+  <p>
+    <strong>Subject:</strong>
+    <%= @email.subject %>
+  </p>
 
-<p>
-  <strong>Reply to:</strong>
-  <%= @email.reply_to %>
-</p>
+  <p>
+    <strong>Reply to:</strong>
+    <%= @email.reply_to %>
+  </p>
 
-<%= link_to 'Edit', edit_email_path(@email) %> |
-<%= link_to 'Back', emails_path %>
+  <%= link_to 'Edit', edit_email_path(@email), class: 'btn btn-primary' %>
+  <%= link_to 'Back', emails_path, class: 'btn btn-primary' %>
+</div>

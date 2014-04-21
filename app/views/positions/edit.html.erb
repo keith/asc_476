@@ -52,8 +52,10 @@
     <% else %>
       <div class="field">
         <%= f.label :professor_comments,  'Comments:' %><br>
-        <%= f.text_area :professor_comments, class: "form-control", rows: "6" %>
+        <%= f.text_area :professor_comments, class: 'form-control', rows: 6 %>
       </div>
+
+      <br>
 
       <div class="field">
         <%= f.label :professor_verdict, "Do you recommend #{ @position.applicant.name } to be a student tutor?" %>:
@@ -71,11 +73,12 @@
         <%= f.radio_button :professor_taught, false %>
       </div>
     <% end %>
+    <hr>
     <div class="actions">
-      <%= f.submit 'Submit' %>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+      <% if !logged_in? %>
+        <%= link_to 'Back', professor_path(@position.professor), class: 'btn btn-primary' %>
+      <% end %>
     </div>
-    <% if !logged_in? %>
-      <%= link_to 'Back', professor_path(@position.professor) %>
-    <% end %>
   </div>
 <% end %>

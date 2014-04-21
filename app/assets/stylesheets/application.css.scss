@@ -38,6 +38,7 @@ table.clickable tbody tr {
 
 .field_with_errors {
   @extend .has-error;
+  display: inline;
 }
 
 #error_explanation {
@@ -57,7 +58,7 @@ table.clickable tbody tr {
 
   h2, h4 {
     margin-top: 0;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   p:last-child {
@@ -81,4 +82,12 @@ table.clickable tbody tr {
 .bs-callout-info {
   background-color: #f0f7fd;
   border-color: #d0e3f0;
+}
+
+div#class {
+  padding-bottom: 10px;
+}
+
+div.container#main {
+  padding-bottom: 50px;
 }
