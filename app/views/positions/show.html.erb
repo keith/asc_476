@@ -13,27 +13,33 @@
 <% end %>
 
 <div class="col-xs-6">
-  <h2><%= get_possessive(@position.applicant.name) %> recommendation</h2>
+  <h2>Recommendation</h2>
 
-  <%# TODO: Add more info about the student and course for this position %>
+  <%= render 'applicant_info',
+    { applicant: @position.applicant,
+      course_name: @position.course.full_name }  %>
+
   <p>
     <strong>Recommending Professor:</strong>
     <%= @position.professor.name %>
   </p>
+
   <p>
-    <strong><%= professor_name_string(@position) %>'s comments:<br/></strong>
+    <strong>Professor's comments:<br/></strong>
     <%= @position.professor_comments %>
   </p>
 
   <p>
-    <strong><%= professor_name_string(@position) %>'s verdict:</strong>
+    <strong>Professor's verdict:</strong>
     <%= bool_string(@position.professor_verdict) %>
   </p>
 
   <p>
-    <strong><%= professor_name_string(@position) %> taught <%= @position.applicant.name %>:</strong>
+    <strong>Professor taught <%= @position.applicant.name %>:</strong>
     <%= bool_string(@position.professor_taught) %>
   </p>
+
+  <hr>
 
   <% if logged_in? %>
     <p>
@@ -41,6 +47,5 @@
       <%= Status.for_number(@position.application_status) %>
     </p>
   <% end %>
-  <%= link_to 'Edit', edit_position_path(@position) %> |
-  <%= link_to 'Back', positions_path %>
+  <%= link_to 'Edit', edit_position_path(@position) %>
 </div>

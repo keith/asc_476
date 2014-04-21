@@ -1,0 +1,31 @@
+<p>
+  <strong>Applicant:</strong>
+  <% if logged_in? %>
+    <%= link_to(applicant.name, applicant) %>
+  <% else %>
+    <%= applicant.name %>
+  <% end %>
+  (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= course_name %>
+</p>
+
+<p>
+  <strong><%= get_possessive(applicant.name) %> comments:</strong>
+  <%= applicant.comment %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= applicant.major %>
+</p>
+
+<p>
+  <strong>Minor:</strong>
+  <%= applicant.minor %>
+</p>
+
+<hr>

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'positions/edit' do
   before(:each) do
+    view.stub(:logged_in?).and_return(true)
     @position = assign(:position, stub_model(Position,
       professor_comments: 'MyText',
       professor_verdict: false,

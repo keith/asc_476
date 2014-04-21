@@ -6,14 +6,6 @@ module PositionsHelper
     identifier
   end
 
-  def professor_name_string(position)
-    if logged_in?
-      position.professor.name
-    else
-      'Professor'
-    end
-  end
-
   def bool_string(bool)
     if bool.nil?
       'Pending'

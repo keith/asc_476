@@ -1,17 +1,21 @@
 <%= form_for(@position) do |f| %>
-  <% if @position.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@position.errors.count, "error") %> prohibited this position from being saved:</h2>
-
-      <ul>
-      <% @position.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <h2>Reviewing <%= @position.applicant.name %></h2>
   <div class="col-xs-6">
+    <% if @position.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@position.errors.count, "error") %> prohibited this position from being saved:</h2>
+
+        <ul>
+        <% @position.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h2>Reviewing <%= @position.applicant.name %></h2>
+    <%= render 'applicant_info',
+      { applicant: @position.applicant, course_name: @position.course.full_name }  %>
+
     <% if logged_in_admin? %>
       <div class="field">
         <%= f.label :professor_comments,  "#{ @position.professor.name }'s Comments:" %><br>
@@ -19,8 +23,7 @@
       </div>
 
       <div class="field">
-        <%# TODO: Wording %>
-        <%= f.label :professor_verdict, "Does #{ @position.professor.name } recommend #{ @position.applicant.name } for the ASC tutoring program?" %>
+        <%= f.label :professor_verdict, "Does #{ @position.professor.name } recommend #{ @position.applicant.name } for the ASC tutoring program?" %><br />
         <%= f.label :professor_verdict , 'Yes', value: true %>
         <%= f.radio_button :professor_verdict , true %>
         <%= f.label :professor_verdict, 'No', value: false %>
@@ -28,12 +31,14 @@
       </div>
 
       <div class="field">
-        <%= f.label :professor_taught, "Did #{ @position.professor.name } teach #{ @position.applicant.name } in #{ @position.course.full_name }?" %>
+        <%= f.label :professor_taught, "Did #{ @position.professor.name } teach #{ @position.applicant.name } in #{ @position.course.full_name }?" %><br />
         <%= f.label :professor_taught, 'Yes', value: true %>
         <%= f.radio_button :professor_taught, true %>
         <%= f.label :professor_taught, 'No', value: false %>
         <%= f.radio_button :professor_taught, false %>
       </div>
+
+      <hr>
 
       <div class="field">
         <%= f.label :application_status %>:
@@ -42,12 +47,11 @@
     <% else %>
       <div class="field">
         <%= f.label :professor_comments,  'Comments:' %><br>
-        <%= f.text_area :professor_comments %>
+        <%= f.text_area :professor_comments, class: "form-control", rows: "6" %>
       </div>
 
       <div class="field">
-        <%# TODO: Wording %>
-        <%= f.label :professor_verdict, "Would you recommend #{ @position.applicant.name } to be a student tutor?" %>:
+        <%= f.label :professor_verdict, "Do you recommend #{ @position.applicant.name } to be a student tutor?" %>:
         <%= f.label :professor_verdict , 'Yes', value: true %>
         <%= f.radio_button :professor_verdict , true %>
         <%= f.label :professor_verdict, 'No', value: false %>
@@ -65,9 +69,7 @@
     <div class="actions">
       <%= f.submit 'Submit' %>
     </div>
-    <% if logged_in_admin? %>
-      <%= link_to 'Back', positions_path %>
-    <% else %>
+    <% if !logged_in? %>
       <%= link_to 'Back', professor_path(@position.professor) %>
     <% end %>
   </div>
