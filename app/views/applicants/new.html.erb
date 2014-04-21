@@ -48,8 +48,8 @@
     <%= f.text_field :minor, class: 'form-control', placeholder: 'Minor' %>
   </div>
   <div class="field checkbox inline">
-    <%= f.label :work_study, class: 'sr-only' %><br>
-    <%= f.check_box :work_study %> Work Study
+    <%= f.label :work_study, 'Are you eligible for work study?' %>
+    <%= f.check_box :work_study %>
   </div>
   <h4>Courses</h4>
   <%= f.fields_for :positions do |position_fields| %>
