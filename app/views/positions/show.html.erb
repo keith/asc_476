@@ -12,30 +12,41 @@
   </div>
 <% end %>
 
-<h2><%= @position.applicant.name %> recommendation by <%= @position.professor.name %></h2>
+<div class="col-xs-6">
+  <% if @position.applicant.name.last == 's' %>
+    <% name = @position.applicant.name + "'" %>
+  <% else %>
+    <% name = @position.applicant.name + "'s" %>
+  <% end %>
+  <h2><%= get_possessive(@position.applicant.name) %> recommendation</h2>
 
-<%# TODO: Add more info about the student and course for this position %>
-<p>
-  <strong><%= professor_name_string(@position) %>'s comments:</strong>
-  <%= @position.professor_comments %>
-</p>
-
-<p>
-  <strong><%= professor_name_string(@position) %>'s verdict:</strong>
-  <%= bool_string(@position.professor_verdict) %>
-</p>
-
-<p>
-  <strong><%= professor_name_string(@position) %> taught <%= @position.applicant.name %>:</strong>
-  <%= bool_string(@position.professor_taught) %>
-</p>
-
-<% if logged_in? %>
+  <%# TODO: Add more info about the student and course for this position %>
   <p>
-    <strong>Application status:</strong>
-    <%= Status.for_number(@position.application_status) %>
+    <strong>Recommending Professor:</strong>
+    <%= @position.professor.name %>
   </p>
-<% end %>
+  <p>
+    <strong><%= professor_name_string(@position) %>'s comments:<br/></strong>
+    <%= @position.professor_comments %>
+  </p>
+
+  <p>
+    <strong><%= professor_name_string(@position) %>'s verdict:</strong>
+    <%= bool_string(@position.professor_verdict) %>
+  </p>
+
+  <p>
+    <strong><%= professor_name_string(@position) %> taught <%= @position.applicant.name %>:</strong>
+    <%= bool_string(@position.professor_taught) %>
+  </p>
+
+  <% if logged_in? %>
+    <p>
+      <strong>Application status:</strong>
+      <%= Status.for_number(@position.application_status) %>
+    </p>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_position_path(@position) %> |
 <%= link_to 'Back', positions_path %>
