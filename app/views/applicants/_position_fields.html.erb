@@ -1,15 +1,23 @@
-<p>
-  <div class="field fields">
-  <%= f.collection_select  :course_id,
-    Course.find_all_by_hidden(false),
-    :id, :full_name, prompt: true %>
-
-  <%= f.fields_for :professor do |professor_fields| %>
-    <%= professor_fields.text_field :name,
-      :placeholder => 'Professor Name' %>
-    <%= professor_fields.text_field :email,
-      :placeholder => 'Professor Email' %> <%= EMAIL_SUFFIX %>
-  <% end %>
-  <%= link_to_remove_closest('Remove', ".fields") if removable %>
+<div class="field fields row">
+  <div class="col-md-3">
+    <%= f.collection_select :course_id,
+      Course.find_all_by_hidden(false),
+      :id, :full_name, { prompt: true }, class: 'form-control' %>
   </div>
-</p>
+
+<%= f.fields_for :professor do |professor_fields| %>
+  <div class="form-group col-md-4">
+    <%= professor_fields.text_field :name,
+      placeholder: 'Professor Name', class: 'form-control' %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <%= professor_fields.text_field :email,
+      placeholder: 'Professor Email', class: 'form-control' %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= link_to_remove_closest('Remove', '.fields') if removable %>
+  </div>
+<% end %>
+</div>

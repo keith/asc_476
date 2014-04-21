@@ -21,19 +21,15 @@
   <div class="field">
     <%# TODO: The email suffix get's put on a newline when there are errors %>
     <%= f.label :email, class: 'sr-only' %><br>
-    <%= f.text_field :email , class: 'form-control', placeholder: 'Winthrop Email' %><%= EMAIL_SUFFIX %>
+    <%= f.text_field :email , class: 'form-control', placeholder: 'Winthrop Username' %>
   </div>
   <div class="field">
     <%= f.label :wuid, class: 'sr-only' %><br>
-    <%= f.text_field :wuid, class: 'form-control', placeholder: 'Winthop Id' %>
+    <%= f.text_field :wuid, class: 'form-control', placeholder: 'Winthop ID' %>
   </div>
   <div class="field">
     <%= f.label :phone_number, class: 'sr-only' %><br>
     <%= f.text_field :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
-  </div>
-  <div class="field">
-    <%= f.label :class_standing %>
-    <%= f.collection_select(:class_standing, Standing.standings, :num, :name) %>
   </div>
   <div class="field">
     <%= f.label :comment, class: 'sr-only' %><br>
@@ -47,6 +43,11 @@
     <%= f.label :minor, class: 'sr-only' %><br>
     <%= f.text_field :minor, class: 'form-control', placeholder: 'Minor' %>
   </div>
+  <div class="field row">
+    <div class="col-md-3">
+      <%= f.collection_select(:class_standing, Standing.standings, :num, :name, { prompt: 'Class Standing' }, class: 'form-control') %>
+    </div>
+  </div>
   <div class="field checkbox inline">
     <%= f.label :work_study, 'Are you eligible for work study?' %>
     <%= f.check_box :work_study %>
@@ -55,10 +56,10 @@
   <%= f.fields_for :positions do |position_fields| %>
     <%= render 'position_fields', f: position_fields, removable: false %>
   <% end %>
-  <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
-  <p>Note: You have to have taken the courses at Winthrop</p>
+  <p class="row"><%= link_to_add_fields 'Add Course', f, :positions %></p>
+  <p class="row">Note: You have to have taken the course at Winthrop</p>
 
-  <div class="actions">
+  <div class="actions row">
     <%= f.submit 'Submit Application' %>
   </div>
 </div>

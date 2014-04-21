@@ -54,7 +54,10 @@
       <% @applicant.positions.each do |p| %>
         <% if !p.new_record? %>
           <% if p.course %>
-            <li><%= p.course.full_name %> <%= p.professor.name %></li>
+            <li>
+              <%= p.course.full_name %>
+              <%= p.professor.name if p.professor %>
+            </li>
           <% end %>
         <% else %>
           <%= f.fields_for :positions, p do |position_fields| %>
@@ -64,7 +67,7 @@
       <% end %>
     </ul>
     <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
-    <p>Note: You have to have taken the courses at Winthrop</p>
+    <p>Note: You have to have taken the course at Winthrop</p>
   </p>
 
   <div class="field">

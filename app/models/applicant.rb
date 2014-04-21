@@ -15,7 +15,7 @@ class Applicant < ActiveRecord::Base
   validates :phone_number, length: { minimum: 10 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
     format: { with: EMAIL_REGEX, message: 'is invalid (only enter before the @ symbol)' }
-  validates :class_standing, on: :update, inclusion: { in: 0...Standing.names.count }
+  validates :class_standing, inclusion: { in: 0...Standing.names.count, message: 'is not valid' }
   validates_presence_of :name
   validates_presence_of :wuid
 
@@ -86,6 +86,7 @@ class Applicant < ActiveRecord::Base
 
     # Ignore extra fields in the form
     def reject_position?(pos_attr)
+      return false if self.positions.count <= 1
       pos_attr['course_id'].blank? and
       pos_attr['professor_attributes']["name"].blank? and
       pos_attr['professor_attributes']['email'].blank? or
