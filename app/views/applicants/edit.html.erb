@@ -50,13 +50,12 @@
     <%= f.text_field :minor, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :work_study, 'Eligible for work study:' %>
-    <%= f.check_box :work_study %>
+  <div class="field checkbox inline">
+    <label>
+      <%= f.check_box :work_study %>  Eligible for work study
+    </label>
   </div>
-
   <hr>
-
   <p>
     <strong>Courses:</strong>
     <ul>
