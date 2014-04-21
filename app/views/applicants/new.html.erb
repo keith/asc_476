@@ -56,13 +56,11 @@
   <%= f.fields_for :positions do |position_fields| %>
     <%= render 'position_fields', f: position_fields, removable: false %>
   <% end %>
-  <p class="row"><%= link_to_add_fields 'Add Course', f, :positions %></p>
-  <p class="row">Note: You have to have taken the course at Winthrop</p>
+  <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
+  <p>Note: You have to have taken the course at Winthrop</p>
 
-  <div class="actions row">
+  <div class="actions">
     <%= f.submit 'Submit Application' %>
   </div>
 </div>
 <% end %>
-
-<%= link_to 'Back', applicants_path %>
