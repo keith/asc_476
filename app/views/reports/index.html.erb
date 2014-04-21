@@ -1,21 +1,38 @@
 <h1>Listing reports</h1>
 <%= link_to "Refine Results", filter_reports_path(params) %>
 
-<table class="table table-striped">
+<p id="notice"><%= notice %></p>
+
+<table class="table table-hover table-striped clickable">
   <thead>
     <tr>
       <th><%= sortable 'name', 'Applicant Name' %></th>
-      <th><%= 'Positions' %></th>
+      <th><%= sortable 'email' %></th>
+      <th>GPA</th>
+      <th>GPA Last Updated</th>
+      <th>Courses</th>
     </tr>
   </thead>
 
   <tbody>
     <% @applicants.each do |applicant| %>
-      <tr>
-        <td><%= link_to applicant.name, applicant%> (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)</td>
+      <tr id="<%= applicant_path(applicant) %>">
+        <td>
+          <%= link_to(applicant.name, applicant) %>
+          <% if applicant.work_study %>
+            (Work Study)
+          <% end %>
+        </td>
+        <td><%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %></td>
+        <td><%= applicant.gpa %></td>
+        <% if applicant.gpa %>
+          <td><%= applicant.gpa_timestamp.strftime(DATE_FORMAT) %></td>
+        <% else %>
+          <td>Never</td>
+        <% end %>
         <td>
           <% applicant.positions.each do |p| %>
-            <%= link_to "#{p.course.full_name} (#{Status.for_number(p.application_status).name})", p %>
+            <%= link_to("#{ p.course.full_name } (#{Status.for_number(p.application_status).name})", p) %>
           <% end %>
         </td>
       </tr>
