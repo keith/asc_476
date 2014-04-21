@@ -8,10 +8,12 @@
   (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)
 </p>
 
-<p>
-  <strong>Course:</strong>
-  <%= course_name %>
-</p>
+<% if course %>
+  <p>
+    <strong>Course:</strong>
+    <%= link_to(course.full_name, reports_path(course_id: [course.id])) %>
+  </p>
+<% end %>
 
 <p>
   <strong><%= get_possessive(applicant.name) %> comments:</strong>

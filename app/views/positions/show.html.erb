@@ -17,12 +17,21 @@
 
   <%= render 'applicant_info',
     { applicant: @position.applicant,
-      course_name: @position.course.full_name }  %>
+      course: @position.course }  %>
 
-  <p>
-    <strong>Recommending Professor:</strong>
-    <%= @position.professor.name if @position.professor %>
-  </p>
+  <% if @position.professor %>
+    <p>
+      <strong>Recommending Professor:</strong>
+      <% if logged_in_admin? %>
+        <%= link_to(@position.professor.name, @position.professor) %>
+        | <%= link_to 'Email',
+              email_professor_path(@position.professor),
+              method: :post %>
+      <% else %>
+        <%= @position.professor.name %>
+      <% end %>
+    </p>
+  <% end %>
 
   <p>
     <strong>Professor's comments:<br/></strong>
