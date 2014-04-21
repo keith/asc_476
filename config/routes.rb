@@ -1,8 +1,9 @@
 Asc476::Application.routes.draw do
 
-  root 'applicants#new'
+  root 'staticpages#landing'
   resources :emails, except: [:new, :create, :destroy]
   resources :positions, only: [:show, :edit, :update]
+
   resources :professors, except: [:create, :new] do
     post :email, on: :member
   end
@@ -14,6 +15,7 @@ Asc476::Application.routes.draw do
   resources :reports, only: [:index] do
     get :filter, to: :new, on: :collection
   end
+
   resources :applicants do
     post :email, on: :member
   end
@@ -26,6 +28,7 @@ Asc476::Application.routes.draw do
   match '/signin',  to: 'sessions#new', via: :get
   resource :sessions, only: [:create]
 
+  match '/apply', to: 'applicants#new', via: :get
   match '/thanks', to: 'staticpages#thanks', via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
