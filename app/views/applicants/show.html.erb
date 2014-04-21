@@ -76,17 +76,16 @@
       <% @applicant.positions.each do |p| %>
         <% if p.course %>
           <li>
-            <%# TODO: Link course to filter on course_id %>
             <% if p.course %>
               <%= link_to(p.course.full_name,
                           reports_path(course_id: [p.course.id])) %>
             <% end %>
-            <% if p.professor %>
-              <%= p.professor.name %>
-            <% end %>
             <% if logged_in_admin? %>
+              <%= link_to(p.professor.name, p.professor) %>
               <%= link_to 'Review', p %>
               (<%= Status.for_number(p.application_status) %>)
+            <% else %>
+              <%= p.professor.name %>
             <% end %>
           </li>
         <% end %>
