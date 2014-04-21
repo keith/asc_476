@@ -20,12 +20,19 @@
     <% end %>
   <% end %>
   <%= menu_group pull: :right do %>
+    <% if logged_in_admin? %>
+      <%= drop_down 'Admin' do %>
+        <%= menu_item 'Users', users_path %>
+        <%= menu_item 'Emails', emails_path %>
+      <% end %>
+    <% end %>
+
     <% if logged_in_moderator? %>
       <%= menu_item current_user.email, edit_user_path(current_user) %>
       <%= menu_item 'Log Out', signout_path, method: :delete %>
     <% else %>
       <%= menu_item 'Sign In', signin_path %>
-    <% end -%>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -34,9 +41,10 @@
 <%= debug(params) if Rails.env.development? %>
 
 <script type="text/javascript">
-$('table.clickable tbody tr a').click(function(e){
+$('table.clickable tbody tr a').click(function(e) {
   e.stopPropagation();
 });
+
 $('table.clickable tbody tr').click(function() {
   window.location = this.id;
 });
