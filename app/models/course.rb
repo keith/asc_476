@@ -18,7 +18,11 @@ class Course < ActiveRecord::Base
   end
 
   def full_name
-    "#{ designator } #{ number }"
+    if self.hidden
+      "-#{ designator } #{ number }"
+    else
+      "#{ designator } #{ number }"
+    end
   end
 
   private

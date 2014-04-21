@@ -35,7 +35,7 @@
       <% unless @values[:course_id].nil? %>
         <% @values[:course_id].each do |course| %>
           <div id="class">
-            <%= collection_select Course, :all, Course.find_all_by_disabled(false),
+            <%= collection_select Course, :all, Course.all.order('hidden ASC, designator ASC'),
               :id, :full_name, { selected: course.to_s, prompt: 'Select Course' },
               name: 'course_id[]'  %>
             <%= link_to_remove_closest('Remove', '#class') %>
@@ -71,7 +71,7 @@
     $("#addCourse").click(function (evt) {
       evt.preventDefault();
       var div_html = '<div id="class">';
-      div_html += "<%= escape_javascript(collection_select  Course, :all, Course.find_all_by_disabled(false), :id, :full_name, {prompt: 'Select Course'}, name: "course_id[]" ) %> ";
+      div_html += "<%= escape_javascript(collection_select  Course, :all, Course.all.order('hidden ASC, designator ASC'), :id, :full_name, {prompt: 'Select Course'}, name: "course_id[]" ) %> ";
       div_html += "<%= escape_javascript (link_to_remove_closest('Remove', '#class')) %>" ;
       div_html += "</div>";
       $("#courseArea").append(div_html);
