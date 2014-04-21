@@ -1,103 +1,104 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Name:</strong>
+    <%= @applicant.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @applicant.name %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= mail_to("#{ @applicant.email }#{ EMAIL_SUFFIX }") %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= mail_to("#{ @applicant.email }#{ EMAIL_SUFFIX }") %>
-</p>
+  <p>
+    <strong>Wuid:</strong>
+    <%= @applicant.wuid %>
+  </p>
 
-<p>
-  <strong>Wuid:</strong>
-  <%= @applicant.wuid %>
-</p>
+  <p>
+    <strong>Phone number:</strong>
+    <%= @applicant.phone_number %>
+  </p>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @applicant.phone_number %>
-</p>
+  <p>
+    <strong>Class standing:</strong>
+    <%= Standing.for_number(@applicant.class_standing) %>
+  </p>
 
-<p>
-  <strong>Class standing:</strong>
-  <%= Standing.for_number(@applicant.class_standing) %>
-</p>
+  <% if logged_in_moderator? %>
+    <% if @applicant.gpa %>
+      <p>
+        <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT_TEXT) %>):</strong>
+        <%= @applicant.gpa %>
+      </p>
+    <% else %>
+      <p>
+        <strong>GPA:</strong> hasn't been entered
+      </p>
+    <% end %>
+  <% end %>
 
-<% if logged_in_moderator? %>
-  <% if @applicant.gpa %>
+  <p>
+    <strong>Comment:</strong>
+    <%= @applicant.comment %>
+  </p>
+
+  <p>
+    <strong>Major:</strong>
+    <%= @applicant.major %>
+  </p>
+
+  <p>
+    <strong>Minor:</strong>
+    <%= @applicant.minor %>
+  </p>
+
+  <p>
+    <strong>Eligible for work study:</strong>
+    <%= @applicant.work_study ? 'Yes' : 'No' %>
+  </p>
+
+  <% if logged_in_moderator? %>
     <p>
-      <strong>GPA (<%= @applicant.gpa_timestamp.strftime(DATE_FORMAT_TEXT) %>):</strong>
-      <%= @applicant.gpa %>
+      <strong>ASC Comments:</strong>
+      <%= @applicant.asc_comments %>
     </p>
-  <% else %>
     <p>
-      <strong>GPA:</strong> hasn't been entered
+      <strong>Applicant Interviewed:</strong>
+      <%= @applicant.interviewed ? 'Yes' : 'No' %>
     </p>
   <% end %>
-<% end %>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @applicant.comment %>
-</p>
-
-<p>
-  <strong>Major:</strong>
-  <%= @applicant.major %>
-</p>
-
-<p>
-  <strong>Minor:</strong>
-  <%= @applicant.minor %>
-</p>
-
-<p>
-  <strong>Eligible for work study:</strong>
-  <%= @applicant.work_study ? 'Yes' : 'No' %>
-</p>
-
-<% if logged_in_moderator? %>
   <p>
-    <strong>ASC Comments:</strong>
-    <%= @applicant.asc_comments %>
-  </p>
-  <p>
-    <strong>Applicant Interviewed:</strong>
-    <%= @applicant.interviewed ? 'Yes' : 'No' %>
-  </p>
-<% end %>
-
-<p>
-<% if @applicant.positions.count > 0 %>
-    <strong>Courses:</strong>
-    <ul>
-      <% @applicant.positions.each do |p| %>
-        <% if p.course %>
-          <li>
-            <% if p.course %>
-              <%= link_to(p.course.full_name,
-                          reports_path(course_id: [p.course.id])) %>
-            <% end %>
-            <% if logged_in_admin? %>
-              <%= link_to(p.professor.name, p.professor) %>
-              <%= link_to 'Review', p %>
-              (<%= Status.for_number(p.application_status) %>)
-            <% else %>
-              <%= p.professor.name %>
-            <% end %>
-          </li>
+  <% if @applicant.positions.count > 0 %>
+      <strong>Courses:</strong>
+      <ul>
+        <% @applicant.positions.each do |p| %>
+          <% if p.course %>
+            <li>
+              <% if p.course %>
+                <%= link_to(p.course.full_name,
+                            reports_path(course_id: [p.course.id])) %>
+              <% end %>
+              <% if logged_in_admin? %>
+                <%= link_to(p.professor.name, p.professor) %>
+                <%= link_to 'Review', p %>
+                (<%= Status.for_number(p.application_status) %>)
+              <% else %>
+                <%= p.professor.name %>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
-<% else %>
-  <strong>No courses found</strong>
-<% end %>
-</p>
+      </ul>
+  <% else %>
+    <strong>No courses found</strong>
+  <% end %>
+  </p>
 
-<%= link_to 'Edit', edit_applicant_path(@applicant) %>
-<% if logged_in_admin? %>
-  | <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' } %>
-  | <%= link_to 'Email', email_applicant_path(@applicant), method: :post %>
-<% end %>
+  <%= link_to 'Edit', edit_applicant_path(@applicant) %>
+  <% if logged_in_admin? %>
+    | <%= link_to 'Delete', @applicant, method: :delete, data: { confirm: 'Are you sure?' } %>
+    | <%= link_to 'Email', email_applicant_path(@applicant), method: :post %>
+  <% end %>
+</div>
