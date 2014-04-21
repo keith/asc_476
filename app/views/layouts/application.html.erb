@@ -34,7 +34,7 @@
 <%= debug(params) if Rails.env.development? %>
 
 <script type="text/javascript">
-$('a').click(function(e){
+$('table.clickable tbody tr a').click(function(e){
   e.stopPropagation();
 });
 $('table.clickable tbody tr').click(function() {
