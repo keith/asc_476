@@ -32,40 +32,4 @@ describe Professor do
     before { @prof.identifier = 'abc' }
     it { should_not be_valid }
   end
-
-  describe 'changing professor emails' do
-    before(:each) do
-      ActionMailer::Base.deliveries.clear
-    end
-
-    context 'email changed' do
-      before do
-        @prof.email = @prof.email + 'a'
-        @prof.save!
-      end
-
-      it 'should send an email' do
-        ActionMailer::Base.deliveries.count.should == 1
-      end
-    end
-
-    context 'unchanged email' do
-      before { @prof.save! }
-
-      it 'should not send an email' do
-        ActionMailer::Base.deliveries.count.should == 0
-      end
-    end
-
-    context 'email case changed' do
-      before do
-        @prof.email = @prof.email.upcase
-        @prof.save!
-      end
-
-      it 'should not send an email' do
-        ActionMailer::Base.deliveries.count.should == 0
-      end
-    end
-  end
 end

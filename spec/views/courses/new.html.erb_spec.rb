@@ -6,8 +6,7 @@ describe '/courses/new', type: :feature do
   it 'renders the form for a new course' do
     render
 
-    assert_select 'input[type=text]', count: 1
-    assert_select 'input[type=text]', count: 1
+    assert_select 'input[type=text]', count: 2
     assert_select 'input[type=submit]', count: 1
   end
 end
