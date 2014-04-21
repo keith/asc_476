@@ -11,33 +11,50 @@
 </head>
 <body>
 
-<%= nav_bar fixed: :top, brand: 'ASC Tutoring', responsive: true do %>
-  <% if logged_in_moderator? %>
-    <%= menu_group do %>
-      <%= drop_down 'View' do %>
-        <%= menu_item 'Applicants', applicants_path %>
-        <%= menu_item 'Professors', professors_path %>
-        <%= menu_item 'Courses', courses_path %>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://localhost:3000/">ASC Tutoring</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <% if logged_in_moderator? %>
+        <ul class="nav navbar-nav ">
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="active"><a href="<%= applicants_path %>">Applicants</a></li>
+              <li><a href="<%= professors_path %>">Professors</a></li>
+              <li><a href="<%= courses_path %>">Courses</a></li>
+            </ul>
+          </li>
+          <li><a href="<%= filter_reports_path %>">Reports</a></li>
+        </ul>
       <% end %>
-      <%= menu_item 'Reports', filter_reports_path %>
-    <% end %>
-  <% end %>
-  <%= menu_group pull: :right do %>
-    <% if logged_in_admin? %>
-      <%= drop_down 'Admin' do %>
-        <%= menu_item 'Users', users_path %>
-        <%= menu_item 'Emails', emails_path %>
-      <% end %>
-    <% end %>
+      <ul class="nav navbar-nav navbar-right">
+        <% if logged_in_admin? %>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= users_path %>">Users</a></li>
+              <li><a href="<%= emails_path %>">Emails</a></li>
+            </ul>
+          </li>
+        <% end %>
 
-    <% if logged_in_moderator? %>
-      <%= menu_item current_user.email, edit_user_path(current_user) %>
-      <%= menu_item 'Log Out', signout_path, method: :delete %>
-    <% else %>
-      <%= menu_item 'Sign In', signin_path %>
-    <% end %>
-  <% end %>
-<% end %>
+        <% if logged_in_moderator? %>
+          <li><a href="<%= edit_user_path(current_user) %>">test@example.com</a></li>
+          <li><a data-method="delete" href="<%= signout_path %>" rel="nofollow">Log Out</a></li>
+        <% else %>
+          <li><a href="<%= signin_path %>" rel="nofollow">Log In</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <div class="container">
   <%= yield %>
