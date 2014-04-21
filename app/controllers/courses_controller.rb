@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
     failed = []
     @courses = Course.find(values.keys)
     @courses.each do |c|
-      attrs = values[c.id.to_s].slice(:hidden, :disabled)
+      attrs = values[c.id.to_s].slice(:hidden)
       c.update_attributes(update_params(attrs))
       next unless c.changed?
       if !c.save
@@ -49,11 +49,11 @@ class CoursesController < ApplicationController
 
   private
     def create_params
-      params.require(:course).permit(:designator, :number, :hidden, :disabled)
+      params.require(:course).permit(:designator, :number, :hidden)
     end
 
     def update_params(p)
-      p.permit(:hidden, :disabled)
+      p.permit(:hidden)
     end
 
     def sort_column

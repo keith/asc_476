@@ -21,9 +21,6 @@
   <li>
     (Hidden courses will not appear in new applications)
   </li>
-  <li>
-    (Disabled courses will not show up in reports or new applicants)
-  </li>
 </ul>
 
 <table class="table table-striped">
@@ -32,7 +29,6 @@
       <th><%= sortable 'designator' %></th>
       <th><%= sortable 'number' %></th>
       <th><%= sortable 'hidden' %></th>
-      <th><%= sortable 'disabled' %></th>
     </tr>
   </thead>
 
@@ -44,7 +40,6 @@
           <td><%= course.designator %></td>
           <td><%= course.number %></td>
           <td><%= f.check_box :hidden %></td>
-          <td><%= f.check_box :disabled %></td>
         </tr>
       <% end %>
     <% end %>
