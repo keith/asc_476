@@ -1,8 +1,8 @@
 <h1>Listing courses</h1>
 
-<p id="notice">
-  <%= notice %>
-</p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <% @courses.each do |course| %>
   <% if course.errors.any? %>

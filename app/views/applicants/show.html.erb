@@ -1,5 +1,7 @@
 <div class="col-md-8">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
   <p>
     <strong>Name:</strong>
     <%= @applicant.name %>
