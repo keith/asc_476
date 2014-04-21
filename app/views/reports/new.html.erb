@@ -1,10 +1,5 @@
 <h2>Tutor Application</h2>
 <div class="col-md-8">
-<script type="text/javascript">
-  function removeCourse(course){
-    $("#" + course).remove();
-  }
-</script>
 
 <%= form_tag("/reports", method: "get") do %>
 
@@ -40,9 +35,9 @@
       <% if @values[:course_id] != nil %>
         <% @values[:course_id].each do |course| %>
           <% course_div_id = SecureRandom.uuid.to_s %>
-          <div id="<%= course_div_id %>">
+          <div id="class">
             <%= collection_select  Course, :courses, Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name, {selected: course.to_s, prompt: 'Select Course'}, name: "course_id[]"  %>
-            <a onclick='removeCourse("<%= course_div_id %>")'>Remove</a>
+            <%= link_to_remove_closest("Remove", "#class") %>
           </div>
         <% end %>
       <% end %>
@@ -62,24 +57,22 @@
   </div>
   <hr>
   <div id = "field">
-      <%= label_tag(:work_study, "Work Study") %>
-      <%= check_box_tag :work_study, 'true', checked = !@values[:work_study].nil? %>
+    <%= label_tag(:work_study, "Work Study") %>
+    <%= check_box_tag :work_study, 'true', checked = !@values[:work_study].nil? %>
   </div>
   <%= submit_tag("Search") %>
 <% end %>
 
 <%= link_to 'Back', applicants_path %>
 
-<!-- TODO: add a button to remove courses -->
 <script>
   $(document).ready(function(){
     var course_div_id = new Date().getTime();
     $("#addCourse").click(function (evt) {
       evt.preventDefault();
-      course_div_id++;
-      var div_html = '<div id ="' + course_div_id + '">';
+      var div_html = '<div id="class">';
       div_html += "<%= escape_javascript(collection_select  Course, :courses, Course.find_all_by_hidden_and_disabled(false, false), :id, :full_name, {prompt: 'Select Course'}, name: "course_id[]" ) %> ";
-      div_html += '<a onclick="removeCourse(' + course_div_id + ')">Remove</a>';
+      div_html += "<%= escape_javascript (link_to_remove_closest('Remove', '#class')) %>" ;
       div_html += "</div>";
       $("#courseArea").append(div_html);
     });
