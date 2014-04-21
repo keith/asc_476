@@ -9,7 +9,7 @@
   </div>
   <div id = "field">
     <%= label_tag(:wuid, nil, class: 'sr-only') %>
-    <%= text_field_tag :wuid, @values[:wuid], class: 'form-control', placeholder: 'WUId' %>
+    <%= text_field_tag :wuid, @values[:wuid], class: 'form-control', placeholder: 'Winthrop ID' %>
   </div>
   <div id = "field">
     <%= label_tag(:email, nil, class: 'sr-only') %>
@@ -24,9 +24,9 @@
   <div id="field">
     <%= label_tag :application_statuses,  "Application Status" %><br/>
     <% Status.statuses.each do |status| %>
-      <%= label_tag(:application_status, status.name) %>
+      <%= label_tag("status_#{ status.num }", status.name) %>
       <% status_check = @values[:application_status].include?(status.num.to_s) if  @values[:application_status] != nil %>
-      <%= check_box_tag("application_status[]", status.num, checked = status_check ) %>
+      <%= check_box_tag("application_status[]", status.num, checked = status_check, id: "status_#{ status.num }" ) %>
     <% end %>
   </div>
   <hr>
@@ -47,17 +47,17 @@
   <hr>
   <!-- Standing -->
   <div id = "field">
-    <%= label_tag(:class_standings, "Class Standing") %><br/>
+    <%= label_tag(:class_standings, 'Class Standing') %><br/>
     <% Standing.standings.each do |standing| %>
-      <%= label_tag(:class_standing, standing.name) %>
+      <%= label_tag("standing_#{ standing.num }", standing.name) %>
       <% standing_check = true #default value %>
-      <% standing_check = @values[:class_standing].include?(standing.num.to_s) if @values[:class_standing] != nil %>
-      <%= check_box_tag "class_standing[]", standing.num, checked = standing_check %>
+      <% standing_check = @values[:class_standing].include?(standing.num.to_s) unless @values[:class_standing].nil? %>
+      <%= check_box_tag 'class_standing[]', standing.num, checked = standing_check, id: "standing_#{ standing.num }" %>
     <% end %>
   </div>
   <hr>
   <div id = "field">
-    <%= label_tag(:work_study, "Work Study") %>
+    <%= label_tag(:work_study, 'Work Study') %>
     <%= check_box_tag :work_study, 'true', checked = !@values[:work_study].nil? %>
   </div>
   <%= submit_tag("Search") %>
