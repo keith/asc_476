@@ -28,7 +28,7 @@
     </thead>
 
     <tbody>
-      <%= form_tag(update_multiple_courses_path, method: :put) do %>
+      <%= form_tag(update_multiple_courses_path, method: :put) do -%>
         <% @courses.each do |course| %>
           <%= fields_for 'courses[]', course do |f| %>
             <tr>
@@ -39,7 +39,7 @@
           <% end %>
         <% end %>
         <%= submit_tag 'Update Courses', class: 'btn btn-primary' %>
-      <% end %>
+      <% end -%>
     </tbody>
   </table>
   <p>* Hidden courses will not appear in new applications</p>
