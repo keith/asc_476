@@ -1,29 +1,31 @@
-<h1>New course</h1>
+<div class="col-md-4">
+  <h1>New course</h1>
 
-<%= form_for(@course) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, 'error') %> stopped this course from being saved:</h2>
+  <%= form_for(@course) do |f| %>
+    <% if @course.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@course.errors.count, 'error') %> stopped this course from being saved:</h2>
 
-      <ul>
-        <% @course.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% @course.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :designator %><br>
+      <%= f.text_field :designator, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label :number %><br>
+      <%= f.text_field :number, class: 'form-control' %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to 'Back', courses_path, class: 'btn btn-primary' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :designator %><br>
-    <%= f.text_field :designator %>
-  </div>
-  <div class="field">
-    <%= f.label :number %><br>
-    <%= f.text_field :number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', courses_path %>
+</div>
