@@ -31,7 +31,7 @@
   </div>
   <hr>
   <div id="field">
-    <%= label_tag :application_statuses,  "Application Status" %><br/>
+    <%= label_tag :application_statuses,  'Application Status' %><br/>
     <% Status.statuses.each do |status| %>
       <div class="checkbox inline">
         <label>
@@ -47,6 +47,7 @@
     <div id="courseArea">
       <% unless @values[:course_id].nil? %>
         <% @values[:course_id].each do |course| %>
+          <% next if course.blank? %>
           <div class="row" id="class">
             <div class="col-xs-7">
               <%= collection_select Course, :all, Course.all.order('hidden ASC, designator ASC'),
