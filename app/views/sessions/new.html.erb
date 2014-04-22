@@ -1,20 +1,26 @@
 <% provide(:title, 'Login') %>
-<h1 class="sr-only">Login</h1>
-
-<% if notice %>
-  <p id="notice"><%= notice %></p>
-<% end %>
-<div class="alert">
-  <%= alert %>
-</div>
+<h1 class='sr-only'>Login</h1>
 
 <div class="container">
-  <%= form_for(:session, url: sessions_path, html: { class: "form-signin"}) do |f| %>
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <%= f.label :email, class: "sr-only" %><br>
-    <%= f.text_field :email, class: "form-control", placeholder: "Email Address" %>
-    <%= f.label :password, class: "sr-only" %><br>
-    <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-    <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
+  <div class="row">
+    <div class="col-md-4 col-md-push-4">
+      <% if notice %>
+        <p id='notice'><%= notice %></p>
+      <% end %>
+
+      <% if alert %>
+        <p id='alert'><%= alert %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_for(:session, url: sessions_path, html: { class: 'col-md-4 col-md-push-4' }) do |f| %>
+    <h2>Please sign in</h2>
+    <%= f.label :email, class: 'sr-only' %><br>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email Address' %>
+    <%= f.label :password, class: 'sr-only' %><br>
+    <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+    <br>
+    <%= f.submit 'Sign in', class: 'btn btn-lg btn-primary btn-block' %>
   <% end %>
 </div>

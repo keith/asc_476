@@ -41,7 +41,7 @@ table.clickable tbody tr {
   display: inline;
 }
 
-#error_explanation {
+#error_explanation, #alert {
   @extend .bs-callout;
   @extend .bs-callout-danger;
 }
@@ -98,3 +98,8 @@ div.container#main {
   margin: 0 auto;
   text-align: center;
 };
+
+#thanks {
+  font-size: 20px;
+  margin-top: 30px;
+}
