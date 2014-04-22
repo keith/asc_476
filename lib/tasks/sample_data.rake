@@ -5,6 +5,12 @@ namespace :db do
   desc 'Generate some sample data'
   task populate: :environment do
     make_users
+  end
+end
+
+namespace :db do
+  desc 'Generate sample courses'
+  task courses: :environment do
     make_courses
   end
 end
@@ -12,8 +18,8 @@ end
 def make_users
   User.delete_all
   FactoryGirl.create(:test)
-  FactoryGirl.create(:admin)
-  FactoryGirl.create(:moderator)
+  # FactoryGirl.create(:admin)
+  # FactoryGirl.create(:moderator)
 end
 
 def make_courses
@@ -23,4 +29,3 @@ def make_courses
     c.save!
   end
 end
-
