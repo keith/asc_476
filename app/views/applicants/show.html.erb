@@ -73,7 +73,7 @@
 
   <p>
   <% if @applicant.positions.count > 0 %>
-      <strong>Courses:</strong>
+      <strong>Courses</strong> (- denotes a course marked as hidden):
       <ul>
         <% @applicant.positions.each do |p| %>
           <% next unless p.course %>

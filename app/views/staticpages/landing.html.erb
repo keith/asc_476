@@ -1,13 +1,19 @@
-<% provide :title, "Intro" %>
+<% provide(:title, 'Welcome') %>
 <div class="row static-center">
   <p>
-    <%= image_tag "asc.jpg", size: "250x250" %>
+    <%= image_tag 'asc.jpg', size: '250x250' %>
   </p>
   <p id="intro-text">
-     ASC Tutors are required to submit an application as well as have a faculty recommendation, at least a 3.0 cumulative GPA, and complete an interview with a member of the ASC staff.  Tutors can only provide tutoring for courses in which they have received a B or higher.  All ASC tutors must complete tutor training as a condition of employment, which means enrollment in a LEAD 120D course for their first semester of employment.
+     ASC Tutors are required to submit an application as well as have a faculty
+     recommendation, at least a 3.0 cumulative GPA, and complete an interview
+     with a member of the ASC staff.  Tutors can only provide tutoring for
+     courses in which they have received a B or higher.  All ASC tutors must
+     complete tutor training as a condition of employment, which means
+     enrollment in a LEAD 120D course for their first semester of employment.
   </p>
   <p>
   <br/>
-    <%= link_to('Apply', apply_path, class: "button btn-primary btn-lg wide-button") %>
+  <%= link_to('Apply', apply_path,
+              class: 'button btn-primary btn-lg wide-button') %>
   </p>
 </div>
