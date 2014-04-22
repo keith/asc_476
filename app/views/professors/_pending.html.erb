@@ -6,6 +6,7 @@
       <tr>
         <th>Student Name</th>
         <th>Course</th>
+        <th>Applied</th>
       </tr>
     </thead>
     <tbody>
@@ -13,8 +14,9 @@
         <% next unless position.applicant %>
         <% next unless position.course %>
         <tr id="<%= position_path(position) %>">
-          <td><%= position.applicant.name %></td>
+          <td><%= link_to(position.applicant.name, position) %></td>
           <td><%= position.course.full_name %></td>
+          <td><%= position.created_at.strftime(DATE_FORMAT) %></td>
         </tr>
       <% end %>
     </tbody>
