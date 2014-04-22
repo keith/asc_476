@@ -13,5 +13,16 @@ FactoryGirl.define do
     work_study { [true, false].sample }
     asc_comments Faker::Lorem.paragraph
     interviewed { [true, false].sample }
+    positions { [Position.new(
+      professor_comments: Faker::Lorem.paragraph,
+      professor_verdict:  [true, false].sample,
+      professor_taught:  [true, false].sample,
+      application_status:  (0...Status.statuses.count).to_a.sample,
+      course: Course.new(
+        designator: 'CSCI',
+        number:  (100..999).to_a.sample,
+        hidden: [true, false].sample),
+      professor: Professor.new(name: Faker::Name.name,
+                               email: Faker::Name.last_name.tr("'", '')))]}
   end
 end
