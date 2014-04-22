@@ -43,10 +43,12 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   def create
     positions = applicant_params[:positions_attributes]
-    positions.each do |arr|
-      professor = arr.last[:professor_attributes]
-      existing = Professor.find_by_email(professor[:email])
-      Professor.create(professor) unless existing
+    if positions
+      positions.each do |arr|
+        professor = arr.last[:professor_attributes]
+        existing = Professor.find_by_email(professor[:email])
+        Professor.create(professor) unless existing
+      end
     end
 
     @applicant = Applicant.new(applicant_params)
