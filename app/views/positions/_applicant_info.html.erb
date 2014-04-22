@@ -11,7 +11,11 @@
 <% if course %>
   <p>
     <strong>Course:</strong>
-    <%= link_to(course.full_name, reports_path(course_id: [course.id])) %>
+    <% if logged_in_admin? %>
+      <%= link_to(course.full_name, reports_path(course_id: [course.id])) %>
+    <% else %>
+      <%= course.full_name %>
+    <% end %>
   </p>
 <% end %>
 
