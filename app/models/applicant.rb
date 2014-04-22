@@ -20,6 +20,8 @@ class Applicant < ActiveRecord::Base
                                           message: 'is not valid' }
   validates_presence_of :name
   validates_presence_of :wuid
+  # If Winthrop ID's need to allow characters in the future remove this
+  validates_numericality_of :wuid, only_integer: true
 
   # For will_paginate
   self.per_page = 25
