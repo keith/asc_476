@@ -31,7 +31,6 @@ class ApplicantsController < ApplicationController
         @applicant.send_emails(true)
       rescue
         redirect_to @applicant,
-          # TODO: Add url
           notice: 'The application was updated but the emails failed to send. Contact the ASC for assistance'
       else
         redirect_to @applicant, notice: 'The application was saved succesfully'

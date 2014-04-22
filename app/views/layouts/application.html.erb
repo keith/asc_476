@@ -27,8 +27,8 @@
       <a class="navbar-brand" href="http://localhost:3000/">ASC Tutoring</a>
     </div>
     <div class="navbar-collapse collapse">
-      <% if logged_in_moderator? %>
-        <ul class="nav navbar-nav ">
+      <ul class="nav navbar-nav">
+        <% if logged_in_admin? %>
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li class="<%= 'active' if params[:controller] == 'applicants' %>"><a href="<%= applicants_path %>">Applicants</a></li>
@@ -37,8 +37,10 @@
             </ul>
           </li>
           <li class="<%= 'active' if params[:controller] == 'reports' %>"><a href="<%= filter_reports_path %>">Reports</a></li>
-        </ul>
-      <% end %>
+        <% elsif logged_in_moderator? %>
+          <li class="<%= 'active' if params[:controller] == 'applicants' %>"><a href="<%= applicants_path %>">Applicants</a></li>
+        <% end %>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in_admin? %>
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <b class="caret"></b></a>

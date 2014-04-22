@@ -32,8 +32,12 @@
           <td>Never</td>
         <% end %>
         <td>
-          <% applicant.positions.each do |p| %>
-            <%= link_to("#{ p.course.full_name } (#{Status.for_number(p.application_status).name})", p) %>
+          <% if logged_in_admin? %>
+            <% applicant.positions.each do |p| %>
+              <%= link_to("#{ p.course.full_name } (#{Status.for_number(p.application_status).name})", p) %>
+            <% end %>
+          <% else %>
+            <%= applicant.comma_courses %>
           <% end %>
         </td>
       </tr>

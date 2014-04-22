@@ -76,21 +76,19 @@
       <strong>Courses:</strong>
       <ul>
         <% @applicant.positions.each do |p| %>
-          <% if p.course %>
-            <li>
-              <% if p.course %>
-                <%= link_to(p.course.full_name,
-                            reports_path(course_id: [p.course.id])) %>
-              <% end %>
-              <% if logged_in_admin? %>
-                <%= link_to(p.professor.name, p.professor) %>
-                (<%= Status.for_number(p.application_status) %>)
-                <%= link_to 'Review', p %>
-              <% else %>
-                <%= p.professor.name %>
-              <% end %>
-            </li>
-          <% end %>
+          <% next unless p.course %>
+          <li>
+            <% if logged_in_admin? %>
+              <%= link_to(p.course.full_name,
+                          reports_path(course_id: [p.course.id])) %>
+              <%= link_to(p.professor.name, p.professor) %>
+              (<%= Status.for_number(p.application_status) %>)
+              <%= link_to 'Review', p %>
+            <% else %>
+              <%= p.course.full_name %>
+              <%= p.professor.name %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
   <% else %>
