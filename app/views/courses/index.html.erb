@@ -16,31 +16,32 @@
       </div>
     <% end %>
   <% end %>
-  <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= sortable 'designator' %></th>
-        <th><%= sortable 'number' %></th>
-        <th><%= sortable 'hidden' %>*</th>
-      </tr>
-    </thead>
+  <%= form_tag(update_multiple_courses_path, method: :put) do -%>
+    <%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>
+    <%= submit_tag 'Update Courses', class: 'btn btn-primary' %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= sortable 'designator' %></th>
+          <th><%= sortable 'number' %></th>
+          <th><%= sortable 'hidden' %>*</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <%= form_tag(update_multiple_courses_path, method: :put) do -%>
-        <% @courses.each do |course| %>
-          <%= fields_for 'courses[]', course do |f| %>
-            <tr>
-              <td><%= course.designator %></td>
-              <td><%= course.number %></td>
-              <td><%= f.check_box :hidden %></td>
-            </tr>
+      <tbody>
+          <% @courses.each do |course| %>
+            <%= fields_for 'courses[]', course do |f| %>
+              <tr>
+                <td><%= course.designator %></td>
+                <td><%= course.number %></td>
+                <td><%= f.check_box :hidden %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-        <%= submit_tag 'Update Courses', class: 'btn btn-primary' %>
-      <% end -%>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  <% end -%>
+      <%# </form> %>
   <p>* Hidden courses will not appear in new applications</p>
 </div>
