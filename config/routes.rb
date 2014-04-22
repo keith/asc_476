@@ -1,7 +1,7 @@
 Asc476::Application.routes.draw do
 
   root 'staticpages#landing'
-  resources :emails, except: [:new, :create, :destroy]
+  resources :emails, only: [:index, :show, :edit, :update]
   resources :positions, only: [:show, :edit, :update]
 
   resources :professors, except: [:create, :new] do
