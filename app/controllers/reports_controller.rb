@@ -9,7 +9,6 @@ class ReportsController < ApplicationController
 
   # GET /reports
   def index
-    # TODO: Carry over params when hitting sort button
     app_params_trimmed = app_params.delete_if {|k, v| v.empty?}
     app_filter = { applicants: app_params_trimmed } unless app_params_trimmed.empty?
     pos_params_trimmed = pos_params.delete_if {|k, v| v.empty?}

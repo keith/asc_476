@@ -4,7 +4,6 @@ class ProfessorsController < ApplicationController
   before_action :set_professor, only: [:show, :edit, :update, :destroy, :email]
 
   # GET /professors
-  # TODO: Allow sorting by pending recommendations
   def index
     @professors = Professor.page(params[:page]).order(sort_column + ' ' + sort_direction)
   end
