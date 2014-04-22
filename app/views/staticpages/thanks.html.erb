@@ -1,4 +1,9 @@
 <% provide(:title, 'Thanks') %>
+  
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+
 <p id="thanks" class="col-md-8 col-md-push-2">
   Thank you for applying to be an ASC student tutor. Check your email for the
   URL where you can edit or view your application. You will be contacted by
