@@ -10,6 +10,7 @@ class Applicant < ActiveRecord::Base
   before_save { email.downcase! }
   after_validation :duplicate_email
 
+  validate :has_positions
   validate :gpa_update, on: :update
   validate :static_identifier, on: :update
   validates :phone_number, length: { minimum: 10 }
@@ -20,6 +21,8 @@ class Applicant < ActiveRecord::Base
                                           message: 'is not valid' }
   validates_presence_of :name
   validates_presence_of :wuid
+  # If Winthrop ID's need to allow characters in the future remove this
+  validates_numericality_of :wuid, only_integer: true
 
   # For will_paginate
   self.per_page = 25
@@ -58,9 +61,23 @@ class Applicant < ActiveRecord::Base
 
   private
 
+    def has_positions
+      error = true
+      self.positions.each do |x|
+        error = false if x
+      end
+
+      if error
+        errors.add(:courses, 'you must apply for at least one course')
+        return false
+      end
+      true
+    end
+
     def duplicate_email
       return true if self.errors.empty?
       existing = Applicant.find_by_email(self.email)
+      return true if existing.nil?
       unless existing == self
         error = 'application already exists for this Winthrop username. Check your email for the link to edit your existing application.'
         begin
