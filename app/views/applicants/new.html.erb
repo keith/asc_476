@@ -54,8 +54,14 @@
     </label>
   </div>
   <h4>Courses</h4>
+  <% count = 0 %>
   <%= f.fields_for :positions do |position_fields| %>
-    <%= render 'position_fields', f: position_fields, removable: false %>
+    <% if count == 0 %>
+      <%= render 'position_fields', f: position_fields, removable: false %>
+    <% else %>
+      <%= render 'position_fields', f: position_fields, removable: true %>
+    <% end %>
+  <% count += 1 %>
   <% end %>
   <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
   <p>Note: You have to have taken the course at Winthrop</p>
