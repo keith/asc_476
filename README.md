@@ -10,9 +10,25 @@
 - Setup mysql, set the mysql settings in config/database.yml
 - Run `rake db:create`
 - Run `rake db:migrate`
-- Run `rake db:populate` (to generate a default user)
+- Run `rake db:seed`
+
+### Or
+
+- Run `./bootstrap.sh`
+
+### Server
+
+When you're ready to run the application:
+
+- Run `rails server`
+- Visit `localhost:3000`
 
 ## Tests:
 
 - Run `rake test:prepare`
 - Run `bundle exec rspec spec`
+
+
+#### Fake Courses
+
+- Run `rake db:courses`

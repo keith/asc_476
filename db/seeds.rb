@@ -79,3 +79,4 @@ Email.create(body: applicant_acceptance_email,
              id: 3) unless Email.find_by_identifier(identifier)
 
 raise Exception, 'Database seed failed' unless Email.count == email_count
+FactoryGirl.create(:test)
