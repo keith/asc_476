@@ -12,10 +12,12 @@
     <%= mail_to("#{ @applicant.email }#{ EMAIL_SUFFIX }") %>
   </p>
 
-  <p>
-    <strong>Wuid:</strong>
-    <%= @applicant.wuid %>
-  </p>
+  <% if logged_in_moderator? %>
+    <p>
+      <strong>Winthrop ID:</strong>
+      <%= @applicant.wuid %>
+    </p>
+  <% end %>
 
   <p>
     <strong>Phone number:</strong>

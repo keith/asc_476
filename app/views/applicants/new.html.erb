@@ -65,9 +65,12 @@
   <% end %>
   <p><%= link_to_add_fields 'Add Course', f, :positions %></p>
   <p>Note: You have to have taken the course at Winthrop</p>
+  <p>Note: Usernames are Winthrop emails before the @ symbol</p>
+
+  <hr>
 
   <div class="actions">
-    <%= f.submit 'Submit Application' %>
+    <%= f.submit 'Submit Application', class: 'btn btn-primary' %>
   </div>
 </div>
 <% end %>
