@@ -23,6 +23,6 @@ describe 'professors/index' do
 
     assert_select 'tr>td', text: 'Name'.to_s, count: 2
     rendered.should match(/addr#{ EMAIL_SUFFIX }/)
-    rendered.should match(/Email/)
+    rendered.should_not match(/Email/)
   end
 end
