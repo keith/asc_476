@@ -47,6 +47,7 @@ RSpec.configure do |config|
   # Seed the database before running for Emails
   config.before(:suite) do
     Rails.application.load_seed
+    User.delete_all
   end
 
   config.include Capybara::DSL
