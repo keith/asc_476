@@ -10,6 +10,7 @@ describe 'positions/show' do
       professor_taught: false,
       application_status: 1,
       identifier: 'abc',
+      created_at: Time.now,
       applicant: mock_model(Applicant,
                             FactoryGirl.attributes_for(:applicant)),
       professor: mock_model(Professor,
