@@ -17,6 +17,11 @@
 
   <h2>Recommendation</h2>
 
+  <p>
+    <strong>Submitted:</strong>
+    <%= @position.created_at.strftime(DATE_FORMAT) %>
+  </p>
+
   <%= render 'applicant_info',
     { applicant: @position.applicant,
       course: @position.course }  %>

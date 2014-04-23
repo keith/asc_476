@@ -8,6 +8,11 @@
   (<%= mail_to("#{ applicant.email }#{ EMAIL_SUFFIX }") %>)
 </p>
 
+<p>
+  <strong>Winthrop ID:</strong>
+  <%= applicant.wuid %>
+</p>
+
 <% if course %>
   <p>
     <strong>Course:</strong>
